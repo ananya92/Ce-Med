@@ -6,8 +6,8 @@ function Login() {
         <Container style={{ width: "50%", marginTop: 50 }}>
             <Form>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Label>User Name</Form.Label>
+                    <Form.Control type="email" placeholder="Enter user name" />
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
