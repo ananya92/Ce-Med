@@ -11,3 +11,14 @@
 .logo {
   border-radius: 5px;
 }
+
+.title {
+  text-align: left;
+  color: #959595;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 12px;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
