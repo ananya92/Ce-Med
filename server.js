@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const routes = require("./routes");
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -13,6 +14,7 @@ let db = require("./models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(routes);
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function (req, res) {
@@ -20,7 +22,7 @@ app.get("*", function (req, res) {
 });
 
 
-db.sequelize.sync({ force: false }).then(function () {
+db.sequelize.sync().then(function () {
   app.listen(PORT, function () {
     console.log(`🌎 ==> API server now on port ${PORT}!`);
   });

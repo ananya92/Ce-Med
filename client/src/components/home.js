@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import API from '../utils/API';
 
 function Home() {
     const [filterBy, setFilterBy] = useState('callback');
-    const [options, setOptions] = useState([{ name: "Ananya Pramanik", number: "0431051442" }]);
+    const [options, setOptions] = useState([]);
     const [selected, setSelected] = useState([]);
-    const filterByCallback = (option, props) => (
-        option.name.toLowerCase().indexOf(props.text.toLowerCase()) !== -1 ||
-        option.number.toLowerCase().indexOf(props.text.toLowerCase()) !== -1
-    );
-
-    const filterByFields = ['name', 'number'];
+    useEffect(() => {
+        API.getPatients().then(response => {
+            const options = response.data.map((patient) => ({
+                name: patient.name,
+                phoneNumber: patient.phoneNumber.toString()
+              }));
+            setOptions(options);
+        }).catch(error => {
+            console.log('get patients error: ', error);
+        });
+    }, []);
+    const filterByFields = ['name', 'phoneNumber'];
     useEffect(() => {
         console.log(selected);
     }, selected)
@@ -23,7 +30,7 @@ function Home() {
                         <React.Fragment>
                             <p className="title">Search patient:</p>
                             <Typeahead
-                                filterBy={filterBy === 'callback' ? filterByCallback : filterByFields}
+                                filterBy={filterByFields}
                                 id="custom-filtering-example"
                                 labelKey="name"
                                 options={options}
@@ -32,7 +39,7 @@ function Home() {
                                     <div>
                                         {option.name}
                                         <div>
-                                            <small>{option.number}</small>
+                                            <small>{option.phoneNumber}</small>
                                         </div>
                                     </div>
                                 )}
