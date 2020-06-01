@@ -2,6 +2,8 @@ const router = require("express").Router();
 var db = require("../../models");
 var Sequelize = require("sequelize");
 const cors = require("cors");
+const isAuthenticated = require("../../config/middleware/IsAuthenticated")
+
 
 
 router.post("/sign", (req, res) => {
