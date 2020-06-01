@@ -15,6 +15,7 @@ import CritscoreApp1 from './components/critscoreApp1';
 import CritscoreApp2 from './components/critscoreApp2';
 import CritscoreApp3 from './components/critscoreApp3';
 import "./App.css";
+import Register from "./components/register";
 
 class App extends Component {
   render() {
@@ -23,65 +24,70 @@ class App extends Component {
         <div className="App">
           <MedNavbar />
           <Route
-          exact path="/"
-          render={() =>
-            <Home/>}
-        />
-          <Route
-            path="/login"
+            exact path="/"
             render={() =>
-              <Login/>}
+              <Login />}
           />
           <Route
-          exact path="/patientDetails"
-          render={() =>
-            <PatientDetails/>}
-        />
+            path="/home"
+            render={() =>
+              <Home />}
+          />
           <Route
-          exact path="/icuCriteriaApp1"
-          render={() =>
-            <IcuCriteriaApp1/>}
-        />
+            path="/register"
+            render={() =>
+              <Register />}
+          />
+          <Route
+            exact path="/patientDetails"
+            render={() =>
+              <PatientDetails />}
+          />
+          <Route
+            exact path="/icuCriteriaApp1"
+            render={() =>
+              <IcuCriteriaApp1 />}
+          />
           <Route
             path="/icuCriteria"
             render={() =>
-              <IcuCriteria/>}
+              <IcuCriteria />}
           />
           <Route
-          exact path="/icuCriteriaApp2"
-          render={() =>
-            <IcuCriteriaApp2/>}
-        />
+            exact path="/icuCriteriaApp2"
+            render={() =>
+              <IcuCriteriaApp2 />}
+          />
           <Route
             path="/scoringCont1"
             render={() =>
-              <ScoringCont1/>}
+              <ScoringCont1 />}
           />
           <Route
-          exact path="/scoringCont2"
-          render={() =>
-            <ScoringCont2/>}
-        />
+            exact path="/scoringCont2"
+            render={() =>
+              <ScoringCont2 />}
+          />
           <Route
             path="/critscoreOlivia"
             render={() =>
-              <CritscoreOlivia/>}
+              <CritscoreOlivia />}
           />
           <Route
-          exact path="/critscoreApp1"
-          render={() =>
-            <CritscoreApp1/>}
-        />
+            exact path="/critscoreApp1"
+            render={() =>
+              <CritscoreApp1 />}
+          />
           <Route
             path="/critscoreApp2"
             render={() =>
-              <CritscoreApp2/>}
+              <CritscoreApp2 />}
           />
           <Route
-          exact path="/critscoreApp3"
-          render={() =>
-            <CritscoreApp3/>}
-        />
+            exact path="/critscoreApp3"
+            render={() =>
+              <CritscoreApp3 />}
+          />
         </div>
       </Router>
     );
