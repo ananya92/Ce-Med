@@ -22,3 +22,11 @@
   margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
+
+.nav-link {
+  font-weight: 500 !important;
+}
+
+.nav-tabs {
+  justify-content: center;
+}
