@@ -1,43 +1,34 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import API from "../utils/API"
 
-class Login extends Component {
+class Register extends Component {
     constructor() {
-        super();
+        super()
         this.state = {
-            username: "",
-            password: "",
-            errors: {}
-        };
+            username: '',
+            password: '',
 
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+            errors: {}
+        }
+
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     onChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value })
     }
-
     onSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
 
-        const user = {
+        const newUser = {
             username: this.state.username,
             password: this.state.password
-        };
+        }
 
-        API.apiLogin(user).then(res => {
-
-            console.log(res)
-            if (res.data === "matched") {
-                window.location.replace("/home");
-            }
-            else {
-                window.location.replace("/");
-            }
-
-
-        });
+        API.register(newUser).then(res => {
+            window.location.replace("/");
+        })
     }
 
     render() {
@@ -46,14 +37,14 @@ class Login extends Component {
                 <div className="row">
                     <div className="col-md-6 mt-5 mx-auto">
                         <form noValidate onSubmit={this.onSubmit}>
-                            <h1 className="h3 mb-3 font-weight-normal">User Login</h1>
+                            <h1 className="h3 mb-3 font-weight-normal">User Register</h1>
                             <div className="form-group">
-                                <label htmlFor="email">Email address</label>
+                                <label htmlFor="email">User Name</label>
                                 <input
                                     type="username"
                                     className="form-control"
                                     name="username"
-                                    placeholder="Enter email"
+                                    placeholder="Enter User Name"
                                     value={this.state.username}
                                     onChange={this.onChange}
                                 />
@@ -73,14 +64,14 @@ class Login extends Component {
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block"
                             >
-                                Sign in
+                                Register
               </button>
                         </form>
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default Login;
+export default Register
