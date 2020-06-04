@@ -25,8 +25,19 @@
 
 .nav-link {
   font-weight: 500 !important;
+  background-color: rgb(235, 232, 232) !important;
+  margin: 0.2rem !important;
+  color: black;
+}
+
+.nav-tabs .active {
+  background-color: rgb(116, 220, 255) !important;
 }
 
 .nav-tabs {
   justify-content: center;
+}
+
+td, th {
+  text-align: left !important;
 }
