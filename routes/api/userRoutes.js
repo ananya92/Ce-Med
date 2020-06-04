@@ -1,9 +1,7 @@
 const router = require("express").Router();
-var db = require("../../models");
-var Sequelize = require("sequelize");
-const cors = require("cors");
-const isAuthenticated = require("../../config/middleware/IsAuthenticated")
-
+const db = require("../../models");
+const Sequelize = require("sequelize");
+const { compare } = require("bcrypt");
 
 
 router.post("/sign", (req, res) => {
@@ -19,38 +17,47 @@ router.post("/sign", (req, res) => {
     db.User.create(userData)
         .then((data) => {
             console.log(data)
-            res.redirect("/")
+            res.redirect(307);
         })
         .catch(function (err) {
             console.log(err)
-            res.sendStatus(400).json(err);
+            res.status(401).json(err);
         });
 });
 
 
-router.post("/login", (req, res) => {
 
-    console.log(req.body.username)
+router.post("/login", (req, respond) => {
+
+    //console.log(req.body.username)
+
+    const { username, password } = req.body;
 
     db.User.findOne({
         where: {
-            username: req.body.username
+            username: username
         }
     })
-        .then(user => {
-            if (user) {
-                if (bcrypt.compareSync(req.body.password, user.password)) {
-                    console.log("matched")
-                    res.redirect("/")
+        .then(async (res) => {
+            //console.log(res.dataValues)
 
-                }
+            const uid = res.dataValues.username
+            const pw = res.dataValues.password
+
+            if (username === uid && await compare(password, pw)) {
+
+                console.log("matched")
+                respond.status(200).json("matched")
+
+
             } else {
-                // res.status(400).json({ error: "User does not exist" });
-                console.log("unmatched")
+                respond.status(401).json({ error: "User does not exist" });
+                // console.log("Not matched")
+                // res.status(400).json("not-matched")
             }
         })
         .catch(err => {
-            res.status(400).json({ error: err });
+            respond.status(400).json({ error: err });
         });
 });
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { register } from './UserFunctions'
+import API from "../utils/API"
 
 class Register extends Component {
     constructor() {
@@ -26,7 +26,7 @@ class Register extends Component {
             password: this.state.password
         }
 
-        register(newUser).then(res => {
+        API.register(newUser).then(res => {
             window.location.replace("/");
         })
     }

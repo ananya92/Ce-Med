@@ -7,12 +7,23 @@ export default {
         return axios.get("/api/patient");
     },
 
+    register: newUser => {
+
+        return axios
+            .post('/api/user/sign', {
+                username: newUser.username,
+                password: newUser.password
+            })
+            .then(response => {
+                console.log('Registered')
+            })
+    },
+
     apiLogin: function (userInfo) {
         return axios.post("/api/user/login", userInfo);
     },
 
-    apiRegister: function (userInfo) {
-        return axios.post("/api/sign", { userInfo });
-    },
+
+
 };
 

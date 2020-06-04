@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { login } from "./UserFunctions";
-import cors from "cors";
+import API from "../utils/API"
 
 class Login extends Component {
     constructor() {
@@ -18,6 +17,7 @@ class Login extends Component {
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -26,9 +26,16 @@ class Login extends Component {
             password: this.state.password
         };
 
-        login(user).then(res => {
+        API.apiLogin(user).then(res => {
 
-            window.location.replace("/home");
+            console.log(res)
+            if (res.data === "matched") {
+                window.location.replace("/home");
+            }
+            else {
+                window.location.replace("/");
+            }
+
 
         });
     }

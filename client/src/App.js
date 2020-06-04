@@ -26,12 +26,12 @@ class App extends Component {
           <Route
             exact path="/"
             render={() =>
-              <Login />}
+              <Home />}
           />
           <Route
-            path="/home"
+            path="/login"
             render={() =>
-              <Home />}
+              <Login />}
           />
           <Route
             path="/register"
