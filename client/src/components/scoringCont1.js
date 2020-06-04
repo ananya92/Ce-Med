@@ -5,7 +5,7 @@ import CardiovascularSystem from './cardiovascularSystem';
 import NeurologicalSystem from './neurologicalSystem';
 import RenalSystem from './renalSystem';
 import OtherParams from './otherParams';
-function ScoringCont1() {
+function ScoringCont1(props) {
     const [key, setKey] = useState('Respiratory System');
     return (
         <div>

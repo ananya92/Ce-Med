@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import API from '../utils/API';
-
-function Home() {
+import history from "../utils/history";
+function Home(props) {
     const [filterBy, setFilterBy] = useState('callback');
     const [options, setOptions] = useState([]);
     const [selected, setSelected] = useState([]);
     useEffect(() => {
+        if(props.currentPatient.name !== "") {
+            setSelected([{
+                name: props.currentPatient.name,
+                phoneNumber: props.currentPatient.phoneNumber
+            }]);
+        }
         API.getPatients().then(response => {
             const options = response.data.map((patient) => ({
                 name: patient.name,
@@ -18,10 +24,8 @@ function Home() {
             console.log('get patients error: ', error);
         });
     }, []);
+
     const filterByFields = ['name', 'phoneNumber'];
-    useEffect(() => {
-        console.log(selected);
-    }, selected)
     return (
         <div>
             <Container fluid>
@@ -45,6 +49,7 @@ function Home() {
                                 )}
                                 onChange={(selected) => {
                                     setSelected(selected);
+                                    props.updatePatient(selected);
                                 }}
                                 selected={selected}
                             />
@@ -53,20 +58,20 @@ function Home() {
                         {
                             selected[0] !== undefined ?
                                 <div>
-                                    <Button href="/patientDetails" variant="primary" block>Patient Details</Button>
-                                    <Button href="/icuCriteriaApp1" variant="primary" block>ICU Criteria App 1</Button>
-                                    <Button href="/icuCriteria" variant="primary" block>ICU Criteria</Button>
-                                    <Button href="/icuCriteriaApp2" variant="primary" block>ICU Criteria App 2</Button>
-                                    <Button href="/scoringCont1" variant="primary" block>Scoring Cont. 1</Button>
-                                    <Button href="/scoringCont2" variant="primary" block>Scoring Cont. 2</Button>
-                                    <Button href="/critscoreOlivia" variant="primary" block>Add Info to Critscore OLIVIA</Button>
-                                    <Button href="/critscoreApp1" variant="primary" block>Add Info to Critscore App 1</Button>
-                                    <Button href="/critscoreApp2" variant="primary" block>Add Info to Critscore App 2</Button>
-                                    <Button href="/critscoreApp3" variant="primary" block>Add Info to Critscore App 3</Button>
+                                    <Button onClick = {() => { history.push("/patientDetails");}} variant="primary" block>Patient Details</Button>
+                                    <Button onClick = {() => { history.push("/icuCriteriaApp1");}} variant="primary" block>ICU Criteria App 1</Button>
+                                    <Button onClick = {() => { history.push("/icuCriteria");}} variant="primary" block>ICU Criteria</Button>
+                                    <Button onClick = {() => { history.push("/icuCriteriaApp2");}} variant="primary" block>ICU Criteria App 2</Button>
+                                    <Button onClick = {() => { history.push("/scoringCont1");}} variant="primary" block>Scoring Cont. 1</Button>
+                                    <Button onClick = {() => { history.push("/scoringCont2");}} variant="primary" block>Scoring Cont. 2</Button>
+                                    <Button onClick = {() => { history.push("/critscoreOlivia");}} variant="primary" block>Add Info to Critscore OLIVIA</Button>
+                                    <Button onClick = {() => { history.push("/critscoreApp1");}} variant="primary" block>Add Info to Critscore App 1</Button>
+                                    <Button onClick = {() => { history.push("/critscoreApp2");}} variant="primary" block>Add Info to Critscore App 2</Button>
+                                    <Button onClick = {() => { history.push("/critscoreApp3");}} variant="primary" block>Add Info to Critscore App 3</Button>
                                 </div>
                                 :
                                 <div>
-                                    <Button href="/patientDetails" variant="primary" block>Patient Details</Button>
+                                    <Button onClick = {() => { history.push("/patientDetails");}} variant="primary" block>Patient Details</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria App 1</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria App 2</Button>

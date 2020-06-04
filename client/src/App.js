@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Router } from 'react-router-dom';
 import history from "./utils/history";
 import MedNavbar from './components/navbar';
@@ -16,76 +16,91 @@ import CritscoreApp2 from './components/critscoreApp2';
 import CritscoreApp3 from './components/critscoreApp3';
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <Router history={history}>
+function App() {
+  const [currentPatient, setCurrentPatient] = useState(
+    {
+      name: "",
+      phoneNumber: ""
+    }
+  );
+  function updatePatient(patient) {
+    if(patient[0]) {
+      setCurrentPatient(
+        {
+          name: patient[0].name,
+          phoneNumber: patient[0].phoneNumber
+        }
+      );
+    }
+  }
+
+  return (
+    <Router history={history}>
         <div className="App">
           <MedNavbar />
           <Route
-          exact path="/"
-          render={() =>
-            <Home/>}
-        />
+            exact path="/"
+            render={() =>
+              <Home currentPatient={currentPatient} updatePatient={updatePatient} />}
+          />
           <Route
             path="/login"
             render={() =>
-              <Login/>}
+              <Login />}
           />
           <Route
-          exact path="/patientDetails"
-          render={() =>
-            <PatientDetails/>}
-        />
+            exact path="/patientDetails"
+            render={() =>
+              <PatientDetails currentPatient={currentPatient} />}
+          />
           <Route
-          exact path="/icuCriteriaApp1"
-          render={() =>
-            <IcuCriteriaApp1/>}
-        />
+            exact path="/icuCriteriaApp1"
+            render={() =>
+              <IcuCriteriaApp1 currentPatient={currentPatient} />}
+          />
           <Route
             path="/icuCriteria"
             render={() =>
-              <IcuCriteria/>}
+              <IcuCriteria currentPatient={currentPatient} />}
           />
           <Route
-          exact path="/icuCriteriaApp2"
-          render={() =>
-            <IcuCriteriaApp2/>}
-        />
+            exact path="/icuCriteriaApp2"
+            render={() =>
+              <IcuCriteriaApp2 currentPatient={currentPatient} />}
+          />
           <Route
             path="/scoringCont1"
             render={() =>
-              <ScoringCont1/>}
+              <ScoringCont1 currentPatient={currentPatient} />}
           />
           <Route
-          exact path="/scoringCont2"
-          render={() =>
-            <ScoringCont2/>}
-        />
+            exact path="/scoringCont2"
+            render={() =>
+              <ScoringCont2 currentPatient={currentPatient} />}
+          />
           <Route
             path="/critscoreOlivia"
             render={() =>
-              <CritscoreOlivia/>}
+              <CritscoreOlivia currentPatient={currentPatient} />}
           />
           <Route
-          exact path="/critscoreApp1"
-          render={() =>
-            <CritscoreApp1/>}
-        />
+            exact path="/critscoreApp1"
+            render={() =>
+              <CritscoreApp1 currentPatient={currentPatient} />}
+          />
           <Route
             path="/critscoreApp2"
             render={() =>
-              <CritscoreApp2/>}
+              <CritscoreApp2 currentPatient={currentPatient} />}
           />
           <Route
-          exact path="/critscoreApp3"
-          render={() =>
-            <CritscoreApp3/>}
-        />
+            exact path="/critscoreApp3"
+            render={() =>
+              <CritscoreApp3 currentPatient={currentPatient} />}
+          />
         </div>
-      </Router>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;
