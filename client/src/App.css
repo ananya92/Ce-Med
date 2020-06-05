@@ -41,3 +41,7 @@
 td, th {
   text-align: left !important;
 }
+
+.dropdown-menu a {
+  border-top: 1px solid lightgray !important;
+}
