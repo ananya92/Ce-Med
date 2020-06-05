@@ -24,7 +24,13 @@ function App() {
       phoneNumber: ""
     }
   );
-  function updatePatient(patient) {
+  const [currentCase, setCurrentCase] = useState(
+    {
+      id: "",
+      caseName: ""
+    }
+  );
+  function updatePatient(patient, selectedCase) {
     if(patient.name) {
       setCurrentPatient(
         {
@@ -33,6 +39,12 @@ function App() {
           phoneNumber: patient.phoneNumber
         }
       );
+    }
+    if(selectedCase.id) {
+      setCurrentCase( {
+        id: selectedCase.id,
+        caseName: selectedCase.caseName
+      })
     }
   }
 
@@ -43,7 +55,7 @@ function App() {
           <Route
             exact path="/"
             render={() =>
-              <Home currentPatient={currentPatient} updatePatient={updatePatient} />}
+              <Home currentPatient={currentPatient} currentCase={currentCase} updatePatient={updatePatient} />}
           />
           <Route
             path="/login"
@@ -53,52 +65,52 @@ function App() {
           <Route
             exact path="/patientDetails"
             render={() =>
-              <PatientDetails currentPatient={currentPatient} />}
+              <PatientDetails currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             exact path="/icuCriteriaApp1"
             render={() =>
-              <IcuCriteriaApp1 currentPatient={currentPatient} />}
+              <IcuCriteriaApp1 currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             path="/icuCriteria"
             render={() =>
-              <IcuCriteria currentPatient={currentPatient} />}
+              <IcuCriteria currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             exact path="/icuCriteriaApp2"
             render={() =>
-              <IcuCriteriaApp2 currentPatient={currentPatient} />}
+              <IcuCriteriaApp2 currentPatient={currentPatient} currentCase={currentCase}/>}
           />
           <Route
             path="/scoringCont1"
             render={() =>
-              <ScoringCont1 currentPatient={currentPatient} />}
+              <ScoringCont1 currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             exact path="/scoringCont2"
             render={() =>
-              <ScoringCont2 currentPatient={currentPatient} />}
+              <ScoringCont2 currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             path="/critscoreOlivia"
             render={() =>
-              <CritscoreOlivia currentPatient={currentPatient} />}
+              <CritscoreOlivia currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             exact path="/critscoreApp1"
             render={() =>
-              <CritscoreApp1 currentPatient={currentPatient} />}
+              <CritscoreApp1 currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             path="/critscoreApp2"
             render={() =>
-              <CritscoreApp2 currentPatient={currentPatient} />}
+              <CritscoreApp2 currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             exact path="/critscoreApp3"
             render={() =>
-              <CritscoreApp3 currentPatient={currentPatient} />}
+              <CritscoreApp3 currentPatient={currentPatient} currentCase={currentCase} />}
           />
         </div>
     </Router>
