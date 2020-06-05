@@ -13,32 +13,36 @@ function ScoringCont1(props) {
             <Container>
                 <Row>
                     <Col>
-                        <p>Patient ID: {props.currentPatient.patientID} &emsp; Name: {props.currentPatient.name} &emsp; Case ID: {props.currentCase.id}</p>
-                        <p>Case summary: {props.currentCase.caseName}</p>
+                        <p className="details"><span className="title">Patient ID:</span> {props.currentPatient.patientID} &emsp; <span className="title">Name:</span> {props.currentPatient.name} &emsp; <span className="title">Case ID:</span> {props.currentCase.id}</p>
+                        <p className="details"><span className="title">Case summary:</span> {props.currentCase.caseName}</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                    <Tabs
+                        id="controlled-tab-example"
+                        activeKey={key}
+                        onSelect={(k) => setKey(k)}
+                    >
+                        <Tab eventKey="Respiratory System" title="Respiratory System">
+                            <RespiratorySystem />
+                        </Tab>
+                        <Tab eventKey="Cardiovascular System" title="Cardiovascular System">
+                            <CardiovascularSystem />
+                        </Tab>
+                        <Tab eventKey="Neurological System" title="Neurological System">
+                            <NeurologicalSystem />
+                        </Tab>
+                        <Tab eventKey="Renal System" title="Renal System">
+                            <RenalSystem />
+                        </Tab>
+                        <Tab eventKey="Other" title="Other">
+                            <OtherParams />
+                        </Tab>
+                    </Tabs>
                     </Col>
                 </Row>
             </Container>
-            <Tabs
-                id="controlled-tab-example"
-                activeKey={key}
-                onSelect={(k) => setKey(k)}
-            >
-                <Tab eventKey="Respiratory System" title="Respiratory System">
-                    <RespiratorySystem />
-                </Tab>
-                <Tab eventKey="Cardiovascular System" title="Cardiovascular System">
-                    <CardiovascularSystem />
-                </Tab>
-                <Tab eventKey="Neurological System" title="Neurological System">
-                    <NeurologicalSystem />
-                </Tab>
-                <Tab eventKey="Renal System" title="Renal System">
-                    <RenalSystem />
-                </Tab>
-                <Tab eventKey="Other" title="Other">
-                    <OtherParams />
-                </Tab>
-            </Tabs>
         </div>
     )
 }

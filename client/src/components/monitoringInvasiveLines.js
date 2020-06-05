@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-import { Container, Row, Col } from 'react-bootstrap';
 
 function MonitoringInvasiveLines() {
     const [data, setData] = useState(
@@ -52,38 +51,32 @@ function MonitoringInvasiveLines() {
         // handle any data change here
         var newData = data.map(entry => {
             console.log(entry);
-            if(entry.id === newState.cellEdit.rowId) {
+            if (entry.id === newState.cellEdit.rowId) {
                 let changedField = newState.cellEdit.dataField;
                 entry[changedField] = newState.cellEdit.newValue;
             }
             return entry;
         });
         setData(newData);
-      }
+    }
     return (
         <div>
-            <Container>
-                <Row>
-                    <Col>
-                        <BootstrapTable
-                            keyField="id"
-                            data={data}
-                            columns={columns}
-                            cellEdit={cellEditFactory({
-                                mode: 'click',
-                                blurToSave: true
-                            })}
-                            remote={{
-                                filter: false,
-                                pagination: false,
-                                sort: false,
-                                cellEdit: true
-                            }}
-                            onTableChange={ onTableChange }
-                        />
-                    </Col>
-                </Row>
-            </Container>
+            <BootstrapTable
+                keyField="id"
+                data={data}
+                columns={columns}
+                cellEdit={cellEditFactory({
+                    mode: 'click',
+                    blurToSave: true
+                })}
+                remote={{
+                    filter: false,
+                    pagination: false,
+                    sort: false,
+                    cellEdit: true
+                }}
+                onTableChange={onTableChange}
+            />
         </div>
     )
 }

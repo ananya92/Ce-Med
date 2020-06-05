@@ -22,6 +22,11 @@
   margin-top: 1rem;
   margin-bottom: 0.25rem;
 }
+.details {
+  margin-top: 1rem;
+  font-size: 14px;
+  text-align: left;
+}
 
 .nav-link {
   font-weight: 500 !important;
@@ -35,7 +40,7 @@
 }
 
 .nav-tabs {
-  justify-content: center;
+  justify-content: left;
 }
 
 td, th {
