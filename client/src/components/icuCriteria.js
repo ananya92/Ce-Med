@@ -1,8 +1,9 @@
 import React from 'react';
 
-function IcuCriteria() {
+function IcuCriteria(props) {
     return (
         <div>
+            <p>Patient ID: {props.currentPatient.patientID} &emsp; Name: {props.currentPatient.name}</p>
             <h2>ICU Criteria Page</h2>
         </div>
     )

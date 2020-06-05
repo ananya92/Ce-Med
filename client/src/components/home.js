@@ -7,6 +7,7 @@ function Home(props) {
     const [filterBy, setFilterBy] = useState('callback');
     const [options, setOptions] = useState([]);
     const [selected, setSelected] = useState([]);
+    const [allPatients, setAllPatients] = useState([]);
     useEffect(() => {
         if(props.currentPatient.name !== "") {
             setSelected([{
@@ -20,6 +21,7 @@ function Home(props) {
                 phoneNumber: patient.phoneNumber.toString()
               }));
             setOptions(options);
+            setAllPatients(response.data);
         }).catch(error => {
             console.log('get patients error: ', error);
         });
@@ -49,7 +51,14 @@ function Home(props) {
                                 )}
                                 onChange={(selected) => {
                                     setSelected(selected);
-                                    props.updatePatient(selected);
+                                    if(selected[0] !== undefined) {
+                                        for(var i = 0; i < allPatients.length; i++) {
+                                            if(allPatients[i].name === selected[0].name && allPatients[i].phoneNumber == selected[0].phoneNumber) {
+                                                props.updatePatient(allPatients[i]);
+                                                break;
+                                            }
+                                        }
+                                    }
                                 }}
                                 selected={selected}
                             />

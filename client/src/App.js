@@ -19,16 +19,18 @@ import "./App.css";
 function App() {
   const [currentPatient, setCurrentPatient] = useState(
     {
+      patientID: "",
       name: "",
       phoneNumber: ""
     }
   );
   function updatePatient(patient) {
-    if(patient[0]) {
+    if(patient.name) {
       setCurrentPatient(
         {
-          name: patient[0].name,
-          phoneNumber: patient[0].phoneNumber
+          patientID: patient.id,
+          name: patient.name,
+          phoneNumber: patient.phoneNumber
         }
       );
     }

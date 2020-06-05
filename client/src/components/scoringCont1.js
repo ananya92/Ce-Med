@@ -9,6 +9,7 @@ function ScoringCont1(props) {
     const [key, setKey] = useState('Respiratory System');
     return (
         <div>
+            <p>Patient ID: {props.currentPatient.patientID} &emsp; Name: {props.currentPatient.name}</p>
             <Tabs
                 id="controlled-tab-example"
                 activeKey={key}

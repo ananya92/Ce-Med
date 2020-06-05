@@ -14,7 +14,17 @@ module.exports = function (sequelize, DataTypes) {
         phoneNumber: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            field: 'created_at',
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            field: 'updated_at'
         }
+    }, {
+        timestamps: false
     });
 
     return Patient;
