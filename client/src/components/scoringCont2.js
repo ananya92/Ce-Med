@@ -23,17 +23,17 @@ function ScoringCont2(props) {
                             activeKey={key}
                             onSelect={(k) => setKey(k)}
                         >
-                            <Tab eventKey="Medication Intravenous" title="Medication Intravenous">
-                                <MedicationIntravenous />
+                            <Tab eventKey="Medication Intravenous" title="Medication Intravenous" unmountOnExit>
+                                <MedicationIntravenous saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
                             </Tab>
-                            <Tab eventKey="Laboratory Imbalances" title="Laboratory Imbalances">
-                                <LaboratoryImbalances />
+                            <Tab eventKey="Laboratory Imbalances" title="Laboratory Imbalances" unmountOnExit>
+                                <LaboratoryImbalances saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
                             </Tab>
-                            <Tab eventKey="Monitoring / Invasive Lines" title="Monitoring / Invasive Lines">
-                                <MonitoringInvasiveLines />
+                            <Tab eventKey="Monitoring / Invasive Lines" title="Monitoring / Invasive Lines" unmountOnExit>
+                                <MonitoringInvasiveLines saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
                             </Tab>
-                            <Tab eventKey="Emergency Procedures Within 24 hrs" title="Emergency Procedures Within 24 hrs">
-                                <EmergencyProcedures />
+                            <Tab eventKey="Emergency Procedures Within 24 hrs" title="Emergency Procedures Within 24 hrs" unmountOnExit>
+                                <EmergencyProcedures saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
                             </Tab>
                         </Tabs>
                     </Col>

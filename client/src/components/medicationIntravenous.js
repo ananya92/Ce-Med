@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 
-function MedicationIntravenous() {
+function MedicationIntravenous(props) {
     const [data, setData] = useState(
         [
             { id: "Positive Inotropic Support", day1: "", day2: "", day3: "", day4: "", day5: "", day6: "", day7: "" },
@@ -62,6 +62,13 @@ function MedicationIntravenous() {
         });
         setData(newData);
     }
+    
+    useEffect(() => {
+        return function cleanup() {
+            props.saveVitalsBeforeExiting("Medication Intravenous");
+        };
+    }, []);
+    
     return (
         <div>
             <BootstrapTable

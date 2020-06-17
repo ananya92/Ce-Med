@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 
-function LaboratoryImbalances() {
+function LaboratoryImbalances(props) {
     const [data, setData] = useState(
         [
             { id: "Hypo Serum Na ≤ 130mmol/l", day1: "", day2: "", day3: "", day4: "", day5: "", day6: "", day7: "" },
@@ -64,6 +64,13 @@ function LaboratoryImbalances() {
         });
         setData(newData);
     }
+    
+    useEffect(() => {
+        return function cleanup() {
+            props.saveVitalsBeforeExiting("Laboratory Imbalances");
+        };
+    }, []);
+
     return (
         <div>
             <BootstrapTable

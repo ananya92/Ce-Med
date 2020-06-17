@@ -19,27 +19,27 @@ function ScoringCont1(props) {
                 </Row>
                 <Row>
                     <Col>
-                    <Tabs
-                        id="controlled-tab-example"
-                        activeKey={key}
-                        onSelect={(k) => setKey(k)}
-                    >
-                        <Tab eventKey="Respiratory System" title="Respiratory System">
-                            <RespiratorySystem />
-                        </Tab>
-                        <Tab eventKey="Cardiovascular System" title="Cardiovascular System">
-                            <CardiovascularSystem />
-                        </Tab>
-                        <Tab eventKey="Neurological System" title="Neurological System">
-                            <NeurologicalSystem />
-                        </Tab>
-                        <Tab eventKey="Renal System" title="Renal System">
-                            <RenalSystem />
-                        </Tab>
-                        <Tab eventKey="Other" title="Other">
-                            <OtherParams />
-                        </Tab>
-                    </Tabs>
+                        <Tabs
+                            id="controlled-tab-example"
+                            activeKey={key}
+                            onSelect={(k) => setKey(k)}
+                        >
+                            <Tab eventKey="Respiratory System" title="Respiratory System" unmountOnExit>
+                                <RespiratorySystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                            </Tab>
+                            <Tab eventKey="Cardiovascular System" title="Cardiovascular System" unmountOnExit>
+                                <CardiovascularSystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                            </Tab>
+                            <Tab eventKey="Neurological System" title="Neurological System" unmountOnExit>
+                                <NeurologicalSystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                            </Tab>
+                            <Tab eventKey="Renal System" title="Renal System" unmountOnExit>
+                                <RenalSystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                            </Tab>
+                            <Tab eventKey="Other" title="Other" unmountOnExit>
+                                <OtherParams saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                            </Tab>
+                        </Tabs>
                     </Col>
                 </Row>
             </Container>

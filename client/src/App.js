@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Router } from 'react-router-dom';
+import { Button, Modal } from 'react-bootstrap';
 import history from "./utils/history";
 import MedNavbar from './components/navbar';
 import Home from "./components/home";
@@ -30,6 +31,9 @@ function App() {
       caseName: ""
     }
   );
+  const [modalShow, setModalShow] = useState(false);
+  const [patientVitals, setPatientVitals] = useState();
+
   function updatePatient(patient, selectedCase) {
     if(patient.name) {
       setCurrentPatient(
@@ -48,10 +52,36 @@ function App() {
     }
   }
 
+  function saveVitalsBeforeExiting(patientVitals) {
+    setModalShow(true);
+    setPatientVitals(patientVitals);
+  }
+
+  function saveVitals() {
+    setModalShow(false);
+    console.log("saveVitalsBeforeExiting called");
+    console.log(patientVitals);
+  }
   return (
     <Router history={history}>
         <div className="App">
           <MedNavbar />
+          <Modal
+                size="sm"
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+                centered
+            >
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body id="example-modal-sizes-title-lg">
+                        Please save the changes in {patientVitals}.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={() => saveVitals()} variant="primary">Save</Button>
+                </Modal.Footer>
+            </Modal>
           <Route
             exact path="/"
             render={() =>
@@ -85,12 +115,12 @@ function App() {
           <Route
             path="/scoringCont1"
             render={() =>
-              <ScoringCont1 currentPatient={currentPatient} currentCase={currentCase} />}
+              <ScoringCont1 currentPatient={currentPatient} currentCase={currentCase} saveVitalsBeforeExiting={saveVitalsBeforeExiting}/>}
           />
           <Route
             exact path="/scoringCont2"
             render={() =>
-              <ScoringCont2 currentPatient={currentPatient} currentCase={currentCase} />}
+              <ScoringCont2 currentPatient={currentPatient} currentCase={currentCase} saveVitalsBeforeExiting={saveVitalsBeforeExiting}/>}
           />
           <Route
             path="/critscoreOlivia"

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-function RespiratorySystem() {
+
+function RespiratorySystem(props) {
     const [data, setData] = useState(
         [
             { id: "Respiratory arrest within 24 hours", day1: "", day2: "", day3: "", day4: "", day5: "", day6: "", day7: "" },
@@ -49,6 +50,13 @@ function RespiratorySystem() {
         text: 'Sun'
     }
     ];
+
+    useEffect(() => {
+        return function cleanup() {
+            props.saveVitalsBeforeExiting("Respiratory System");
+        };
+    }, []);
+
     const onTableChange = (type, newState) => {
         // handle any data change here
         var newData = data.map(entry => {
