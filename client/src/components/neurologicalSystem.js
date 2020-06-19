@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
+import { useCeMedContext } from "../utils/GlobalState";
 
 function NeurologicalSystem(props) {
+    const [state, dispatch] = useCeMedContext();
     const [data, setData] = useState(
         [
             { id: "Glascow coma scale ≤ 8", day1: "", day2: "", day3: "", day4: "", day5: "", day6: "", day7: "" },

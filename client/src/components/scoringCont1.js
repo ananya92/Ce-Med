@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { Button, Modal } from 'react-bootstrap';
 import { Tabs, Tab } from 'react-bootstrap';
 import RespiratorySystem from './respiratorySystem';
 import CardiovascularSystem from './cardiovascularSystem';
@@ -6,8 +7,25 @@ import NeurologicalSystem from './neurologicalSystem';
 import RenalSystem from './renalSystem';
 import OtherParams from './otherParams';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useCeMedContext } from "../utils/GlobalState";
 function ScoringCont1(props) {
+    const [state, dispatch] = useCeMedContext();
     const [key, setKey] = useState('Respiratory System');
+    /* const [modalShow, setModalShow] = useState(false);
+    
+        function saveVitalsBeforeExiting() {
+            if(state.isRecordChanged) {
+                setModalShow(true);
+            }
+        }
+    
+        function saveVitals() {
+          setModalShow(false);
+          console.log("saveVitalsBeforeExiting called");
+          console.log(state.currentRecord);
+          dispatch({type: "initNewRecord", data: {isRecordChanged: false}}); 
+        }
+        */
     return (
         <div>
             <Container>
@@ -25,24 +43,42 @@ function ScoringCont1(props) {
                             onSelect={(k) => setKey(k)}
                         >
                             <Tab eventKey="Respiratory System" title="Respiratory System" unmountOnExit>
-                                <RespiratorySystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                                <RespiratorySystem patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
                             <Tab eventKey="Cardiovascular System" title="Cardiovascular System" unmountOnExit>
-                                <CardiovascularSystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                                <CardiovascularSystem patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
                             <Tab eventKey="Neurological System" title="Neurological System" unmountOnExit>
-                                <NeurologicalSystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                                <NeurologicalSystem patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
                             <Tab eventKey="Renal System" title="Renal System" unmountOnExit>
-                                <RenalSystem saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                                <RenalSystem patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
                             <Tab eventKey="Other" title="Other" unmountOnExit>
-                                <OtherParams saveVitalsBeforeExiting={props.saveVitalsBeforeExiting}/>
+                                <OtherParams patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
                         </Tabs>
                     </Col>
                 </Row>
             </Container>
+            {/* 
+            <Modal
+            size="sm"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+            centered
+          >
+            <Modal.Header closeButton>
+            </Modal.Header>
+            <Modal.Body id="example-modal-sizes-title-lg">
+              Please save the changes in {state.pageName}.
+                </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={() => saveVitals()} variant="primary">Save</Button>
+            </Modal.Footer>
+          </Modal>
+    */}
         </div>
     )
 }

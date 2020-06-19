@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
+import { useCeMedContext } from "../utils/GlobalState";
 
 function CardiovascularSystem(props) {
+    const [state, dispatch] = useCeMedContext();
+    const [newRecordInfo, setNewRecordInfo] = useState({
+        PatientId: props.patientId,
+        CaseId: props.caseId
+    });
+    useEffect(() => {
+        console.log(newRecordInfo);
+        return function cleanup() {
+            props.saveVitalsBeforeExiting();
+        };
+    }, []);
     const [data, setData] = useState(
         [
             { id: "Cardiac arrest within 24 hours", day1: "", day2: "", day3: "", day4: "", day5: "", day6: "", day7: "" },
