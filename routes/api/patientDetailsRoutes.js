@@ -3,12 +3,15 @@ const router = require("express").Router();
 var db = require("../../models");
 
 // route to get data about a case's hospital information
-router.get("/hospitalInformation/:caseId", (req, res) => {
+router.get("/hospitalInformation/:CaseId", (req, res) => {
+    console.log("req.params.CaseId**********");
+    console.log(req.params.CaseId);
     db.PatientDetails_HospitalInformation.findAll({
         where: {
-            CaseId: req.params.caseId
+            CaseId: req.params.CaseId
         }
     }).then(function (data) {
+        console.log(data);
         res.json(data);
     });
 });

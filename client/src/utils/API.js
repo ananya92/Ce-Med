@@ -27,8 +27,9 @@ export default {
         return axios.post(`/api/patientDetails/hospitalInformation/storeHospitalInformationData`, data);
     },
     //1. save Hospital information
-    getHospitalInformationData: function(caseId) {
-        return axios.post(`/api/patientDetails/hospitalInformation/${caseId}`);
+    getHospitalInformationData: function(CaseId) {
+        console.log(`/api/patientDetails/hospitalInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/hospitalInformation/${CaseId}`);
     },
 
 };

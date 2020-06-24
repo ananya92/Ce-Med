@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 function HospitalInformation(props) {
     const classes = useStyles();
+    const { register, handleSubmit,  setValue, errors } = useForm();
 
     const [newRecordInfo, setNewRecordInfo] = useState({
         PatientId: props.patientId,
@@ -32,9 +33,19 @@ function HospitalInformation(props) {
     });
 
     useEffect(() => {
-        if ( newRecordInfo.caseId) {
-            API.getHospitalInformationData(newRecordInfo.caseId).then(response => {
-                console.log(response);
+        if ( newRecordInfo.CaseId) {
+            API.getHospitalInformationData(newRecordInfo.CaseId).then(response => {
+                setValue([
+                    { bedDetails : response.data[0].bedDetails},
+                    { doctor : response.data[0].doctor },
+                    { preAdmissionNumber : response.data[0].preAdmissionNumber },
+                    { surgeryBookedTime : response.data[0].surgeryBookedTime },
+                    { timeOfArrival : response.data[0].timeOfArrival },
+                    { wardDetails : response.data[0].wardDetails },
+                  ])
+
+                onSubmit();
+
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
             });
@@ -42,7 +53,7 @@ function HospitalInformation(props) {
     }, [])
 
 
-    const { register, handleSubmit, watch, errors } = useForm();
+    
 
     const onSubmit = (res) => {
         var data = {
@@ -82,8 +93,9 @@ function HospitalInformation(props) {
                                 label="Doctor"
                                 type="text"
                                 name="doctor"
+                                defaultValue=""
                                 inputRef={register}
-                                fullWidth
+                                fullWidth                           
                             />
                         </Grid>
 
@@ -112,7 +124,7 @@ function HospitalInformation(props) {
                                 label="Time Of Arrival"
                                 variant="outlined"
                                 type="datetime-local"
-                                defaultValue={Date.now()}                    
+                                // defaultValue={Date.now()}                    
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
