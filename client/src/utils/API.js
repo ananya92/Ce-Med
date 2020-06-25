@@ -19,7 +19,19 @@ export default {
 
     getRespiratorySystemData: function() {
         
-    }
+    },
+
+    //saving Patient Information
+    //1. save Hospital information
+    storeHospitalInformationData: function(data) {
+        return axios.post(`/api/patientDetails/hospitalInformation/storeHospitalInformationData`, data);
+    },
+    //1. save Hospital information
+    getHospitalInformationData: function(CaseId) {
+        console.log(`/api/patientDetails/hospitalInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/hospitalInformation/${CaseId}`);
+    },
+
 };
 
 // Function to convert the ISO time to local timezone
