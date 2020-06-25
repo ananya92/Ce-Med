@@ -77,14 +77,14 @@ function HospitalInformation(props) {
         <div>
             <Container>
 
-                <h2>Hospital Information</h2>
+                <h4>Hospital Use Only</h4>
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className={classes.root}
                 // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
                 >
-                    <h6>Hospital Use Only</h6>
+
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>
                             <TextField
