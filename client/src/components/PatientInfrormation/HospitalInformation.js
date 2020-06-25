@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 
-
+// for styling form components
 const useStyles = makeStyles((theme) => ({
     root: {
         "& > *": {
@@ -20,31 +20,33 @@ const useStyles = makeStyles((theme) => ({
     },
 
 }));
-
+//to keep case information
 let caseInfo = "";
 
 
 function HospitalInformation(props) {
     const classes = useStyles();
-    const { register, handleSubmit,  setValue, errors } = useForm();
+    // react-hook-form
+    const { register, handleSubmit, setValue, errors } = useForm();
 
-
+    //setting case info
     caseInfo = {
         PatientId: props.patientId,
         CaseId: props.caseId
     };
 
+    // Retrieving the existing value if case exists
     useEffect(() => {
-        if ( caseInfo.CaseId) {
+        if (caseInfo.CaseId) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
-                console.log(response.data[0]);
+                // console.log(response.data[0]);
                 setValue(
-                    [{ bedDetails : response.data[0].bedDetails},
-                     {doctor : response.data[0].doctor },
-                     {preAdmissionNumber : response.data[0].preAdmissionNumber} ,
-                     {surgeryBookedTime : response.data[0].surgeryBookedTime },
-                     {timeOfArrival : response.data[0].timeOfArrival },
-                     {wardDetails : response.data[0].wardDetails }
+                    [{ bedDetails: response.data[0].bedDetails },
+                    { doctor: response.data[0].doctor },
+                    { preAdmissionNumber: response.data[0].preAdmissionNumber },
+                    { surgeryBookedTime: response.data[0].surgeryBookedTime },
+                    { timeOfArrival: response.data[0].timeOfArrival },
+                    { wardDetails: response.data[0].wardDetails }
                     ]);
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
@@ -53,22 +55,20 @@ function HospitalInformation(props) {
     }, [])
 
 
-    
 
+    // saving or updating value on form submit
     const onSubmit = (res) => {
         var data = {
-            ...res, CaseId : caseInfo.CaseId
+            ...res, CaseId: caseInfo.CaseId
         }
 
-        console.log(data);
+        // console.log(data);
 
         API.storeHospitalInformationData(data).then(response => {
-            console.log(response);
+            // console.log(response);
         }).catch(error => {
             console.log("Error while adding hospital information data:", error);
         });
-
-
     };
 
 
@@ -94,7 +94,7 @@ function HospitalInformation(props) {
                                 type="text"
                                 name="doctor"
                                 inputRef={register({ required: true })}
-                                fullWidth                           
+                                fullWidth
                             />
                         </Grid>
 
@@ -180,10 +180,38 @@ function HospitalInformation(props) {
 
                         {errors.doctor && (
                             <h4 style={{ color: "red" }}>
-                                Doctor needs to be entered
+                                Please enter Doctor Information
                             </h4>
                         )}
-                     
+
+                        {errors.surgeryBookedTime && (
+                            <h4 style={{ color: "red" }}>
+                                Please enter Surgery Booked Time
+                            </h4>
+                        )}
+
+                        {errors.timeOfArrival && (
+                            <h4 style={{ color: "red" }}>
+                                Please enter patient's Time Of Arrival
+                            </h4>
+                        )}
+                        {errors.wardDetails && (
+                            <h4 style={{ color: "red" }}>
+                                Please enter patient's Ward Details
+                            </h4>
+                        )}
+                        {errors.bedDetails && (
+                            <h4 style={{ color: "red" }}>
+                                Please enter patient's Bed Details
+                            </h4>
+                        )}
+                        {errors.preAdmissionNumber && (
+                            <h4 style={{ color: "red" }}>
+                                Please enter patient's Pre Admission Number
+                            </h4>
+                        )}
+
+
                     </Grid>
                     <Grid>
                         <Grid item xs={4} sm={4}></Grid>
