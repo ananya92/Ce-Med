@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -40,13 +40,14 @@ function HospitalInformation(props) {
         if (caseInfo.CaseId) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
                 // console.log(response.data[0]);
+                let data = response.data[0];
                 setValue(
-                    [{ bedDetails: response.data[0].bedDetails },
-                    { doctor: response.data[0].doctor },
-                    { preAdmissionNumber: response.data[0].preAdmissionNumber },
-                    { surgeryBookedTime: response.data[0].surgeryBookedTime },
-                    { timeOfArrival: response.data[0].timeOfArrival },
-                    { wardDetails: response.data[0].wardDetails }
+                    [{ bedDetails: data.bedDetails },
+                    { doctor: data.doctor },
+                    { preAdmissionNumber: data.preAdmissionNumber },
+                    { surgeryBookedTime: data.surgeryBookedTime },
+                    { timeOfArrival: data.timeOfArrival },
+                    { wardDetails: data.wardDetails }
                     ]);
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
@@ -174,7 +175,7 @@ function HospitalInformation(props) {
 
 
 
-
+                    {/* Error reporting */}
 
                     <Grid item xs={12} sm={12}>
 
@@ -183,35 +184,41 @@ function HospitalInformation(props) {
                                 Please enter Doctor Information
                             </h4>
                         )}
-
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
                         {errors.surgeryBookedTime && (
                             <h4 style={{ color: "red" }}>
                                 Please enter Surgery Booked Time
                             </h4>
                         )}
-
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
                         {errors.timeOfArrival && (
                             <h4 style={{ color: "red" }}>
                                 Please enter patient's Time Of Arrival
                             </h4>
                         )}
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
                         {errors.wardDetails && (
                             <h4 style={{ color: "red" }}>
                                 Please enter patient's Ward Details
                             </h4>
                         )}
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
                         {errors.bedDetails && (
                             <h4 style={{ color: "red" }}>
                                 Please enter patient's Bed Details
                             </h4>
                         )}
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
                         {errors.preAdmissionNumber && (
                             <h4 style={{ color: "red" }}>
                                 Please enter patient's Pre Admission Number
                             </h4>
                         )}
-
-
                     </Grid>
                     <Grid>
                         <Grid item xs={4} sm={4}></Grid>
