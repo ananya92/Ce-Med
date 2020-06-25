@@ -21,31 +21,31 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+let caseInfo = "";
 
 
 function HospitalInformation(props) {
     const classes = useStyles();
     const { register, handleSubmit,  setValue, errors } = useForm();
 
-    const [newRecordInfo, setNewRecordInfo] = useState({
+
+    caseInfo = {
         PatientId: props.patientId,
         CaseId: props.caseId
-    });
+    };
 
     useEffect(() => {
-        if ( newRecordInfo.CaseId) {
-            API.getHospitalInformationData(newRecordInfo.CaseId).then(response => {
-                setValue([
-                    { bedDetails : response.data[0].bedDetails},
-                    { doctor : response.data[0].doctor },
-                    { preAdmissionNumber : response.data[0].preAdmissionNumber },
-                    { surgeryBookedTime : response.data[0].surgeryBookedTime },
-                    { timeOfArrival : response.data[0].timeOfArrival },
-                    { wardDetails : response.data[0].wardDetails },
-                  ])
-
-                onSubmit();
-
+        if ( caseInfo.CaseId) {
+            API.getHospitalInformationData(caseInfo.CaseId).then(response => {
+                console.log(response.data[0]);
+                setValue(
+                    [{ bedDetails : response.data[0].bedDetails},
+                     {doctor : response.data[0].doctor },
+                     {preAdmissionNumber : response.data[0].preAdmissionNumber} ,
+                     {surgeryBookedTime : response.data[0].surgeryBookedTime },
+                     {timeOfArrival : response.data[0].timeOfArrival },
+                     {wardDetails : response.data[0].wardDetails }
+                    ]);
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
             });
@@ -57,7 +57,7 @@ function HospitalInformation(props) {
 
     const onSubmit = (res) => {
         var data = {
-            ...res, CaseId : newRecordInfo.CaseId
+            ...res, CaseId : caseInfo.CaseId
         }
 
         console.log(data);
@@ -71,7 +71,7 @@ function HospitalInformation(props) {
 
     };
 
-    console.log(newRecordInfo);
+
     return (
         <div>
             <Container>
@@ -93,8 +93,7 @@ function HospitalInformation(props) {
                                 label="Doctor"
                                 type="text"
                                 name="doctor"
-                                defaultValue=""
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                                 fullWidth                           
                             />
                         </Grid>
@@ -107,13 +106,13 @@ function HospitalInformation(props) {
                                 label="Surgery Booked Time"
                                 variant="outlined"
                                 type="datetime-local"
-                                defaultValue={Date.now()}
+                                // defaultValue={Date.now()}
                                 // className={classes.textField}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 fullWidth
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -129,7 +128,7 @@ function HospitalInformation(props) {
                                     shrink: true,
                                 }}
                                 fullWidth
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -140,7 +139,7 @@ function HospitalInformation(props) {
                                 label="Ward Details"
                                 name="wardDetails"
                                 type="text"
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                                 fullWidth
                             />
                         </Grid>
@@ -153,7 +152,7 @@ function HospitalInformation(props) {
                                 label="Bed Details"
                                 name="bedDetails"
                                 type="text"
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                                 fullWidth
                             />
                         </Grid>
@@ -166,7 +165,7 @@ function HospitalInformation(props) {
                                 label="Pre Admission Number"
                                 name="preAdmissionNumber"
                                 type="text"
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                                 fullWidth
                             />
                         </Grid>
@@ -179,16 +178,12 @@ function HospitalInformation(props) {
 
                     <Grid item xs={12} sm={12}>
 
-                        {errors.name && (
+                        {errors.doctor && (
                             <h4 style={{ color: "red" }}>
-                                USER NAME NEEDS TO BE MINIMUM 4 CHARACTORS
+                                Doctor needs to be entered
                             </h4>
                         )}
-                        {errors.password && (
-                            <h4 style={{ color: "red" }}>
-                                PASSWORD NEEDS TO BE MINIMUM 4 CHARACTORS
-                            </h4>
-                        )}
+                     
                     </Grid>
                     <Grid>
                         <Grid item xs={4} sm={4}></Grid>
