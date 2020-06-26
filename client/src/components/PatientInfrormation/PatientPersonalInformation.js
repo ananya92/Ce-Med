@@ -86,7 +86,7 @@ function PatientPersonalInformation(props) {
                 // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
                 >
 
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                         <Grid item xs={6} sm={6}>
                             <FormControl margin="dense" variant="outlined" fullWidth>
                                 <InputLabel htmlFor="identifier-type"  >
@@ -358,90 +358,223 @@ function PatientPersonalInformation(props) {
                                 </Select>
                             </FormControl>
                         </Grid>
+                        <Grid item xs={12} sm={12}>
+                            <Grid container spacing={2} >
+                                <Grid item xs={12} sm={6}>
+                                    {/* Residential Address */}
+                                    <h6>Residential Address</h6>
+                                    {/* Address Line 1 */}
+                                    <Grid item xs={12} sm={12}>
+                                        <TextField
+                                            margin="dense"
+                                            id="residentialAddressLine1"
+                                            variant="outlined"
+                                            label="Address Line 1"
+                                            name="residentialAddressLine1"
+                                            type="text"
+                                            inputRef={register}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    {/* Address Line 2 */}
+                                    <Grid item xs={12} sm={12}>
+                                        <TextField
+                                            margin="dense"
+                                            id="residentialAddressLine2"
+                                            variant="outlined"
+                                            label="Address Line 2"
+                                            name="residentialAddressLine2"
+                                            type="text"
+                                            inputRef={register}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    {/* Suburb */}
+                                    <Grid item xs={12} sm={12}>
+                                        <TextField
+                                            margin="dense"
+                                            id="residentialSubrub"
+                                            variant="outlined"
+                                            label="Subrub"
+                                            name="residentialSubrub"
+                                            type="text"
+                                            inputRef={register}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    {/* City  */}
+                                    <Grid container xs={12} sm={12}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                margin="dense"
+                                                id="residentialCity"
+                                                variant="outlined"
+                                                label="City"
+                                                name="residentialCity"
+                                                type="text"
+                                                inputRef={register}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                        {/* Code */}
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                margin="dense"
+                                                id="residentialCode"
+                                                variant="outlined"
+                                                label="Code"
+                                                name="residentialCode"
+                                                type="text"
+                                                inputRef={register}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
 
-                        <Grid item xs={12} sm={6}>
-                            {/* Residential Address */}
-                            <h6>Residential Address</h6>
-                            {/* Address Line 1 */}
-                            <TextField
-                                margin="dense"
-                                id="residentialAddressLine1"
-                                variant="outlined"
-                                label="Address Line 1"
-                                name="residentialAddressLine1"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                            {/* Address Line 2 */}
-                            <TextField
-                                margin="dense"
-                                id="residentialAddressLine2"
-                                variant="outlined"
-                                label="Address Line 2"
-                                name="residentialAddressLine2"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                            {/* Suburb */}
-                            <TextField
-                                margin="dense"
-                                id="residentialSubrub"
-                                variant="outlined"
-                                label="Subrub"
-                                name="residentialSubrub"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
+                                <Grid item xs={12} sm={6}>
+                                    {/* Postal Address */}
+                                    <h6>Postal Address</h6>
+                                    {/* Address Line 1 */}
+                                    <Grid item xs={12} sm={12}>
+                                        <TextField
+                                            margin="dense"
+                                            id="postalAddressLine1"
+                                            variant="outlined"
+                                            label="Address Line 1"
+                                            name="postalAddressLine1"
+                                            type="text"
+                                            inputRef={register}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    {/* Address Line 2 */}
+                                    <Grid item xs={12} sm={12}>
+                                        <TextField
+                                            margin="dense"
+                                            id="postalAddressLine2"
+                                            variant="outlined"
+                                            label="Address Line 2"
+                                            name="postalAddressLine2"
+                                            type="text"
+                                            inputRef={register}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    {/* Suburb */}
+                                    <Grid item xs={12} sm={12}>
+                                        <TextField
+                                            margin="dense"
+                                            id="postalSubrub"
+                                            variant="outlined"
+                                            label="Subrub"
+                                            name="postalSubrub"
+                                            type="text"
+                                            inputRef={register}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    {/* City  */}
+                                    <Grid container xs={12} sm={12}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                margin="dense"
+                                                id="postalCity"
+                                                variant="outlined"
+                                                label="City"
+                                                name="postalCity"
+                                                type="text"
+                                                inputRef={register}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                        {/* Code */}
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                margin="dense"
+                                                id="postalCode"
+                                                variant="outlined"
+                                                label="Code"
+                                                name="postalCode"
+                                                type="text"
+                                                inputRef={register}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                    </Grid>
 
-                            {/* City  */}
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    margin="dense"
-                                    id="residentialCity"
-                                    variant="outlined"
-                                    label="City"
-                                    name="residentialCity"
-                                    type="text"
-                                    inputRef={register}
-                                    fullWidth
-                                />
-                                {/* Code */}
+                                </Grid>
 
                             </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            {/* Postal Address */}
-                            <h6>Postal Address</h6>
-                            {/* Address Line 1 */}
-                            {/* Address Line 2 */}
-                            {/* Suburb */}
-                            {/* City Code */}
 
                         </Grid>
 
 
+                        <Grid item xs={6} sm={4}>
+                            <TextField
+                                margin="dense"
+                                id="maritalStatus"
+                                variant="outlined"
+                                label="Marital Status"
+                                name="maritalStatus"
+                                type="text"
+                                inputRef={register}
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={6} sm={8}>
+                            <TextField
+                                margin="dense"
+                                id="dietaryPreference"
+                                variant="outlined"
+                                label="Dietary Preference"
+                                name="dietaryPreference"
+                                type="text"
+                                inputRef={register}
+                                fullWidth
+                            />
+                        </Grid>
+
+                        <Grid item xs={6} sm={4}>
+                            <TextField
+                                margin="dense"
+                                id="religion"
+                                variant="outlined"
+                                label="Religion"
+                                name="religion"
+                                type="text"
+                                inputRef={register}
+                                fullWidth
+                            />
+                        </Grid>
 
 
+                        <Grid item xs={6} sm={4}>
+                            <TextField
+                                margin="dense"
+                                id="congregation"
+                                variant="outlined"
+                                label="Congregation"
+                                name="congregation"
+                                type="text"
+                                inputRef={register}
+                                fullWidth
+                            />
+                        </Grid>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        <Grid item xs={6} sm={4}>
+                            <TextField
+                                margin="dense"
+                                id="minister"
+                                variant="outlined"
+                                label="Minister"
+                                name="minister"
+                                type="text"
+                                inputRef={register}
+                                fullWidth
+                            />
+                        </Grid>
 
                     </Grid>
 
@@ -451,7 +584,7 @@ function PatientPersonalInformation(props) {
 
                     {/* Error reporting */}
 
-                    <Grid item xs={12} sm={12}>
+                    {/* <Grid item xs={12} sm={12}>
 
                         {errors.doctor && (
                             <h4 style={{ color: "red" }}>
@@ -493,7 +626,7 @@ function PatientPersonalInformation(props) {
                                 Please enter patient's Pre Admission Number
                             </h4>
                         )}
-                    </Grid>
+                    </Grid> */}
                     <Grid>
                         <Grid item xs={4} sm={4}></Grid>
                         <Grid item xs={4} sm={4}>
@@ -512,7 +645,7 @@ function PatientPersonalInformation(props) {
                 </form>
 
 
-            </Container>
+            </Container >
         </div >
     )
 }

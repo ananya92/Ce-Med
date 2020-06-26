@@ -106,6 +106,7 @@ function HospitalInformation(props) {
             <Container>
 
                 <h4>Hospital Use Only</h4>
+                <p>Infomation ID : {initialState.id}</p>
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
