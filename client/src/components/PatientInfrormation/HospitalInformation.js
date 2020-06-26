@@ -53,6 +53,7 @@ function HospitalInformation(props) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
                 console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
+                //This part is not used as of now.
                 let retrievedData = {
                     id: data.id,
                     bedDetails: data.bedDetails,
@@ -64,7 +65,9 @@ function HospitalInformation(props) {
                 }
                 console.log(retrievedData);
                 setTimeout(()=> setInitialState(retrievedData));
-                
+
+                //This part is for stting the current value in the input box
+
                 setValue(
                     [{ bedDetails: data.bedDetails },
                     { doctor: data.doctor },
