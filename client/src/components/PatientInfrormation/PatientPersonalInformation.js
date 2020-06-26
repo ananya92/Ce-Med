@@ -395,8 +395,22 @@ function PatientPersonalInformation(props) {
                                 inputRef={register}
                                 fullWidth
                             />
-                            {/* City Code */}
 
+                            {/* City  */}
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    margin="dense"
+                                    id="residentialCity"
+                                    variant="outlined"
+                                    label="City"
+                                    name="residentialCity"
+                                    type="text"
+                                    inputRef={register}
+                                    fullWidth
+                                />
+                                {/* Code */}
+
+                            </Grid>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             {/* Postal Address */}

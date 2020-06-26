@@ -49,7 +49,7 @@ router.post("/hospitalInformation/storeHospitalInformationData", function (req, 
                 });
             } else {
                 console.log("Record not found, creating new record");
-                db.PatientDetails_HospitalInformation.create(sliced).then(function (data) {
+                db.PatientDetails_HospitalInformation.create(req.body).then(function (data) {
                     res.json(data);
                 }).catch(error => {
                     console.log(error);

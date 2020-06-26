@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import moment from "moment";
 
 
 // for styling form components
@@ -28,6 +29,17 @@ function HospitalInformation(props) {
     const classes = useStyles();
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
+    const [initialState, setInitialState] = useState(
+        {
+            id: 0,
+            bedDetails: "Bed detail",
+            doctor: "Doctor",
+            preAdmissionNumber: "123456",
+            surgeryBookedTime: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
+            timeOfArrival: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
+            wardDetails: "Ward Name"
+        }
+    );
 
     //setting case info
     caseInfo = {
@@ -39,16 +51,29 @@ function HospitalInformation(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
-                // console.log(response.data[0]);
+                console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
+                let retrievedData = {
+                    id: data.id,
+                    bedDetails: data.bedDetails,
+                    doctor: data.doctor,
+                    preAdmissionNumber: data.preAdmissionNumber,
+                    surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm"),
+                    timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm"),
+                    wardDetails: data.wardDetails
+                }
+                console.log(retrievedData);
+                setTimeout(()=> setInitialState(retrievedData));
+                
                 setValue(
                     [{ bedDetails: data.bedDetails },
                     { doctor: data.doctor },
                     { preAdmissionNumber: data.preAdmissionNumber },
-                    { surgeryBookedTime: data.surgeryBookedTime },
-                    { timeOfArrival: data.timeOfArrival },
+                    { surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm") },
+                    { timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm") },
                     { wardDetails: data.wardDetails }
                     ]);
+
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
             });
@@ -94,6 +119,7 @@ function HospitalInformation(props) {
                                 label="Doctor"
                                 type="text"
                                 name="doctor"
+                                defaultValue={initialState.doctor}
                                 inputRef={register({ required: true })}
                                 fullWidth
                             />
@@ -107,7 +133,7 @@ function HospitalInformation(props) {
                                 label="Surgery Booked Time"
                                 variant="outlined"
                                 type="datetime-local"
-                                // defaultValue={Date.now()}
+                                defaultValue={initialState.surgeryBookedTime}
                                 // className={classes.textField}
                                 InputLabelProps={{
                                     shrink: true,
@@ -124,7 +150,7 @@ function HospitalInformation(props) {
                                 label="Time Of Arrival"
                                 variant="outlined"
                                 type="datetime-local"
-                                // defaultValue={Date.now()}                    
+                                defaultValue={initialState.timeOfArrival}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -140,6 +166,7 @@ function HospitalInformation(props) {
                                 label="Ward Details"
                                 name="wardDetails"
                                 type="text"
+                                defaultValue={initialState.wardDetails}
                                 inputRef={register({ required: true })}
                                 fullWidth
                             />
@@ -153,6 +180,7 @@ function HospitalInformation(props) {
                                 label="Bed Details"
                                 name="bedDetails"
                                 type="text"
+                                defaultValue={initialState.bedDetails}
                                 inputRef={register({ required: true })}
                                 fullWidth
                             />
@@ -166,6 +194,7 @@ function HospitalInformation(props) {
                                 label="Pre Admission Number"
                                 name="preAdmissionNumber"
                                 type="text"
+                                defaultValue={initialState.preAdmissionNumber}
                                 inputRef={register({ required: true })}
                                 fullWidth
                             />
