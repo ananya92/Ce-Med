@@ -59,9 +59,9 @@ function RespiratorySystem(props) {
     ];
 
     useEffect(() => {
-        API.getRespiratorySystemData().then(response => {
-            console.log(response);
-        });
+        // API.getRespiratorySystemData().then(response => {
+        //     console.log(response);
+        // });
     }, []);
 
     useEffect(() => {
