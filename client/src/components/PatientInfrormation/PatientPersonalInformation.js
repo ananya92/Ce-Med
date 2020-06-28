@@ -358,6 +358,21 @@ function PatientPersonalInformation(props) {
                                 </Select>
                             </FormControl>
                         </Grid>
+
+                        <Grid item xs={12} sm={12}>
+                            <TextField
+                                margin="dense"
+                                id="email-address"
+                                variant="outlined"
+                                label="Email Address"
+                                name="emailAddress"
+                                type="text"
+                                inputRef={register}
+                                fullWidth
+                            />
+                        </Grid>
+
+                        
                         <Grid item xs={12} sm={12}>
                             <Grid container spacing={2} >
                                 <Grid item xs={12} sm={6}>
