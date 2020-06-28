@@ -87,7 +87,7 @@ function PatientPersonalInformation(props) {
                 >
 
                     <Grid container spacing={1}>
-                        <Grid item xs={6} sm={6}>
+                        <Grid item xs={12} sm={6}>
                             <FormControl margin="dense" variant="outlined" fullWidth>
                                 <InputLabel htmlFor="identifier-type"  >
                                     Identifier Type
@@ -403,7 +403,7 @@ function PatientPersonalInformation(props) {
                                         />
                                     </Grid>
                                     {/* City  */}
-                                    <Grid container xs={12} sm={12}>
+                                    <Grid container >
                                         <Grid item xs={12} sm={6}>
                                             <TextField
                                                 margin="dense"
@@ -475,7 +475,7 @@ function PatientPersonalInformation(props) {
                                         />
                                     </Grid>
                                     {/* City  */}
-                                    <Grid container xs={12} sm={12}>
+                                    <Grid container >
                                         <Grid item xs={12} sm={6}>
                                             <TextField
                                                 margin="dense"
@@ -509,7 +509,9 @@ function PatientPersonalInformation(props) {
 
                         </Grid>
 
-
+                        <Grid item xs={12} sm={12}>
+                            <h6>Other Details</h6>
+                        </Grid>
                         <Grid item xs={6} sm={4}>
                             <TextField
                                 margin="dense"
