@@ -198,6 +198,7 @@ function HospitalVisitInformation(props) {
                                 type="text"
                                 inputRef={register}
                                 fullWidth
+                                multiline
                             />
                         </Grid>
 
@@ -211,6 +212,7 @@ function HospitalVisitInformation(props) {
                                 type="text"
                                 inputRef={register}
                                 fullWidth
+                                multiline
                             />
                         </Grid>
 
