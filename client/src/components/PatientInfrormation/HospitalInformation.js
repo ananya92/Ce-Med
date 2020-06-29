@@ -64,7 +64,7 @@ function HospitalInformation(props) {
                     wardDetails: data.wardDetails
                 }
                 console.log(retrievedData);
-                setTimeout(()=> setInitialState(retrievedData));
+                setTimeout(() => setInitialState(retrievedData));
 
                 //This part is for stting the current value in the input box
 
@@ -102,178 +102,178 @@ function HospitalInformation(props) {
 
 
     return (
-        <div>
-            <Container>
 
-                <h4>Hospital Use Only</h4>
-                <p>Infomation ID : {initialState.id}</p>
+        <Container>
 
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className={classes.root}
-                // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
-                >
+            <h4>Hospital Use Only</h4>
+            <p>Infomation ID : {initialState.id}</p>
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12}>
-                            <TextField
-                                margin="dense"
-                                id="doctor"
-                                variant="outlined"
-                                label="Doctor"
-                                type="text"
-                                name="doctor"
-                                defaultValue={initialState.doctor}
-                                inputRef={register({ required: true })}
-                                fullWidth
-                            />
-                        </Grid>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={classes.root}
+            // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
+            >
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                name="surgeryBookedTime"
-                                id="surgeryBookedTime"
-                                label="Surgery Booked Time"
-                                variant="outlined"
-                                type="datetime-local"
-                                defaultValue={initialState.surgeryBookedTime}
-                                // className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                fullWidth
-                                inputRef={register({ required: true })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                name="timeOfArrival"
-                                id="timeOfArrival"
-                                label="Time Of Arrival"
-                                variant="outlined"
-                                type="datetime-local"
-                                defaultValue={initialState.timeOfArrival}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                fullWidth
-                                inputRef={register({ required: true })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="wardDetails"
-                                variant="outlined"
-                                label="Ward Details"
-                                name="wardDetails"
-                                type="text"
-                                defaultValue={initialState.wardDetails}
-                                inputRef={register({ required: true })}
-                                fullWidth
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="bedDetails"
-                                variant="outlined"
-                                label="Bed Details"
-                                name="bedDetails"
-                                type="text"
-                                defaultValue={initialState.bedDetails}
-                                inputRef={register({ required: true })}
-                                fullWidth
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="preAdmissionNumber"
-                                variant="outlined"
-                                label="Pre Admission Number"
-                                name="preAdmissionNumber"
-                                type="text"
-                                defaultValue={initialState.preAdmissionNumber}
-                                inputRef={register({ required: true })}
-                                fullWidth
-                            />
-                        </Grid>
-
-                    </Grid>
-
-
-
-                    {/* Error reporting */}
-
+                <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
+                        <TextField
+                            margin="dense"
+                            id="doctor"
+                            variant="outlined"
+                            label="Doctor"
+                            type="text"
+                            name="doctor"
+                            defaultValue={initialState.doctor}
+                            inputRef={register({ required: true })}
+                            fullWidth
+                        />
+                    </Grid>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            name="surgeryBookedTime"
+                            id="surgeryBookedTime"
+                            label="Surgery Booked Time"
+                            variant="outlined"
+                            type="datetime-local"
+                            defaultValue={initialState.surgeryBookedTime}
+                            // className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            fullWidth
+                            inputRef={register({ required: true })}
+                        />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            name="timeOfArrival"
+                            id="timeOfArrival"
+                            label="Time Of Arrival"
+                            variant="outlined"
+                            type="datetime-local"
+                            defaultValue={initialState.timeOfArrival}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            fullWidth
+                            inputRef={register({ required: true })}
+                        />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="wardDetails"
+                            variant="outlined"
+                            label="Ward Details"
+                            name="wardDetails"
+                            type="text"
+                            defaultValue={initialState.wardDetails}
+                            inputRef={register({ required: true })}
+                            fullWidth
+                        />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="bedDetails"
+                            variant="outlined"
+                            label="Bed Details"
+                            name="bedDetails"
+                            type="text"
+                            defaultValue={initialState.bedDetails}
+                            inputRef={register({ required: true })}
+                            fullWidth
+                        />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="preAdmissionNumber"
+                            variant="outlined"
+                            label="Pre Admission Number"
+                            name="preAdmissionNumber"
+                            type="text"
+                            defaultValue={initialState.preAdmissionNumber}
+                            inputRef={register({ required: true })}
+                            fullWidth
+                        />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid>
-                        <Grid item xs={4} sm={4}></Grid>
-                        <Grid item xs={4} sm={4}>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                style={{ marginTop: 20 }}
-                                fullWidth
-                            >
-                                SUBMIT
+
+                </Grid>
+
+
+
+                {/* Error reporting */}
+
+                <Grid item xs={12} sm={12}>
+
+                    {errors.doctor && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Doctor Information
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.surgeryBookedTime && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Surgery Booked Time
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.timeOfArrival && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter patient's Time Of Arrival
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.wardDetails && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter patient's Ward Details
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.bedDetails && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter patient's Bed Details
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.preAdmissionNumber && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter patient's Pre Admission Number
+                        </h4>
+                    )}
+                </Grid>
+                <Grid>
+                    <Grid item xs={4} sm={4}></Grid>
+                    <Grid item xs={4} sm={4}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            style={{ marginTop: 20 }}
+                            fullWidth
+                        >
+                            SUBMIT
                         </Button>
-                        </Grid>
-                        <Grid item xs={4} sm={4}></Grid>
                     </Grid>
-                </form>
+                    <Grid item xs={4} sm={4}></Grid>
+                </Grid>
+            </form>
 
 
-            </Container>
-        </div >
+        </Container>
     )
+
 }
 
 export default HospitalInformation;

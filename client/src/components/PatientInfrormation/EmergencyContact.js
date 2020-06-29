@@ -73,191 +73,191 @@ function EmergencyContact(props) {
 
 
     return (
-        <div>
-            <Container>
 
-                <h2>Emergency Contact</h2>
-                <h6>Person to be contacted in case of medical emergency</h6>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className={classes.root}
-                // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
-                >
+        <Container>
 
-                    <Grid container spacing={1}>
+            <h2>Emergency Contact</h2>
+            <h6>Person to be contacted in case of medical emergency</h6>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={classes.root}
+            // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
+            >
 
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="surname"
-                                variant="outlined"
-                                label="Surname"
-                                name="surname"
-                                type="text"
-                                inputRef={register({ required: true })}
-                                fullWidth
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="name"
-                                variant="outlined"
-                                label="Name"
-                                name="name"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={12}>
-                            <TextField
-                                margin="dense"
-                                id="relationshipToPatient"
-                                variant="outlined"
-                                label="Relationship To Patient"
-                                name="relationshipToPatient"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
+                <Grid container spacing={1}>
 
 
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="surname"
+                            variant="outlined"
+                            label="Surname"
+                            name="surname"
+                            type="text"
+                            inputRef={register({ required: true })}
+                            fullWidth
+                        />
+                    </Grid>
 
-                        <Grid item xs={12} sm={12}>
-                            <h6>Emergency Contact's Contact Details</h6>
-                        </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="name"
+                            variant="outlined"
+                            label="Name"
+                            name="name"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={12}>
+                        <TextField
+                            margin="dense"
+                            id="relationshipToPatient"
+                            variant="outlined"
+                            label="Relationship To Patient"
+                            name="relationshipToPatient"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
 
 
 
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                margin="dense"
-                                id="mobileNumber"
-                                variant="outlined"
-                                label="Mobile Number"
-                                name="mobileNumber"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                margin="dense"
-                                id="workNumber"
-                                variant="outlined"
-                                label="Work Number"
-                                name="workNumber"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                margin="dense"
-                                id="homeNumber"
-                                variant="outlined"
-                                label="Home Number"
-                                name="homeNumber"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={12}>
-                            <h6>Emergency Contact's Address</h6>
-                        </Grid>
-                        {/* Address Line 1 */}
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="residentialAddressLine1"
-                                variant="outlined"
-                                label="Address Line 1"
-                                name="residentialAddressLine1"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        {/* Address Line 2 */}
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="residentialAddressLine2"
-                                variant="outlined"
-                                label="Address Line 2"
-                                name="residentialAddressLine2"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        {/* Suburb */}
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="residentialSubrub"
-                                variant="outlined"
-                                label="Subrub"
-                                name="residentialSubrub"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        {/* City  */}
-
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="residentialCity"
-                                variant="outlined"
-                                label="City"
-                                name="residentialCity"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        {/* Code */}
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="residentialCode"
-                                variant="outlined"
-                                label="Code"
-                                name="residentialCode"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <h6>Emergency Contact's Contact Details</h6>
+                    </Grid>
 
 
 
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="dense"
+                            id="mobileNumber"
+                            variant="outlined"
+                            label="Mobile Number"
+                            name="mobileNumber"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="dense"
+                            id="workNumber"
+                            variant="outlined"
+                            label="Work Number"
+                            name="workNumber"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="dense"
+                            id="homeNumber"
+                            variant="outlined"
+                            label="Home Number"
+                            name="homeNumber"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
 
+                    <Grid item xs={12} sm={12}>
+                        <h6>Emergency Contact's Address</h6>
+                    </Grid>
+                    {/* Address Line 1 */}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="residentialAddressLine1"
+                            variant="outlined"
+                            label="Address Line 1"
+                            name="residentialAddressLine1"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    {/* Address Line 2 */}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="residentialAddressLine2"
+                            variant="outlined"
+                            label="Address Line 2"
+                            name="residentialAddressLine2"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    {/* Suburb */}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="residentialSubrub"
+                            variant="outlined"
+                            label="Subrub"
+                            name="residentialSubrub"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    {/* City  */}
 
-
-
-
-
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="residentialCity"
+                            variant="outlined"
+                            label="City"
+                            name="residentialCity"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    {/* Code */}
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="residentialCode"
+                            variant="outlined"
+                            label="Code"
+                            name="residentialCode"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
                     </Grid>
 
 
 
 
 
-                    {/* Error reporting */}
 
-                    {/* <Grid item xs={12} sm={12}>
+
+
+
+                </Grid>
+
+
+
+
+
+                {/* Error reporting */}
+
+                {/* <Grid item xs={12} sm={12}>
 
                         {errors.doctor && (
                             <h4 style={{ color: "red" }}>
@@ -300,26 +300,26 @@ function EmergencyContact(props) {
                             </h4>
                         )}
                     </Grid> */}
-                    <Grid>
-                        <Grid item xs={4} sm={4}></Grid>
-                        <Grid item xs={4} sm={4}>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                style={{ marginTop: 20 }}
-                                fullWidth
-                            >
-                                SUBMIT
+                <Grid>
+                    <Grid item xs={4} sm={4}></Grid>
+                    <Grid item xs={4} sm={4}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            style={{ marginTop: 20 }}
+                            fullWidth
+                        >
+                            SUBMIT
                         </Button>
-                        </Grid>
-                        <Grid item xs={4} sm={4}></Grid>
                     </Grid>
-                </form>
+                    <Grid item xs={4} sm={4}></Grid>
+                </Grid>
+            </form>
 
 
-            </Container>
-        </div>
+        </Container>
+
     )
 }
 

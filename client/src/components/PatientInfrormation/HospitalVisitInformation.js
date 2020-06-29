@@ -73,165 +73,165 @@ function HospitalVisitInformation(props) {
 
 
     return (
-        <div>
-            <Container>
 
-                <h2>Hospital Visit Information</h2>
+        <Container>
 
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className={classes.root}
-                // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
-                >
+            <h2>Hospital Visit Information</h2>
 
-                    <Grid container spacing={1}>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                margin="dense"
-                                name="admissionDate"
-                                id="admissionDate"
-                                label="Admission Date"
-                                variant="outlined"
-                                type="date"
-                                // defaultValue={Date.now()}
-                                // className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                fullWidth
-                                inputRef={register({ required: true })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                margin="dense"
-                                name="surgeryBookedDate"
-                                id="surgeryBookedDate"
-                                label="Surgery Booked Date"
-                                variant="outlined"
-                                type="date"
-                                // defaultValue={Date.now()}
-                                // className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                fullWidth
-                                inputRef={register({ required: true })}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <TextField
-                                margin="dense"
-                                name="surgeryBookedTime"
-                                id="surgeryBookedTime"
-                                label="Surgery Booked Time"
-                                variant="outlined"
-                                type="time"
-                                // defaultValue={Date.now()}
-                                // className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                fullWidth
-                                inputRef={register({ required: true })}
-                            />
-                        </Grid>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={classes.root}
+            // style={{ margin: "auto", textAlign: "justify", paddingTop: 10 }}
+            >
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="admitting-doctor"
-                                variant="outlined"
-                                label="Admitting Doctor"
-                                name="admittingDoctor"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="dense"
+                            name="admissionDate"
+                            id="admissionDate"
+                            label="Admission Date"
+                            variant="outlined"
+                            type="date"
+                            // defaultValue={Date.now()}
+                            // className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            fullWidth
+                            inputRef={register({ required: true })}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="dense"
+                            name="surgeryBookedDate"
+                            id="surgeryBookedDate"
+                            label="Surgery Booked Date"
+                            variant="outlined"
+                            type="date"
+                            // defaultValue={Date.now()}
+                            // className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            fullWidth
+                            inputRef={register({ required: true })}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <TextField
+                            margin="dense"
+                            name="surgeryBookedTime"
+                            id="surgeryBookedTime"
+                            label="Surgery Booked Time"
+                            variant="outlined"
+                            type="time"
+                            // defaultValue={Date.now()}
+                            // className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            fullWidth
+                            inputRef={register({ required: true })}
+                        />
+                    </Grid>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="referring-doctor"
-                                variant="outlined"
-                                label="Referring Doctor"
-                                name="referringDoctor"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="alternate-doctor"
-                                variant="outlined"
-                                label="Alternate Doctor"
-                                name="AlternateDoctor"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="admitting-doctor"
+                            variant="outlined"
+                            label="Admitting Doctor"
+                            name="admittingDoctor"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
 
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="dense"
-                                id="general-gp"
-                                variant="outlined"
-                                label="General GP"
-                                name="generalGp"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                            />
-                        </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="referring-doctor"
+                            variant="outlined"
+                            label="Referring Doctor"
+                            name="referringDoctor"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="alternate-doctor"
+                            variant="outlined"
+                            label="Alternate Doctor"
+                            name="AlternateDoctor"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
 
-                        <Grid item xs={12} sm={12}>
-                            <TextField
-                                margin="dense"
-                                id="icd-code-diagnosis"
-                                variant="outlined"
-                                label="ICD Code / Diagnosis"
-                                name="icdCodeDiagnosis"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                                multiline
-                            />
-                        </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="general-gp"
+                            variant="outlined"
+                            label="General GP"
+                            name="generalGp"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                        />
+                    </Grid>
 
-                        <Grid item xs={12} sm={12}>
-                            <TextField
-                                margin="dense"
-                                id="CPT-code-procedure"
-                                variant="outlined"
-                                label="CPT Code / Procedure"
-                                name="cptCodeProcedure"
-                                type="text"
-                                inputRef={register}
-                                fullWidth
-                                multiline
-                            />
-                        </Grid>
+                    <Grid item xs={12} sm={12}>
+                        <TextField
+                            margin="dense"
+                            id="icd-code-diagnosis"
+                            variant="outlined"
+                            label="ICD Code / Diagnosis"
+                            name="icdCodeDiagnosis"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                            multiline
+                        />
+                    </Grid>
 
-
-
-
-
-
-
-
+                    <Grid item xs={12} sm={12}>
+                        <TextField
+                            margin="dense"
+                            id="CPT-code-procedure"
+                            variant="outlined"
+                            label="CPT Code / Procedure"
+                            name="cptCodeProcedure"
+                            type="text"
+                            inputRef={register}
+                            fullWidth
+                            multiline
+                        />
                     </Grid>
 
 
 
 
 
-                    {/* Error reporting */}
 
-                    {/* <Grid item xs={12} sm={12}>
+
+
+                </Grid>
+
+
+
+
+
+                {/* Error reporting */}
+
+                {/* <Grid item xs={12} sm={12}>
 
                         {errors.doctor && (
                             <h4 style={{ color: "red" }}>
@@ -274,26 +274,26 @@ function HospitalVisitInformation(props) {
                             </h4>
                         )}
                     </Grid> */}
-                    <Grid>
-                        <Grid item xs={4} sm={4}></Grid>
-                        <Grid item xs={4} sm={4}>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                style={{ marginTop: 20 }}
-                                fullWidth
-                            >
-                                SUBMIT
+                <Grid>
+                    <Grid item xs={4} sm={4}></Grid>
+                    <Grid item xs={4} sm={4}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            style={{ marginTop: 20 }}
+                            fullWidth
+                        >
+                            SUBMIT
                         </Button>
-                        </Grid>
-                        <Grid item xs={4} sm={4}></Grid>
                     </Grid>
-                </form>
+                    <Grid item xs={4} sm={4}></Grid>
+                </Grid>
+            </form>
 
 
-            </Container>
-        </div>
+        </Container>
+
     )
 }
 export default HospitalVisitInformation;
