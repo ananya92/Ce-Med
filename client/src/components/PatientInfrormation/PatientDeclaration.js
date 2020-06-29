@@ -123,7 +123,7 @@ function PatientDeclaration(props) {
                             <li><strong>Medical Aid Patients - </strong> Please consult with your medical aid prior to admission obtaining pre-authorisation if necessary. A short payments by your medical aid will be for your own account.</li>
                             <li><strong>Medical Aid Card and ID Book - </strong> Must be produced on admission otherwise patient will be treated as private.</li>
                             <li><strong>Private/Semi Private Wards - </strong> Medical aid patients requesting private wards will be expected to pay the private ward rate on admission. Please note that private wards are subject to availability.</li>
-                            <li>I hereby declare that the information I have provided is true and correct and agree to the terms and conditions as set out above.</li>
+                            <li><strong>I hereby declare that the information I have provided is true and correct and agree to the terms and conditions as set out above.</strong></li>
                         </ul>
                     </Grid>
 
