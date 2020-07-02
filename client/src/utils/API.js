@@ -26,10 +26,21 @@ export default {
     storeHospitalInformationData: function(data) {
         return axios.post(`/api/patientDetails/hospitalInformation/storeHospitalInformationData`, data);
     },
-    //1. save Hospital information
+    //2. get Hospital information
     getHospitalInformationData: function(CaseId) {
-        console.log(`/api/patientDetails/hospitalInformation/${CaseId}`);
+        // console.log(`/api/patientDetails/hospitalInformation/${CaseId}`);
         return axios.get(`/api/patientDetails/hospitalInformation/${CaseId}`);
+    },
+
+    //saving Alternate Contact Information
+    //1. save Alternate Contact information
+    storeAlternativeContact: function(data) {
+        return axios.post(`/api/patientDetails/AlternativeContact/storeAlternativeContactData`, data);
+    },
+    //2. get Alternate Contact information
+    getAlternativeContact: function(CaseId) {
+        console.log(`/api/patientDetails/AlternativeContact/${CaseId}`);
+        return axios.get(`/api/patientDetails/AlternativeContact/${CaseId}`);
     },
 
 };

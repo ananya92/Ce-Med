@@ -16,14 +16,6 @@ router.get("/hospitalInformation/:CaseId", (req, res) => {
     });
 });
 
-// router.post("/hospitalInformation/storeHospitalInformationData", function (req, res) {
-//     var data = {...req.body, CaseId: req.body.caseId};
-//     db.PatientDetails_HospitalInformation.create(data).then(function (dat) {
-//         res.json(data);
-//     }).catch(error => {
-//         console.log(error);
-//     });
-// })
 
 router.post("/hospitalInformation/storeHospitalInformationData", function (req, res) {
     console.log(req.body, parseInt(req.body.CaseId));
