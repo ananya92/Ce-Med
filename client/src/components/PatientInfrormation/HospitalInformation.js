@@ -32,12 +32,12 @@ function HospitalInformation(props) {
     const [initialState, setInitialState] = useState(
         {
             id: 0,
-            bedDetails: "Bed detail",
-            doctor: "Doctor",
-            preAdmissionNumber: "123456",
+            bedDetails: " ",
+            doctor: " ",
+            preAdmissionNumber: " ",
             surgeryBookedTime: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
             timeOfArrival: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
-            wardDetails: "Ward Name"
+            wardDetails: " "
         }
     );
 
@@ -53,7 +53,7 @@ function HospitalInformation(props) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
                 console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
-                //This part is not used as of now.
+
                 let retrievedData = {
                     id: data.id,
                     bedDetails: data.bedDetails,
@@ -67,16 +67,18 @@ function HospitalInformation(props) {
                 setTimeout(() => setInitialState(retrievedData));
 
                 //This part is for stting the current value in the input box
-
-                setValue(
-                    [{ bedDetails: data.bedDetails },
-                    { doctor: data.doctor },
-                    { preAdmissionNumber: data.preAdmissionNumber },
-                    { surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm") },
-                    { timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm") },
-                    { wardDetails: data.wardDetails }
-                    ]);
-
+                if (data != undefined || data != null) {
+                    setValue(
+                        [{ bedDetails: data.bedDetails },
+                        { doctor: data.doctor },
+                        { preAdmissionNumber: data.preAdmissionNumber },
+                        { surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm") },
+                        { timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm") },
+                        { wardDetails: data.wardDetails }
+                        ]);
+                } else {
+                    console.log("There is no saved data");
+                }
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
             });

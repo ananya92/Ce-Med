@@ -33,18 +33,18 @@ function AlternativeContact(props) {
 
     const [initialState, setInitialState] = useState(
         {
-            CaseId: "",
-            homeNumber: "",
-            mobileNumber: "",
-            name: "",
-            relationshipToPatient: "",
-            residentialAddressLine1: "",
-            residentialAddressLine2: "",
-            residentialCity: "",
-            residentialCode: "",
-            residentialSuburb: "",
-            surname: "",
-            workNumber: ""
+            id: 0,
+            homeNumber: " ",
+            mobileNumber: " ",
+            name: " ",
+            relationshipToPatient: " ",
+            residentialAddressLine1: " ",
+            residentialAddressLine2: " ",
+            residentialCity: " ",
+            residentialCode: " ",
+            residentialSuburb: " ",
+            surname: " ",
+            workNumber: " "
         }
     );
 
@@ -55,23 +55,52 @@ function AlternativeContact(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getAlternativeContact(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getAlternativeContact(caseInfo.CaseId).then(response => {
+                console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+
+                let retrievedData = {
+                    id: data.id,
+                    surname: data.surname,
+                    name: data.name,
+                    relationshipToPatient: data.relationshipToPatient,
+                    mobileNumber: data.mobileNumber,
+                    homeNumber: data.homeNumber,
+                    workNumber: data.workNumber,
+                    residentialAddressLine1: data.residentialAddressLine1,
+                    residentialAddressLine2: data.residentialAddressLine2,
+                    residentialSuburb: data.residentialSuburb,
+                    residentialCity: data.residentialCity,
+                    residentialCode: data.residentialCode,
+                }
+                console.log(retrievedData);
+                setTimeout(() => setInitialState(retrievedData));
+
+                if (data != undefined || data != null) {
+                    setValue([
+                        { surname: data.surname },
+                        { name: data.name },
+                        { relationshipToPatient: data.relationshipToPatient },
+                        { mobileNumber: data.mobileNumber },
+                        { homeNumber: data.homeNumber },
+                        { workNumber: data.workNumber },
+                        { residentialAddressLine1: data.residentialAddressLine1 },
+                        { residentialAddressLine2: data.residentialAddressLine2 },
+                        { residentialSuburb: data.residentialSuburb },
+                        { residentialCity: data.residentialCity },
+                        { residentialCode: data.residentialCode },
+                    ]);
+                }
+                else {
+                    console.log("There is no saved data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Alternative contact data:", error);
+            });
+        }
+    }, [])
 
     // saving or updating value on form submit
     const onSubmit = (res) => {
@@ -81,11 +110,11 @@ function AlternativeContact(props) {
 
         console.log(data);
 
-        // API.storeAlternativeContact(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storeAlternativeContact(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding hospital information data:", error);
+        });
     };
 
 

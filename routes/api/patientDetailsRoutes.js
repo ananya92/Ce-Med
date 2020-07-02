@@ -66,7 +66,7 @@ router.get("/AlternativeContact/:CaseId", (req, res) => {
     });
 });
 
-router.post("/hospitalInformation/storeAlternativeContactData", function (req, res) {
+router.post("/AlternativeContact/storeAlternativeContactData", function (req, res) {
     console.log(req.body, parseInt(req.body.CaseId));
     db.PatientDetails_AlternateContact.findAll(
         {
