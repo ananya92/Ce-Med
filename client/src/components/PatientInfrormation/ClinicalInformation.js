@@ -33,6 +33,15 @@ function ClinicalInformation(props) {
 
     const [isDiabetic, setIsDiabetic] = useState(false);
 
+    const [initialState, setInitialState] = useState(
+        {
+            id: 0,
+            symptoms: " ",
+            others: "Nil"
+        }
+    );
+
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -64,7 +73,7 @@ function ClinicalInformation(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
         // API.storeClinicalInformation(data).then(response => {
         //     // console.log(response);
@@ -104,6 +113,7 @@ function ClinicalInformation(props) {
                             // helperText="Please provide a brief description of the symptoms/complaints present when visiting the doctor"
                             multiline
                             inputRef={register({ required: true })}
+                            defaultValue={initialState.symptoms}
                             fullWidth
                         />
                     </Grid>
@@ -115,7 +125,7 @@ function ClinicalInformation(props) {
                         <FormControl margin="dense" variant="outlined" fullWidth>
                             <InputLabel
                                 htmlFor="diabetes-tablets"
-                                // helperText="Should you be suffering from Diabetes Mellitus, Please indicate which form of control is being practiced?"
+                            // helperText="Should you be suffering from Diabetes Mellitus, Please indicate which form of control is being practiced?"
                             >
                                 Suffering from Diabetes Mellitus?
                                 </InputLabel>
@@ -129,6 +139,7 @@ function ClinicalInformation(props) {
                                 name="diabetes"
                                 type="text"
                                 onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -152,7 +163,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesTablets"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -173,7 +184,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesInsulin"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -194,7 +205,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesDiet"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -215,7 +226,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesNone"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -242,7 +253,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="hypertension"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -263,7 +274,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="multipleSclerosis"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -284,7 +295,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="cholestrol"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -305,7 +316,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="emphysema"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -326,7 +337,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="asthma"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -348,7 +359,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="epilepsy"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -370,7 +381,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="thyroidDisorder"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -392,7 +403,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="lupus"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -413,7 +424,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="depression"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -435,7 +446,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="heartFailure"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -457,7 +468,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="porphyria"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -473,9 +484,10 @@ function ClinicalInformation(props) {
                             label="Others"
                             name="others"
                             type="text"
+                            defaultValue="Nil"
                             // helperText="Please provide a brief description of the symptoms/complaints present when visiting the doctor"
                             multiline
-                            inputRef={register({ required: true })}
+                            inputRef={register}
                             fullWidth
                         />
                     </Grid>
@@ -487,49 +499,15 @@ function ClinicalInformation(props) {
 
                 {/* Error reporting */}
 
-                {/* <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid> */}
+                    {errors.symptoms && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Symptoms/Complaints
+                        </h4>
+                    )}
+                </Grid>
+
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
@@ -540,7 +518,7 @@ function ClinicalInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>
