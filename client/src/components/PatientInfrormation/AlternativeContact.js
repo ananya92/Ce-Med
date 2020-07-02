@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -31,6 +31,8 @@ function AlternativeContact(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
+    const [initialState, setInitialState] = useState();
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -62,7 +64,7 @@ function AlternativeContact(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
         // API.storeAlternativeContact(data).then(response => {
         //     // console.log(response);
@@ -96,6 +98,7 @@ function AlternativeContact(props) {
                             name="surname"
                             type="text"
                             inputRef={register({ required: true })}
+                            // defaultValue={initialState.surname}
                             fullWidth
                         />
                     </Grid>
@@ -109,6 +112,7 @@ function AlternativeContact(props) {
                             name="name"
                             type="text"
                             inputRef={register}
+                            // defaultValue={initialState.name}
                             fullWidth
                         />
                     </Grid>
@@ -121,7 +125,8 @@ function AlternativeContact(props) {
                             label="Relationship To Patient"
                             name="relationshipToPatient"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            // defaultValue={initialState.relationshipToPatient}
                             fullWidth
                         />
                     </Grid>
@@ -142,7 +147,8 @@ function AlternativeContact(props) {
                             label="Mobile Number"
                             name="mobileNumber"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            // defaultValue={initialState.mobileNumber}
                             fullWidth
                         />
                     </Grid>
@@ -155,6 +161,7 @@ function AlternativeContact(props) {
                             name="workNumber"
                             type="text"
                             inputRef={register}
+                            // defaultValue={initialState.workNumber}
                             fullWidth
                         />
                     </Grid>
@@ -167,6 +174,7 @@ function AlternativeContact(props) {
                             name="homeNumber"
                             type="text"
                             inputRef={register}
+                            // defaultValue={initialState.homeNumber}
                             fullWidth
                         />
                     </Grid>
@@ -183,7 +191,8 @@ function AlternativeContact(props) {
                             label="Address Line 1"
                             name="residentialAddressLine1"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            // defaultValue={initialState.residentialAddressLine1}
                             fullWidth
                         />
                     </Grid>
@@ -197,6 +206,7 @@ function AlternativeContact(props) {
                             name="residentialAddressLine2"
                             type="text"
                             inputRef={register}
+                            // defaultValue={initialState.residentialAddressLine2}
                             fullWidth
                         />
                     </Grid>
@@ -209,7 +219,8 @@ function AlternativeContact(props) {
                             label="Subrub"
                             name="residentialSubrub"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            // defaultValue={initialState.residentialSubrub}
                             fullWidth
                         />
                     </Grid>
@@ -224,6 +235,7 @@ function AlternativeContact(props) {
                             name="residentialCity"
                             type="text"
                             inputRef={register}
+                            // defaultValue={initialState.residentialCity}
                             fullWidth
                         />
                     </Grid>
@@ -236,7 +248,8 @@ function AlternativeContact(props) {
                             label="Code"
                             name="residentialCode"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            // defaultValue={initialState.residentialCode}
                             fullWidth
                         />
                     </Grid>
@@ -310,7 +323,7 @@ function AlternativeContact(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>

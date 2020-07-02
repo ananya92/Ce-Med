@@ -103,8 +103,9 @@ function PatientPersonalInformation(props) {
                             // onChange={handleChange}
                             >
                                 <option aria-label="None" value="Identifier Type" />
-                                <option value="Type A">Type A</option>
-                                <option value="Type B">Type B</option>
+                                <option value="identificationNumber">Identification Number</option>
+                                <option value="passportNo">Passport Number</option>
+                                <option value="driverseLicence">Driver's licence</option>
                             </Select>
                         </FormControl>
                     </Grid>
