@@ -39,7 +39,7 @@ export default {
     },
     //2. get Alternate Contact information
     getAlternativeContact: function(CaseId) {
-        console.log(`/api/patientDetails/AlternativeContact/${CaseId}`);
+        // console.log(`/api/patientDetails/AlternativeContact/${CaseId}`);
         return axios.get(`/api/patientDetails/AlternativeContact/${CaseId}`);
     },
 

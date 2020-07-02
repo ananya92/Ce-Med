@@ -52,6 +52,55 @@ router.post("/hospitalInformation/storeHospitalInformationData", function (req, 
         })
 });
 
+// route to get data about a case's alternative contact
+router.get("/AlternativeContact/:CaseId", (req, res) => {
+    console.log("req.params.CaseId**********");
+    console.log(req.params.CaseId);
+    db.PatientDetails_AlternateContact.findAll({
+        where: {
+            CaseId: req.params.CaseId
+        }
+    }).then(function (data) {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+router.post("/hospitalInformation/storeAlternativeContactData", function (req, res) {
+    console.log(req.body, parseInt(req.body.CaseId));
+    db.PatientDetails_AlternateContact.findAll(
+        {
+            where: {
+                CaseId: parseInt(req.body.CaseId)
+            }
+        }).then(function (data) {
+
+            console.log(data);
+
+            if (data.length > 0) {
+                db.PatientDetails_AlternateContact.update(
+                    req.body,
+                    {
+                        where: {
+                            CaseId: req.body.CaseId
+                        }
+                    }
+                ).then(function (data) {
+                    res.json(data);
+                });
+            } else {
+                console.log("Record not found, creating new record");
+                db.PatientDetails_AlternateContact.create(req.body).then(function (data) {
+                    res.json(data);
+                }).catch(error => {
+                    console.log(error);
+                });
+
+            }
+
+        })
+});
+
 function dateToISOLikeButLocal(date) {
     const offsetMs = date.getTimezoneOffset() * 60 * 1000;
     const msLocal = date.getTime() - offsetMs;
