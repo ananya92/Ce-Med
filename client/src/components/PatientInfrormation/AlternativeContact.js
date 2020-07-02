@@ -31,7 +31,22 @@ function AlternativeContact(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
-    const [initialState, setInitialState] = useState();
+    const [initialState, setInitialState] = useState(
+        {
+            CaseId: "",
+            homeNumber: "",
+            mobileNumber: "",
+            name: "",
+            relationshipToPatient: "",
+            residentialAddressLine1: "",
+            residentialAddressLine2: "",
+            residentialCity: "",
+            residentialCode: "",
+            residentialSuburb: "",
+            surname: "",
+            workNumber: ""
+        }
+    );
 
     //setting case info
     caseInfo = {
@@ -98,7 +113,7 @@ function AlternativeContact(props) {
                             name="surname"
                             type="text"
                             inputRef={register({ required: true })}
-                            // defaultValue={initialState.surname}
+                            defaultValue={initialState.surname}
                             fullWidth
                         />
                     </Grid>
@@ -112,7 +127,7 @@ function AlternativeContact(props) {
                             name="name"
                             type="text"
                             inputRef={register}
-                            // defaultValue={initialState.name}
+                            defaultValue={initialState.name}
                             fullWidth
                         />
                     </Grid>
@@ -126,7 +141,7 @@ function AlternativeContact(props) {
                             name="relationshipToPatient"
                             type="text"
                             inputRef={register({ required: true })}
-                            // defaultValue={initialState.relationshipToPatient}
+                            defaultValue={initialState.relationshipToPatient}
                             fullWidth
                         />
                     </Grid>
@@ -148,7 +163,7 @@ function AlternativeContact(props) {
                             name="mobileNumber"
                             type="text"
                             inputRef={register({ required: true })}
-                            // defaultValue={initialState.mobileNumber}
+                            defaultValue={initialState.mobileNumber}
                             fullWidth
                         />
                     </Grid>
@@ -161,7 +176,7 @@ function AlternativeContact(props) {
                             name="workNumber"
                             type="text"
                             inputRef={register}
-                            // defaultValue={initialState.workNumber}
+                            defaultValue={initialState.workNumber}
                             fullWidth
                         />
                     </Grid>
@@ -174,7 +189,7 @@ function AlternativeContact(props) {
                             name="homeNumber"
                             type="text"
                             inputRef={register}
-                            // defaultValue={initialState.homeNumber}
+                            defaultValue={initialState.homeNumber}
                             fullWidth
                         />
                     </Grid>
@@ -192,7 +207,7 @@ function AlternativeContact(props) {
                             name="residentialAddressLine1"
                             type="text"
                             inputRef={register({ required: true })}
-                            // defaultValue={initialState.residentialAddressLine1}
+                            defaultValue={initialState.residentialAddressLine1}
                             fullWidth
                         />
                     </Grid>
@@ -206,7 +221,7 @@ function AlternativeContact(props) {
                             name="residentialAddressLine2"
                             type="text"
                             inputRef={register}
-                            // defaultValue={initialState.residentialAddressLine2}
+                            defaultValue={initialState.residentialAddressLine2}
                             fullWidth
                         />
                     </Grid>
@@ -214,13 +229,13 @@ function AlternativeContact(props) {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             margin="dense"
-                            id="residentialSubrub"
+                            id="residentialSuburb"
                             variant="outlined"
-                            label="Subrub"
-                            name="residentialSubrub"
+                            label="Suburb"
+                            name="residentialSuburb"
                             type="text"
                             inputRef={register({ required: true })}
-                            // defaultValue={initialState.residentialSubrub}
+                            defaultValue={initialState.residentialSuburb}
                             fullWidth
                         />
                     </Grid>
@@ -235,7 +250,7 @@ function AlternativeContact(props) {
                             name="residentialCity"
                             type="text"
                             inputRef={register}
-                            // defaultValue={initialState.residentialCity}
+                            defaultValue={initialState.residentialCity}
                             fullWidth
                         />
                     </Grid>
@@ -249,7 +264,7 @@ function AlternativeContact(props) {
                             name="residentialCode"
                             type="text"
                             inputRef={register({ required: true })}
-                            // defaultValue={initialState.residentialCode}
+                            defaultValue={initialState.residentialCode}
                             fullWidth
                         />
                     </Grid>
@@ -270,49 +285,49 @@ function AlternativeContact(props) {
 
                 {/* Error reporting */}
 
-                {/* <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid> */}
+                    {errors.surname && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Surname Information
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.relationshipToPatient && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter relationship to the patient
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.mobileNumber && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter mobile number.
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialAddressLine1 && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Address Line 1
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialSuburb && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Suburb
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialCode && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter PIN Code
+                        </h4>
+                    )}
+                </Grid>
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
