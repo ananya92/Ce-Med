@@ -68,30 +68,35 @@ function ClinicalInformation(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getClinicalInformation(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
-                let retrievedData = {
-                    symptoms: data.symptoms,
-                    diabetes: data.diabetes,
-                    diabetesTablets: data.diabetesTablets,
-                    diabetesInsulin: data.diabetesInsulin,
-                    diabetesDiet: data.diabetesDiet,
-                    diabetesNone: data.diabetesNone,
-                    hypertension: data.hypertension,
-                    multipleSclerosis: data.multipleSclerosis,
-                    cholestrol: data.cholestrol,
-                    emphysema: data.emphysema,
-                    asthma: data.asthma,
-                    epilepsy: data.epilepsy,
-                    thyroidDisorder: data.thyroidDisorder,
-                    lupus: data.lupus,
-                    depression: data.depression,
-                    heartFailure: data.heartFailure,
-                    porphyria: data.porphyria,
-                    others: data.others
+                //this part is needed if need to update initial values 
+                if (data != undefined || data != null) {
+                    let retrievedData = {
+                        symptoms: data.symptoms,
+                        diabetes: data.diabetes,
+                        diabetesTablets: data.diabetesTablets,
+                        diabetesInsulin: data.diabetesInsulin,
+                        diabetesDiet: data.diabetesDiet,
+                        diabetesNone: data.diabetesNone,
+                        hypertension: data.hypertension,
+                        multipleSclerosis: data.multipleSclerosis,
+                        cholestrol: data.cholestrol,
+                        emphysema: data.emphysema,
+                        asthma: data.asthma,
+                        epilepsy: data.epilepsy,
+                        thyroidDisorder: data.thyroidDisorder,
+                        lupus: data.lupus,
+                        depression: data.depression,
+                        heartFailure: data.heartFailure,
+                        porphyria: data.porphyria,
+                        others: data.others
+                    }
+                    console.log(retrievedData);
+                    setTimeout(() => setInitialState(retrievedData));
+                } else {
+                    console.log("There is no saved data");
                 }
-                console.log(retrievedData);
-                setTimeout(() => setInitialState(retrievedData));
 
                 //This part is for stting the current value in the input box
                 if (data != undefined || data != null) {
@@ -115,6 +120,16 @@ function ClinicalInformation(props) {
                         { porphyria: data.porphyria },
                         { others: data.others },
                     ]);
+                    // In order to set second time after first dom update
+                    if (data.diabetes === "Yes") {
+                        setIsDiabetic("Yes");
+                        setValue([
+                            { diabetesTablets: data.diabetesTablets },
+                            { diabetesInsulin: data.diabetesInsulin },
+                            { diabetesDiet: data.diabetesDiet },
+                            { diabetesNone: data.diabetesNone }
+                        ])
+                    }
                 } else {
                     console.log("There is no saved data");
                 }
@@ -205,7 +220,7 @@ function ClinicalInformation(props) {
                         </FormControl>
                     </Grid>
 
-                    {isDiabetic == "Yes" ?
+                    {isDiabetic === "Yes" ?
                         <React.Fragment>
                             <Grid item xs={6} sm={3}>
                                 <FormControl margin="dense" variant="outlined" fullWidth>
