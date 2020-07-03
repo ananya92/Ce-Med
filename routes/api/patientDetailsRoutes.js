@@ -153,6 +153,61 @@ router.post("/ClinicalInformation/storeClinicalInformationData", function (req, 
 });
 
 /*************************************************************************************** */
+
+//**************************************************************** */
+//PatientDetails_EmergencyContact
+// route to get data about a case's alternative contact
+router.get("/EmergencyContact/:CaseId", (req, res) => {
+    console.log("req.params.CaseId**********");
+    console.log(req.params.CaseId);
+    db.PatientDetails_EmergencyContact.findAll({
+        where: {
+            CaseId: req.params.CaseId
+        }
+    }).then(function (data) {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+router.post("/EmergencyContact/storeEmergencyContactData", function (req, res) {
+    console.log(req.body, parseInt(req.body.CaseId));
+    db.PatientDetails_EmergencyContact.findAll(
+        {
+            where: {
+                CaseId: parseInt(req.body.CaseId)
+            }
+        }).then(function (data) {
+
+            console.log(data);
+
+            if (data.length > 0) {
+                db.PatientDetails_EmergencyContact.update(
+                    req.body,
+                    {
+                        where: {
+                            CaseId: req.body.CaseId
+                        }
+                    }
+                ).then(function (data) {
+                    res.json(data);
+                });
+            } else {
+                console.log("Record not found, creating new record");
+                db.PatientDetails_EmergencyContact.create(req.body).then(function (data) {
+                    res.json(data);
+                }).catch(error => {
+                    console.log(error);
+                });
+
+            }
+
+        })
+});
+
+/*************************************************************************************** */
+
+
 function dateToISOLikeButLocal(date) {
     const offsetMs = date.getTimezoneOffset() * 60 * 1000;
     const msLocal = date.getTime() - offsetMs;

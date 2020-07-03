@@ -71,32 +71,32 @@ function ClinicalInformation(props) {
                 // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
                 //this part is needed if need to update initial values 
-                if (data != undefined || data != null) {
-                    let retrievedData = {
-                        symptoms: data.symptoms,
-                        diabetes: data.diabetes,
-                        diabetesTablets: data.diabetesTablets,
-                        diabetesInsulin: data.diabetesInsulin,
-                        diabetesDiet: data.diabetesDiet,
-                        diabetesNone: data.diabetesNone,
-                        hypertension: data.hypertension,
-                        multipleSclerosis: data.multipleSclerosis,
-                        cholestrol: data.cholestrol,
-                        emphysema: data.emphysema,
-                        asthma: data.asthma,
-                        epilepsy: data.epilepsy,
-                        thyroidDisorder: data.thyroidDisorder,
-                        lupus: data.lupus,
-                        depression: data.depression,
-                        heartFailure: data.heartFailure,
-                        porphyria: data.porphyria,
-                        others: data.others
-                    }
-                    console.log(retrievedData);
-                    setTimeout(() => setInitialState(retrievedData));
-                } else {
-                    console.log("There is no saved data");
-                }
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         symptoms: data.symptoms,
+                //         diabetes: data.diabetes,
+                //         diabetesTablets: data.diabetesTablets,
+                //         diabetesInsulin: data.diabetesInsulin,
+                //         diabetesDiet: data.diabetesDiet,
+                //         diabetesNone: data.diabetesNone,
+                //         hypertension: data.hypertension,
+                //         multipleSclerosis: data.multipleSclerosis,
+                //         cholestrol: data.cholestrol,
+                //         emphysema: data.emphysema,
+                //         asthma: data.asthma,
+                //         epilepsy: data.epilepsy,
+                //         thyroidDisorder: data.thyroidDisorder,
+                //         lupus: data.lupus,
+                //         depression: data.depression,
+                //         heartFailure: data.heartFailure,
+                //         porphyria: data.porphyria,
+                //         others: data.others
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
 
                 //This part is for stting the current value in the input box
                 if (data != undefined || data != null) {

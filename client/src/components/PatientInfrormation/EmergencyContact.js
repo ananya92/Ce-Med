@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -29,6 +29,23 @@ function EmergencyContact(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
+    const [initialState, setInitialState] = useState(
+        {
+            id: 0,
+            homeNumber: " ",
+            mobileNumber: " ",
+            name: " ",
+            relationshipToPatient: " ",
+            residentialAddressLine1: " ",
+            residentialAddressLine2: " ",
+            residentialCity: " ",
+            residentialCode: " ",
+            residentialSuburb: " ",
+            surname: " ",
+            workNumber: " "
+        }
+    );
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -36,23 +53,55 @@ function EmergencyContact(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getEmergencyContact(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getEmergencyContact(caseInfo.CaseId).then(response => {
+                // console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         id: data.id,
+                //         surname: data.surname,
+                //         name: data.name,
+                //         relationshipToPatient: data.relationshipToPatient,
+                //         mobileNumber: data.mobileNumber,
+                //         homeNumber: data.homeNumber,
+                //         workNumber: data.workNumber,
+                //         residentialAddressLine1: data.residentialAddressLine1,
+                //         residentialAddressLine2: data.residentialAddressLine2,
+                //         residentialSuburb: data.residentialSuburb,
+                //         residentialCity: data.residentialCity,
+                //         residentialCode: data.residentialCode,
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
+                if (data != undefined || data != null) {
+                    setValue([
+                        { surname: data.surname },
+                        { name: data.name },
+                        { relationshipToPatient: data.relationshipToPatient },
+                        { mobileNumber: data.mobileNumber },
+                        { homeNumber: data.homeNumber },
+                        { workNumber: data.workNumber },
+                        { residentialAddressLine1: data.residentialAddressLine1 },
+                        { residentialAddressLine2: data.residentialAddressLine2 },
+                        { residentialSuburb: data.residentialSuburb },
+                        { residentialCity: data.residentialCity },
+                        { residentialCode: data.residentialCode },
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Emergency Contact data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Emergency Contact data:", error);
+            });
+        }
+    }, [])
 
     // saving or updating value on form submit
     const onSubmit = (res) => {
@@ -60,13 +109,13 @@ function EmergencyContact(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
-        // API.storeEmergencyContact(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storeEmergencyContact(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding hospital information data:", error);
+        });
     };
 
 
@@ -94,6 +143,7 @@ function EmergencyContact(props) {
                             name="surname"
                             type="text"
                             inputRef={register({ required: true })}
+                            defaultValue={initialState.surname}
                             fullWidth
                         />
                     </Grid>
@@ -107,6 +157,7 @@ function EmergencyContact(props) {
                             name="name"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.name}
                             fullWidth
                         />
                     </Grid>
@@ -119,7 +170,8 @@ function EmergencyContact(props) {
                             label="Relationship To Patient"
                             name="relationshipToPatient"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            defaultValue={initialState.relationshipToPatient}
                             fullWidth
                         />
                     </Grid>
@@ -140,7 +192,8 @@ function EmergencyContact(props) {
                             label="Mobile Number"
                             name="mobileNumber"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            defaultValue={initialState.mobileNumber}
                             fullWidth
                         />
                     </Grid>
@@ -153,6 +206,7 @@ function EmergencyContact(props) {
                             name="workNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.workNumber}
                             fullWidth
                         />
                     </Grid>
@@ -165,6 +219,7 @@ function EmergencyContact(props) {
                             name="homeNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.homeNumber}
                             fullWidth
                         />
                     </Grid>
@@ -181,7 +236,8 @@ function EmergencyContact(props) {
                             label="Address Line 1"
                             name="residentialAddressLine1"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            defaultValue={initialState.residentialAddressLine1}
                             fullWidth
                         />
                     </Grid>
@@ -195,6 +251,7 @@ function EmergencyContact(props) {
                             name="residentialAddressLine2"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.residentialAddressLine2}
                             fullWidth
                         />
                     </Grid>
@@ -202,12 +259,13 @@ function EmergencyContact(props) {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             margin="dense"
-                            id="residentialSubrub"
+                            id="residentialSuburb"
                             variant="outlined"
-                            label="Subrub"
-                            name="residentialSubrub"
+                            label="Suburb"
+                            name="residentialSuburb"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            defaultValue={initialState.residentialSuburb}
                             fullWidth
                         />
                     </Grid>
@@ -222,6 +280,7 @@ function EmergencyContact(props) {
                             name="residentialCity"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.residentialCity}
                             fullWidth
                         />
                     </Grid>
@@ -234,7 +293,8 @@ function EmergencyContact(props) {
                             label="Code"
                             name="residentialCode"
                             type="text"
-                            inputRef={register}
+                            inputRef={register({ required: true })}
+                            defaultValue={initialState.residentialCode}
                             fullWidth
                         />
                     </Grid>
@@ -255,49 +315,49 @@ function EmergencyContact(props) {
 
                 {/* Error reporting */}
 
-                {/* <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid> */}
+                    {errors.surname && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Surname Information
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.relationshipToPatient && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter relationship to the patient
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.mobileNumber && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter mobile number.
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialAddressLine1 && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Address Line 1
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialSuburb && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Suburb
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialCode && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter PIN Code
+                        </h4>
+                    )}
+                </Grid>
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
@@ -308,7 +368,7 @@ function EmergencyContact(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>
