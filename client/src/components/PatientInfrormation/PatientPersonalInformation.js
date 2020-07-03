@@ -409,10 +409,10 @@ function PatientPersonalInformation(props) {
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         margin="dense"
-                                        id="residentialSubrub"
+                                        id="residentialSuburb"
                                         variant="outlined"
-                                        label="Subrub"
-                                        name="residentialSubrub"
+                                        label="Suburb"
+                                        name="residentialSuburb"
                                         type="text"
                                         inputRef={register}
                                         fullWidth
@@ -481,10 +481,10 @@ function PatientPersonalInformation(props) {
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         margin="dense"
-                                        id="postalSubrub"
+                                        id="postalSuburb"
                                         variant="outlined"
-                                        label="Subrub"
-                                        name="postalSubrub"
+                                        label="Suburb"
+                                        name="postalSuburb"
                                         type="text"
                                         inputRef={register}
                                         fullWidth

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -32,6 +32,7 @@ function GurantorInformation(props) {
     const classes = useStyles();
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
+    const [initialState, setInitialState] = useState();
 
     //setting case info
     caseInfo = {
@@ -66,7 +67,7 @@ function GurantorInformation(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
         // API.storeGurantorInformationData(data).then(response => {
         //     // console.log(response);
@@ -92,9 +93,9 @@ function GurantorInformation(props) {
                         <FormControl margin="dense" variant="outlined" fullWidth>
                             <InputLabel htmlFor="identifier-type"  >
                                 Identifier Type
-                                </InputLabel>
+                        </InputLabel>
                             <Select
-                                id="identifier-type"
+                                id="identifierType"
                                 native
                                 label="Identifier Type"
                                 fullWidth
@@ -104,8 +105,9 @@ function GurantorInformation(props) {
                             // onChange={handleChange}
                             >
                                 <option aria-label="None" value="Identifier Type" />
-                                <option value="Type A">Type A</option>
-                                <option value="Type B">Type B</option>
+                                <option value="identificationNumber">Identification Number</option>
+                                <option value="passportNo">Passport Number</option>
+                                <option value="driverseLicence">Driver's licence</option>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -239,8 +241,8 @@ function GurantorInformation(props) {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             margin="dense"
-                            name="date-of-birth"
-                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            id="date-of-birth"
                             label="Date Of Birth"
                             variant="outlined"
                             type="date"
@@ -406,10 +408,10 @@ function GurantorInformation(props) {
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         margin="dense"
-                                        id="residential-subrub"
+                                        id="residential-suburb"
                                         variant="outlined"
-                                        label="Subrub"
-                                        name="residentialSubrub"
+                                        label="Suburb"
+                                        name="residentialSuburb"
                                         type="text"
                                         inputRef={register}
                                         fullWidth
@@ -478,10 +480,10 @@ function GurantorInformation(props) {
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         margin="dense"
-                                        id="postal-subrub"
+                                        id="postal-suburb"
                                         variant="outlined"
-                                        label="Subrub"
-                                        name="postalSubrub"
+                                        label="Suburb"
+                                        name="postalSuburb"
                                         type="text"
                                         inputRef={register}
                                         fullWidth
