@@ -65,6 +65,17 @@ export default {
         return axios.get(`/api/patientDetails/EmergencyContact/${CaseId}`);
     },
 
+    //saving Emergency Contact Information
+    //1. save Emergency Contact information
+    storeGurantorInformationData: function(data) {
+        return axios.post(`/api/patientDetails/GurantorInformation/storeGurantorInformationData`, data);
+    },
+    //2. get Emergency Contact Information 
+    getGurantorInformationData: function(CaseId) {
+        // console.log(`/api/patientDetails/GurantorInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/GurantorInformation/${CaseId}`);
+    },
+
 };
 
 // Function to convert the ISO time to local timezone
