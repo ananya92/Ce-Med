@@ -7,9 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
 // for styling form components
 const useStyles = makeStyles((theme) => ({
@@ -58,25 +55,29 @@ function AlternativeContact(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getAlternativeContact(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
-
-                let retrievedData = {
-                    id: data.id,
-                    surname: data.surname,
-                    name: data.name,
-                    relationshipToPatient: data.relationshipToPatient,
-                    mobileNumber: data.mobileNumber,
-                    homeNumber: data.homeNumber,
-                    workNumber: data.workNumber,
-                    residentialAddressLine1: data.residentialAddressLine1,
-                    residentialAddressLine2: data.residentialAddressLine2,
-                    residentialSuburb: data.residentialSuburb,
-                    residentialCity: data.residentialCity,
-                    residentialCode: data.residentialCode,
-                }
-                console.log(retrievedData);
-                setTimeout(() => setInitialState(retrievedData));
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         id: data.id,
+                //         surname: data.surname,
+                //         name: data.name,
+                //         relationshipToPatient: data.relationshipToPatient,
+                //         mobileNumber: data.mobileNumber,
+                //         homeNumber: data.homeNumber,
+                //         workNumber: data.workNumber,
+                //         residentialAddressLine1: data.residentialAddressLine1,
+                //         residentialAddressLine2: data.residentialAddressLine2,
+                //         residentialSuburb: data.residentialSuburb,
+                //         residentialCity: data.residentialCity,
+                //         residentialCode: data.residentialCode,
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
 
                 if (data != undefined || data != null) {
                     setValue([

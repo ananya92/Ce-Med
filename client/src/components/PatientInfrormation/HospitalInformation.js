@@ -51,20 +51,24 @@ function HospitalInformation(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
-
-                let retrievedData = {
-                    id: data.id,
-                    bedDetails: data.bedDetails,
-                    doctor: data.doctor,
-                    preAdmissionNumber: data.preAdmissionNumber,
-                    surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm"),
-                    timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm"),
-                    wardDetails: data.wardDetails
-                }
-                console.log(retrievedData);
-                setTimeout(() => setInitialState(retrievedData));
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         id: data.id,
+                //         bedDetails: data.bedDetails,
+                //         doctor: data.doctor,
+                //         preAdmissionNumber: data.preAdmissionNumber,
+                //         surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm"),
+                //         timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm"),
+                //         wardDetails: data.wardDetails
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
 
                 //This part is for stting the current value in the input box
                 if (data != undefined || data != null) {
@@ -108,7 +112,7 @@ function HospitalInformation(props) {
         <Container>
 
             <h4>Hospital Use Only</h4>
-            <p>Infomation ID : {initialState.id}</p>
+            {/* <p>Infomation ID : {initialState.id}</p> */}
 
             <form
                 onSubmit={handleSubmit(onSubmit)}

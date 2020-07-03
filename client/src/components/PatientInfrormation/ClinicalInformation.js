@@ -36,8 +36,24 @@ function ClinicalInformation(props) {
     const [initialState, setInitialState] = useState(
         {
             id: 0,
+            asthma: "No",
+            cholestrol: "No",
+            depression: "No",
+            diabetes: "Yes",
+            diabetesDiet: "No",
+            diabetesInsulin: "No",
+            diabetesNone: "No",
+            diabetesTablets: "No",
+            emphysema: "No",
+            epilepsy: "No",
+            heartFailure: "No",
+            hypertension: "No",
+            lupus: "No",
+            multipleSclerosis: "No",
+            others: "Nil",
+            porphyria: "No",
             symptoms: " ",
-            others: "Nil"
+            thyroidDisorder: "No"
         }
     );
 
@@ -49,23 +65,64 @@ function ClinicalInformation(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getClinicalInformation(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getClinicalInformation(caseInfo.CaseId).then(response => {
+                console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                let retrievedData = {
+                    symptoms: data.symptoms,
+                    diabetes: data.diabetes,
+                    diabetesTablets: data.diabetesTablets,
+                    diabetesInsulin: data.diabetesInsulin,
+                    diabetesDiet: data.diabetesDiet,
+                    diabetesNone: data.diabetesNone,
+                    hypertension: data.hypertension,
+                    multipleSclerosis: data.multipleSclerosis,
+                    cholestrol: data.cholestrol,
+                    emphysema: data.emphysema,
+                    asthma: data.asthma,
+                    epilepsy: data.epilepsy,
+                    thyroidDisorder: data.thyroidDisorder,
+                    lupus: data.lupus,
+                    depression: data.depression,
+                    heartFailure: data.heartFailure,
+                    porphyria: data.porphyria,
+                    others: data.others
+                }
+                console.log(retrievedData);
+                setTimeout(() => setInitialState(retrievedData));
+
+                //This part is for stting the current value in the input box
+                if (data != undefined || data != null) {
+                    setValue([
+                        { symptoms: data.symptoms },
+                        { diabetes: data.diabetes },
+                        { diabetesTablets: data.diabetesTablets },
+                        { diabetesInsulin: data.diabetesInsulin },
+                        { diabetesDiet: data.diabetesDiet },
+                        { diabetesNone: data.diabetesNone },
+                        { hypertension: data.hypertension },
+                        { multipleSclerosis: data.multipleSclerosis },
+                        { cholestrol: data.cholestrol },
+                        { emphysema: data.emphysema },
+                        { asthma: data.asthma },
+                        { epilepsy: data.epilepsy },
+                        { thyroidDisorder: data.thyroidDisorder },
+                        { lupus: data.lupus },
+                        { depression: data.depression },
+                        { heartFailure: data.heartFailure },
+                        { porphyria: data.porphyria },
+                        { others: data.others },
+                    ]);
+                } else {
+                    console.log("There is no saved data");
+                }
+            }).catch(error => {
+                console.log("Error while getting hospital information data:", error);
+            });
+        }
+    }, [])
 
     // saving or updating value on form submit
     const onSubmit = (res) => {
@@ -75,11 +132,11 @@ function ClinicalInformation(props) {
 
         console.log(data);
 
-        // API.storeClinicalInformation(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storeClinicalInformation(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding hospital information data:", error);
+        });
     };
 
     const handleChange = (event) => {

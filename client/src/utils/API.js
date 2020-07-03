@@ -43,6 +43,17 @@ export default {
         return axios.get(`/api/patientDetails/AlternativeContact/${CaseId}`);
     },
 
+    //saving Clinical Information
+    //1. save Clinical information
+    storeClinicalInformation: function(data) {
+        return axios.post(`/api/patientDetails/ClinicalInformation/storeClinicalInformationData`, data);
+    },
+    //2. get Clinical Information 
+    getClinicalInformation: function(CaseId) {
+        // console.log(`/api/patientDetails/ClinicalInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/ClinicalInformation/${CaseId}`);
+    },
+
 };
 
 // Function to convert the ISO time to local timezone
