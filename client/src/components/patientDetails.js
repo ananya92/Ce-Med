@@ -16,7 +16,7 @@ import PatientDeclaration from './PatientInfrormation/PatientDeclaration';
 
 //This information must get from login
 const user = {
-    type: "patient"
+    type: "admin"
 }
 
 function PatientDetails(props) {
@@ -44,7 +44,7 @@ function PatientDetails(props) {
                             activeKey={key}
                             onSelect={(k) => setKey(k)}
                         >
-                            {user.type === "patient" ? <Tab eventKey="hospital-information" title="Hospital Information" unmountOnExit>
+                            {user.type === "admin" ? <Tab eventKey="hospital-information" title="Hospital Information" unmountOnExit>
                                 <HospitalInformation patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab> : null}
                             <Tab eventKey="patient-personal-information" title="Patient Personal Information" unmountOnExit>

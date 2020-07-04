@@ -32,12 +32,12 @@ function HospitalInformation(props) {
     const [initialState, setInitialState] = useState(
         {
             id: 0,
-            bedDetails: "Bed detail",
-            doctor: "Doctor",
-            preAdmissionNumber: "123456",
+            bedDetails: " ",
+            doctor: " ",
+            preAdmissionNumber: " ",
             surgeryBookedTime: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
             timeOfArrival: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
-            wardDetails: "Ward Name"
+            wardDetails: " "
         }
     );
 
@@ -51,32 +51,38 @@ function HospitalInformation(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getHospitalInformationData(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
-                //This part is not used as of now.
-                let retrievedData = {
-                    id: data.id,
-                    bedDetails: data.bedDetails,
-                    doctor: data.doctor,
-                    preAdmissionNumber: data.preAdmissionNumber,
-                    surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm"),
-                    timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm"),
-                    wardDetails: data.wardDetails
-                }
-                console.log(retrievedData);
-                setTimeout(() => setInitialState(retrievedData));
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         id: data.id,
+                //         bedDetails: data.bedDetails,
+                //         doctor: data.doctor,
+                //         preAdmissionNumber: data.preAdmissionNumber,
+                //         surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm"),
+                //         timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm"),
+                //         wardDetails: data.wardDetails
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
 
                 //This part is for stting the current value in the input box
-
-                setValue(
-                    [{ bedDetails: data.bedDetails },
-                    { doctor: data.doctor },
-                    { preAdmissionNumber: data.preAdmissionNumber },
-                    { surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm") },
-                    { timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm") },
-                    { wardDetails: data.wardDetails }
-                    ]);
-
+                if (data != undefined || data != null) {
+                    setValue(
+                        [{ bedDetails: data.bedDetails },
+                        { doctor: data.doctor },
+                        { preAdmissionNumber: data.preAdmissionNumber },
+                        { surgeryBookedTime: moment(data.surgeryBookedTime).format("YYYY-MM-DDTkk:mm") },
+                        { timeOfArrival: moment(data.timeOfArrival).format("YYYY-MM-DDTkk:mm") },
+                        { wardDetails: data.wardDetails }
+                        ]);
+                } else {
+                    console.log("There is no saved data");
+                }
             }).catch(error => {
                 console.log("Error while getting hospital information data:", error);
             });
@@ -106,7 +112,7 @@ function HospitalInformation(props) {
         <Container>
 
             <h4>Hospital Use Only</h4>
-            <p>Infomation ID : {initialState.id}</p>
+            {/* <p>Infomation ID : {initialState.id}</p> */}
 
             <form
                 onSubmit={handleSubmit(onSubmit)}

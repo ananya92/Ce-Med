@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
+import moment from "moment";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -31,6 +31,20 @@ function HospitalVisitInformation(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
+    const [initialState, setInitialState] = useState(
+        {
+            admissionDate: moment(Date.now()).format("YYYY-MM-DD"),
+            surgeryBookedDate: moment(Date.now()).format("YYYY-MM-DD"),
+            surgeryBookedTime: moment(Date.now()).format("hh:mm"),
+            admittingDoctor: " ",
+            referringDoctor: " ",
+            alternateDoctor: " ",
+            generalGp: " ",
+            icdCodeDiagnosis: " ",
+            cptCodeProcedure: " ",
+        }
+    );
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -38,23 +52,51 @@ function HospitalVisitInformation(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getHospitalVisitInformation(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getHospitalVisitInformation(caseInfo.CaseId).then(response => {
+                // console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         admissionDate: data.admissionDate,
+                //         surgeryBookedDate: data.surgeryBookedDate,
+                //         surgeryBookedTime: data.surgeryBookedTime,
+                //         admittingDoctor: data.admittingDoctor,
+                //         referringDoctor: data.referringDoctor,
+                //         alternateDoctor: data.alternateDoctor,
+                //         generalGp: data.generalGp,
+                //         icdCodeDiagnosis: data.icdCodeDiagnosis,
+                //         cptCodeProcedure: data.cptCodeProcedure,
+
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
+                if (data != undefined || data != null) {
+                    setValue([
+                        { admissionDate: moment(data.admissionDate).format("YYYY-MM-DD") },
+                        { surgeryBookedDate: moment(data.surgeryBookedDate).format("YYYY-MM-DD") },
+                        { surgeryBookedTime: data.surgeryBookedTime },
+                        { admittingDoctor: data.admittingDoctor },
+                        { referringDoctor: data.referringDoctor },
+                        { alternateDoctor: data.alternateDoctor },
+                        { generalGp: data.generalGp },
+                        { icdCodeDiagnosis: data.icdCodeDiagnosis },
+                        { cptCodeProcedure: data.cptCodeProcedure },
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Hospital Visit Information data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Hospital Visit Information data:", error);
+            });
+        }
+    }, [])
 
     // saving or updating value on form submit
     const onSubmit = (res) => {
@@ -62,13 +104,13 @@ function HospitalVisitInformation(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
-        // API.storeHospitalVisitInformation(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storeHospitalVisitInformation(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding Hospital Visit Information data:", error);
+        });
     };
 
 
@@ -93,8 +135,8 @@ function HospitalVisitInformation(props) {
                             label="Admission Date"
                             variant="outlined"
                             type="date"
-                            // defaultValue={Date.now()}
-                            // className={classes.textField}
+                            inputRef={register({ required: true })}
+                            defaultValue={initialState.admissionDate}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -110,8 +152,8 @@ function HospitalVisitInformation(props) {
                             label="Surgery Booked Date"
                             variant="outlined"
                             type="date"
-                            // defaultValue={Date.now()}
-                            // className={classes.textField}
+                            inputRef={register}
+                            defaultValue={initialState.surgeryBookedDate}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -127,8 +169,8 @@ function HospitalVisitInformation(props) {
                             label="Surgery Booked Time"
                             variant="outlined"
                             type="time"
-                            // defaultValue={Date.now()}
-                            // className={classes.textField}
+                            inputRef={register}
+                            defaultValue={initialState.surgeryBookedTime}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -146,6 +188,7 @@ function HospitalVisitInformation(props) {
                             name="admittingDoctor"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.admittingDoctor}
                             fullWidth
                         />
                     </Grid>
@@ -159,6 +202,7 @@ function HospitalVisitInformation(props) {
                             name="referringDoctor"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.referringDoctor}
                             fullWidth
                         />
                     </Grid>
@@ -168,9 +212,10 @@ function HospitalVisitInformation(props) {
                             id="alternate-doctor"
                             variant="outlined"
                             label="Alternate Doctor"
-                            name="AlternateDoctor"
+                            name="alternateDoctor"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.alternateDoctor}
                             fullWidth
                         />
                     </Grid>
@@ -184,6 +229,7 @@ function HospitalVisitInformation(props) {
                             name="generalGp"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.generalGp}
                             fullWidth
                         />
                     </Grid>
@@ -197,6 +243,7 @@ function HospitalVisitInformation(props) {
                             name="icdCodeDiagnosis"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.icdCodeDiagnosis}
                             fullWidth
                             multiline
                         />
@@ -211,6 +258,7 @@ function HospitalVisitInformation(props) {
                             name="cptCodeProcedure"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.cptCodeProcedure}
                             fullWidth
                             multiline
                         />
@@ -231,49 +279,16 @@ function HospitalVisitInformation(props) {
 
                 {/* Error reporting */}
 
-                {/* <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid> */}
+                    {errors.admissionDate && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Admission Date
+                        </h4>
+                    )}
+                </Grid>
+
+
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
@@ -284,7 +299,7 @@ function HospitalVisitInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>

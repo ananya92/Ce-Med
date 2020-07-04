@@ -33,6 +33,31 @@ function ClinicalInformation(props) {
 
     const [isDiabetic, setIsDiabetic] = useState(false);
 
+    const [initialState, setInitialState] = useState(
+        {
+            id: 0,
+            asthma: "No",
+            cholestrol: "No",
+            depression: "No",
+            diabetes: "Yes",
+            diabetesDiet: "No",
+            diabetesInsulin: "No",
+            diabetesNone: "No",
+            diabetesTablets: "No",
+            emphysema: "No",
+            epilepsy: "No",
+            heartFailure: "No",
+            hypertension: "No",
+            lupus: "No",
+            multipleSclerosis: "No",
+            others: "Nil",
+            porphyria: "No",
+            symptoms: " ",
+            thyroidDisorder: "No"
+        }
+    );
+
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -40,23 +65,79 @@ function ClinicalInformation(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getClinicalInformation(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getClinicalInformation(caseInfo.CaseId).then(response => {
+                // console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                //     let retrievedData = {
+                //         symptoms: data.symptoms,
+                //         diabetes: data.diabetes,
+                //         diabetesTablets: data.diabetesTablets,
+                //         diabetesInsulin: data.diabetesInsulin,
+                //         diabetesDiet: data.diabetesDiet,
+                //         diabetesNone: data.diabetesNone,
+                //         hypertension: data.hypertension,
+                //         multipleSclerosis: data.multipleSclerosis,
+                //         cholestrol: data.cholestrol,
+                //         emphysema: data.emphysema,
+                //         asthma: data.asthma,
+                //         epilepsy: data.epilepsy,
+                //         thyroidDisorder: data.thyroidDisorder,
+                //         lupus: data.lupus,
+                //         depression: data.depression,
+                //         heartFailure: data.heartFailure,
+                //         porphyria: data.porphyria,
+                //         others: data.others
+                //     }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
+
+                //This part is for stting the current value in the input box
+                if (data != undefined || data != null) {
+                    setValue([
+                        { symptoms: data.symptoms },
+                        { diabetes: data.diabetes },
+                        { diabetesTablets: data.diabetesTablets },
+                        { diabetesInsulin: data.diabetesInsulin },
+                        { diabetesDiet: data.diabetesDiet },
+                        { diabetesNone: data.diabetesNone },
+                        { hypertension: data.hypertension },
+                        { multipleSclerosis: data.multipleSclerosis },
+                        { cholestrol: data.cholestrol },
+                        { emphysema: data.emphysema },
+                        { asthma: data.asthma },
+                        { epilepsy: data.epilepsy },
+                        { thyroidDisorder: data.thyroidDisorder },
+                        { lupus: data.lupus },
+                        { depression: data.depression },
+                        { heartFailure: data.heartFailure },
+                        { porphyria: data.porphyria },
+                        { others: data.others },
+                    ]);
+                    // In order to set second time after first dom update
+                    if (data.diabetes === "Yes") {
+                        setIsDiabetic("Yes");
+                        setValue([
+                            { diabetesTablets: data.diabetesTablets },
+                            { diabetesInsulin: data.diabetesInsulin },
+                            { diabetesDiet: data.diabetesDiet },
+                            { diabetesNone: data.diabetesNone }
+                        ])
+                    }
+                } else {
+                    console.log("There is no saved data");
+                }
+            }).catch(error => {
+                console.log("Error while getting hospital information data:", error);
+            });
+        }
+    }, [])
 
     // saving or updating value on form submit
     const onSubmit = (res) => {
@@ -64,13 +145,13 @@ function ClinicalInformation(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
-        // API.storeClinicalInformation(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storeClinicalInformation(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding hospital information data:", error);
+        });
     };
 
     const handleChange = (event) => {
@@ -104,6 +185,7 @@ function ClinicalInformation(props) {
                             // helperText="Please provide a brief description of the symptoms/complaints present when visiting the doctor"
                             multiline
                             inputRef={register({ required: true })}
+                            defaultValue={initialState.symptoms}
                             fullWidth
                         />
                     </Grid>
@@ -115,7 +197,7 @@ function ClinicalInformation(props) {
                         <FormControl margin="dense" variant="outlined" fullWidth>
                             <InputLabel
                                 htmlFor="diabetes-tablets"
-                                // helperText="Should you be suffering from Diabetes Mellitus, Please indicate which form of control is being practiced?"
+                            // helperText="Should you be suffering from Diabetes Mellitus, Please indicate which form of control is being practiced?"
                             >
                                 Suffering from Diabetes Mellitus?
                                 </InputLabel>
@@ -129,6 +211,7 @@ function ClinicalInformation(props) {
                                 name="diabetes"
                                 type="text"
                                 onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -137,7 +220,7 @@ function ClinicalInformation(props) {
                         </FormControl>
                     </Grid>
 
-                    {isDiabetic == "Yes" ?
+                    {isDiabetic === "Yes" ?
                         <React.Fragment>
                             <Grid item xs={6} sm={3}>
                                 <FormControl margin="dense" variant="outlined" fullWidth>
@@ -152,7 +235,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesTablets"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -173,7 +256,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesInsulin"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -194,7 +277,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesDiet"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -215,7 +298,7 @@ function ClinicalInformation(props) {
                                         inputRef={register}
                                         name="diabetesNone"
                                         type="text"
-                                    // onChange={handleChange}
+                                        defaultValue="No"
                                     >
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
@@ -242,7 +325,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="hypertension"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -263,7 +346,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="multipleSclerosis"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -284,7 +367,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="cholestrol"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -305,7 +388,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="emphysema"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -326,7 +409,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="asthma"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -348,7 +431,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="epilepsy"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -370,7 +453,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="thyroidDisorder"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -392,7 +475,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="lupus"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -413,7 +496,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="depression"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -435,7 +518,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="heartFailure"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -457,7 +540,7 @@ function ClinicalInformation(props) {
                                 inputRef={register}
                                 name="porphyria"
                                 type="text"
-                            // onChange={handleChange}
+                                defaultValue="No"
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -473,9 +556,10 @@ function ClinicalInformation(props) {
                             label="Others"
                             name="others"
                             type="text"
+                            defaultValue="Nil"
                             // helperText="Please provide a brief description of the symptoms/complaints present when visiting the doctor"
                             multiline
-                            inputRef={register({ required: true })}
+                            inputRef={register}
                             fullWidth
                         />
                     </Grid>
@@ -487,49 +571,15 @@ function ClinicalInformation(props) {
 
                 {/* Error reporting */}
 
-                {/* <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid> */}
+                    {errors.symptoms && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Symptoms/Complaints
+                        </h4>
+                    )}
+                </Grid>
+
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
@@ -540,7 +590,7 @@ function ClinicalInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>

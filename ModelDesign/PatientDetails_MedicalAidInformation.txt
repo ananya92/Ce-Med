@@ -1,0 +1,58 @@
+medicalAidScheme: " "
+plan: " "
+memberNumber: " "
+authorisationNumber: " "
+surname: " "
+name: " "
+initials: " "
+title: " "
+saIdNumber: " "
+dateOfBirth: " "
+gender: " "
+dependantCode: " "
+
+
+
+medicalAidScheme
+plan
+memberNumber
+authorisationNumber
+surname
+name
+initials
+title
+saIdNumber
+dateOfBirth
+gender
+dependantCode
+
+medicalAidScheme:  data.medicalAidScheme ,
+plan:  data.plan ,
+memberNumber:  data.memberNumber ,
+authorisationNumber:  data.authorisationNumber ,
+surname:  data.surname ,
+name:  data.name ,
+initials:  data.initials ,
+title:  data.title ,
+saIdNumber:  data.saIdNumber ,
+dateOfBirth:  data.dateOfBirth ,
+gender:  data.gender ,
+dependantCode:  data.dependantCode ,
+
+
+
+
+{ medicalAidScheme:  data.medicalAidScheme },
+{ plan:  data.plan },
+{ memberNumber:  data.memberNumber },
+{ authorisationNumber:  data.authorisationNumber },
+{ surname:  data.surname },
+{ name:  data.name },
+{ initials:  data.initials },
+{ title:  data.title },
+{ saIdNumber:  data.saIdNumber },
+{ dateOfBirth:  data.dateOfBirth },
+{ gender:  data.gender },
+{ dependantCode:  data.dependantCode },
+
+

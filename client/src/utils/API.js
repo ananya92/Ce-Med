@@ -26,10 +26,78 @@ export default {
     storeHospitalInformationData: function(data) {
         return axios.post(`/api/patientDetails/hospitalInformation/storeHospitalInformationData`, data);
     },
-    //1. save Hospital information
+    //2. get Hospital information
     getHospitalInformationData: function(CaseId) {
-        console.log(`/api/patientDetails/hospitalInformation/${CaseId}`);
+        // console.log(`/api/patientDetails/hospitalInformation/${CaseId}`);
         return axios.get(`/api/patientDetails/hospitalInformation/${CaseId}`);
+    },
+
+    //saving Alternate Contact Information
+    //1. save Alternate Contact information
+    storeAlternativeContact: function(data) {
+        return axios.post(`/api/patientDetails/AlternativeContact/storeAlternativeContactData`, data);
+    },
+    //2. get Alternate Contact information
+    getAlternativeContact: function(CaseId) {
+        // console.log(`/api/patientDetails/AlternativeContact/${CaseId}`);
+        return axios.get(`/api/patientDetails/AlternativeContact/${CaseId}`);
+    },
+
+    //saving Clinical Information
+    //1. save Clinical information
+    storeClinicalInformation: function(data) {
+        return axios.post(`/api/patientDetails/ClinicalInformation/storeClinicalInformationData`, data);
+    },
+    //2. get Clinical Information 
+    getClinicalInformation: function(CaseId) {
+        // console.log(`/api/patientDetails/ClinicalInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/ClinicalInformation/${CaseId}`);
+    },
+
+    //saving Emergency Contact Information
+    //1. save Emergency Contact information
+    storeEmergencyContact: function(data) {
+        return axios.post(`/api/patientDetails/EmergencyContact/storeEmergencyContactData`, data);
+    },
+    //2. get Emergency Contact Information 
+    getEmergencyContact: function(CaseId) {
+        // console.log(`/api/patientDetails/EmergencyContact/${CaseId}`);
+        return axios.get(`/api/patientDetails/EmergencyContact/${CaseId}`);
+    },
+
+    //saving Emergency Contact Information
+    //1. save Emergency Contact information
+    storeGurantorInformationData: function(data) {
+        return axios.post(`/api/patientDetails/GurantorInformation/storeGurantorInformationData`, data);
+    },
+    //2. get Emergency Contact Information 
+    getGurantorInformationData: function(CaseId) {
+        // console.log(`/api/patientDetails/GurantorInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/GurantorInformation/${CaseId}`);
+    },
+
+    //saving Hospital Visit Information
+    //1. save Hospital Visit Information
+    storeHospitalVisitInformation: function(data) {
+        // console.log(data);
+        return axios.post(`/api/patientDetails/HospitalVisitInformation/storeHospitalVisitInformationData`, data);
+    },
+    //2. get Hospital Visit Information
+    getHospitalVisitInformation: function(CaseId) {
+        // console.log(`/api/patientDetails/HospitalVisitInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/HospitalVisitInformation/${CaseId}`);
+    },
+
+    //saving Medical Aid Information
+    //1. save Medical Aid Information
+    storeMedicalAidInformation: function(data) {
+        // console.log(data);
+        return axios.post(`/api/patientDetails/MedicalAidInformation/storeMedicalAidInformationData`, data);
+    },
+    //2. get Hospital Visit Information
+    getMedicalAidInformation: function(CaseId) {
+        // console.log(`/api/patientDetails/MedicalAidInformation/${CaseId}`);
+        return axios.get(`/api/patientDetails/MedicalAidInformation/${CaseId}`);
     },
 
 };

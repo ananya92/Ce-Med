@@ -103,8 +103,9 @@ function PatientPersonalInformation(props) {
                             // onChange={handleChange}
                             >
                                 <option aria-label="None" value="Identifier Type" />
-                                <option value="Type A">Type A</option>
-                                <option value="Type B">Type B</option>
+                                <option value="identificationNumber">Identification Number</option>
+                                <option value="passportNo">Passport Number</option>
+                                <option value="driverseLicence">Driver's licence</option>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -408,10 +409,10 @@ function PatientPersonalInformation(props) {
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         margin="dense"
-                                        id="residentialSubrub"
+                                        id="residentialSuburb"
                                         variant="outlined"
-                                        label="Subrub"
-                                        name="residentialSubrub"
+                                        label="Suburb"
+                                        name="residentialSuburb"
                                         type="text"
                                         inputRef={register}
                                         fullWidth
@@ -480,10 +481,10 @@ function PatientPersonalInformation(props) {
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         margin="dense"
-                                        id="postalSubrub"
+                                        id="postalSuburb"
                                         variant="outlined"
-                                        label="Subrub"
-                                        name="postalSubrub"
+                                        label="Suburb"
+                                        name="postalSuburb"
                                         type="text"
                                         inputRef={register}
                                         fullWidth
