@@ -1,0 +1,95 @@
+admissionDate: " "
+surgeryBookedDate: " "
+surgeryBookedTime: " "
+admittingDoctor: " "
+referringDoctor: " "
+alternateDoctor: " "
+generalGp: " "
+icdCodeDiagnosis: " "
+cptCodeProcedure: " "
+
+
+
+
+admissionDate
+surgeryBookedDate
+surgeryBookedTime
+admittingDoctor
+referringDoctor
+alternateDoctor
+generalGp
+icdCodeDiagnosis
+cptCodeProcedure
+
+{ admissionDate:  data.admissionDate },
+{ surgeryBookedDate:  data.surgeryBookedDate },
+{ surgeryBookedTime:  data.surgeryBookedTime },
+{ admittingDoctor:  data.admittingDoctor },
+{ referringDoctor:  data.referringDoctor },
+{ alternateDoctor:  data.alternateDoctor },
+{ generalGp:  data.generalGp },
+{ icdCodeDiagnosis:  data.icdCodeDiagnosis },
+{ cptCodeProcedure:  data.cptCodeProcedure },
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = function (sequelize, DataTypes) {
+    var PatientDetails_HospitalVisitInformation = sequelize.define("PatientDetails_HospitalVisitInformation", {
+		admissionDate: {
+            type: DataTypes.DATE,
+			allowNull: true,
+        },
+		surgeryBookedDate: {
+            type: DataTypes.DATE,
+			allowNull: true,
+        },
+		surgeryBookedTime: {
+            type: DataTypes.DATE,
+			allowNull: true,
+        },
+		admittingDoctor: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+		referringDoctor: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+		alternateDoctor: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+		generalGp: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+		icdCodeDiagnosis: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+		cptCodeProcedure: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },		
+    });
+     
+     PatientDetails_HospitalVisitInformation.associate = function (models) {
+        PatientDetails_HospitalVisitInformation.belongsTo(models.Case, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    };
+
+    return PatientDetails_HospitalVisitInformation;
+};

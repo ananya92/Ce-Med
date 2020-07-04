@@ -315,6 +315,59 @@ router.post("/HospitalVisitInformation/storeHospitalVisitInformationData", funct
 
 /*************************************************************************************** */
 
+/*************************************************************************************** */
+
+//PatientDetails_MedicalAidInformation
+// route to get data about a case's Medical Aid Information
+router.get("/MedicalAidInformation/:CaseId", (req, res) => {
+    console.log("req.params.CaseId**********");
+    console.log(req.params.CaseId);
+    db.PatientDetails_MedicalAidInformation.findAll({
+        where: {
+            CaseId: req.params.CaseId
+        }v
+    }).then(function (data) {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+router.post("/MedicalAidInformation/storeMedicalAidInformationData", function (req, res) {
+    console.log(req.body, parseInt(req.body.CaseId));
+    db.PatientDetails_MedicalAidInformation.findAll(
+        {
+            where: {
+                CaseId: parseInt(req.body.CaseId)
+            }
+        }).then(function (data) {
+
+            console.log(data);
+
+            if (data.length > 0) {
+                db.PatientDetails_MedicalAidInformation.update(
+                    req.body,
+                    {
+                        where: {
+                            CaseId: req.body.CaseId
+                        }
+                    }
+                ).then(function (data) {
+                    res.json(data);
+                });
+            } else {
+                console.log("Record not found, creating new record");
+                db.PatientDetails_MedicalAidInformation.create(req.body).then(function (data) {
+                    res.json(data);
+                }).catch(error => {
+                    console.log(error);
+                });
+
+            }
+
+        })
+});
+
+/*************************************************************************************** */
 
 
 

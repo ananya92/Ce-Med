@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
+import moment from "moment";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -31,6 +31,23 @@ function MedicalAidInformation(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
+    const [initialState, setInitialState] = useState(
+        {
+            medicalAidScheme: " ",
+            plan: " ",
+            memberNumber: " ",
+            authorisationNumber: " ",
+            surname: " ",
+            name: " ",
+            initials: " ",
+            title: " ",
+            saIdNumber: " ",
+            dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
+            gender: " ",
+            dependantCode: " ",
+        }
+    );
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -38,23 +55,58 @@ function MedicalAidInformation(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getMedicalAidInformation(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getMedicalAidInformation(caseInfo.CaseId).then(response => {
+                // console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                // let retrievedData = {
+                //     medicalAidScheme: data.medicalAidScheme,
+                //     plan: data.plan,
+                //     memberNumber: data.memberNumber,
+                //     authorisationNumber: data.authorisationNumber,
+                //     surname: data.surname,
+                //     name: data.name,
+                //     initials: data.initials,
+                //     title: data.title,
+                //     saIdNumber: data.saIdNumber,
+                //     dateOfBirth: data.dateOfBirth,
+                //     gender: data.gender,
+                //     dependantCode: data.dependantCode,
+
+                // }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
+                if (data != undefined || data != null) {
+                    setValue([
+                        { medicalAidScheme: data.medicalAidScheme },
+                        { plan: data.plan },
+                        { memberNumber: data.memberNumber },
+                        { authorisationNumber: data.authorisationNumber },
+                        { surname: data.surname },
+                        { name: data.name },
+                        { initials: data.initials },
+                        { title: data.title },
+                        { saIdNumber: data.saIdNumber },
+                        { dateOfBirth: moment(data.dateOfBirth).format("YYYY-MM-DD") },
+                        { gender: data.gender },
+                        { dependantCode: data.dependantCode },
+
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Medical Aid Information data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Medical Aid Information data:", error);
+            });
+        }
+    }, [])
 
     // saving or updating value on form submit
     const onSubmit = (res) => {
@@ -62,13 +114,13 @@ function MedicalAidInformation(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
-        // API.storeMedicalAidInformation(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storeMedicalAidInformation(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding Medical Aid Information data:", error);
+        });
     };
 
 
@@ -93,7 +145,8 @@ function MedicalAidInformation(props) {
                             label="Medical Aid Scheme"
                             name="medicalAidScheme"
                             type="text"
-                            inputRef={register({ required: true })}
+                            inputRef={register}
+                            defaultValue={initialState.medicalAidScheme}
                             fullWidth
                         />
                     </Grid>
@@ -107,6 +160,7 @@ function MedicalAidInformation(props) {
                             name="plan"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.plan}
                             fullWidth
                         />
                     </Grid>
@@ -119,7 +173,8 @@ function MedicalAidInformation(props) {
                             label="Member Number"
                             name="memberNumber"
                             type="text"
-                            inputRef={register({ required: true })}
+                            inputRef={register}
+                            defaultValue={initialState.memberNumber}
                             fullWidth
                         />
                     </Grid>
@@ -133,6 +188,7 @@ function MedicalAidInformation(props) {
                             name="authorisationNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.authorisationNumber}
                             fullWidth
                         />
                     </Grid>
@@ -151,7 +207,8 @@ function MedicalAidInformation(props) {
                             label="Principal Member Surname"
                             name="surname"
                             type="text"
-                            inputRef={register({ required: true })}
+                            inputRef={register}
+                            defaultValue={initialState.surname}
                             fullWidth
                         />
                     </Grid>
@@ -165,6 +222,7 @@ function MedicalAidInformation(props) {
                             name="name"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.name}
                             fullWidth
                         />
                     </Grid>
@@ -178,6 +236,7 @@ function MedicalAidInformation(props) {
                             name="initials"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.initials}
                             fullWidth
                         />
                     </Grid>
@@ -192,7 +251,8 @@ function MedicalAidInformation(props) {
                                 native
                                 label="Title"
                                 fullWidth
-                                inputRef={register({ required: true })}
+                                inputRef={register}
+                                defaultValue={initialState.title}
                                 name="title"
                                 type="text"
                             // onChange={handleChange}
@@ -215,6 +275,7 @@ function MedicalAidInformation(props) {
                             name="saIdNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.saIdNumber}
                             fullWidth
                         />
                     </Grid>
@@ -227,8 +288,8 @@ function MedicalAidInformation(props) {
                             label="Date Of Birth"
                             variant="outlined"
                             type="date"
-                            // defaultValue={Date.now()}
-                            // className={classes.textField}
+                            inputRef={register}
+                            defaultValue={initialState.dateOfBirth}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -247,7 +308,8 @@ function MedicalAidInformation(props) {
                                 native
                                 label="gender"
                                 fullWidth
-                                inputRef={register({ required: true })}
+                                inputRef={register}
+                                defaultValue={initialState.gender}
                                 name="gender"
                                 type="text"
                             // onChange={handleChange}
@@ -270,6 +332,7 @@ function MedicalAidInformation(props) {
                             name="dependantCode"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.dependantCode}
                             fullWidth
                         />
                     </Grid>
@@ -338,7 +401,7 @@ function MedicalAidInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>
