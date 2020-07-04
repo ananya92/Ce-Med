@@ -260,6 +260,64 @@ router.post("/GurantorInformation/storeGurantorInformationData", function (req, 
 
 /*************************************************************************************** */
 
+
+/*************************************************************************************** */
+
+//PatientDetails_HospitalVisitInformation
+// route to get data about a case's Hospital Visit Information
+router.get("/HospitalVisitInformation/:CaseId", (req, res) => {
+    console.log("req.params.CaseId**********");
+    console.log(req.params.CaseId);
+    db.PatientDetails_HospitalVisitInformation.findAll({
+        where: {
+            CaseId: req.params.CaseId
+        }
+    }).then(function (data) {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+router.post("/HospitalVisitInformation/storeHospitalVisitInformationData", function (req, res) {
+    console.log(req.body, parseInt(req.body.CaseId));
+    db.PatientDetails_HospitalVisitInformation.findAll(
+        {
+            where: {
+                CaseId: parseInt(req.body.CaseId)
+            }
+        }).then(function (data) {
+
+            console.log(data);
+
+            if (data.length > 0) {
+                db.PatientDetails_HospitalVisitInformation.update(
+                    req.body,
+                    {
+                        where: {
+                            CaseId: req.body.CaseId
+                        }
+                    }
+                ).then(function (data) {
+                    res.json(data);
+                });
+            } else {
+                console.log("Record not found, creating new record");
+                db.PatientDetails_HospitalVisitInformation.create(req.body).then(function (data) {
+                    res.json(data);
+                }).catch(error => {
+                    console.log(error);
+                });
+
+            }
+
+        })
+});
+
+/*************************************************************************************** */
+
+
+
+
 function dateToISOLikeButLocal(date) {
     const offsetMs = date.getTimezoneOffset() * 60 * 1000;
     const msLocal = date.getTime() - offsetMs;
