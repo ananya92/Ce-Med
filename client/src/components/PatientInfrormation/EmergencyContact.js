@@ -32,17 +32,17 @@ function EmergencyContact(props) {
     const [initialState, setInitialState] = useState(
         {
             id: 0,
-            homeNumber: " ",
-            mobileNumber: " ",
-            name: " ",
-            relationshipToPatient: " ",
-            residentialAddressLine1: " ",
-            residentialAddressLine2: " ",
-            residentialCity: " ",
-            residentialCode: " ",
-            residentialSuburb: " ",
-            surname: " ",
-            workNumber: " "
+            homeNumber: "_",
+            mobileNumber: "_",
+            name: "_",
+            relationshipToPatient: "_",
+            residentialAddressLine1: "_",
+            residentialAddressLine2: "_",
+            residentialCity: "_",
+            residentialCode: "_",
+            residentialSuburb: "_",
+            surname: "_",
+            workNumber: "_"
         }
     );
 

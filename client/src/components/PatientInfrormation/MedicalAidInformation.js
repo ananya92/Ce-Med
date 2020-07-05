@@ -33,18 +33,18 @@ function MedicalAidInformation(props) {
 
     const [initialState, setInitialState] = useState(
         {
-            medicalAidScheme: " ",
-            plan: " ",
-            memberNumber: " ",
-            authorisationNumber: " ",
-            surname: " ",
-            name: " ",
-            initials: " ",
-            title: " ",
-            saIdNumber: " ",
+            medicalAidScheme: "_",
+            plan: "_",
+            memberNumber: "_",
+            authorisationNumber: "_",
+            surname: "_",
+            name: "_",
+            initials: "_",
+            title: "_",
+            saIdNumber: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
-            gender: " ",
-            dependantCode: " ",
+            gender: "_",
+            dependantCode: "_",
         }
     );
 

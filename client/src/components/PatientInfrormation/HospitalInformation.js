@@ -31,13 +31,12 @@ function HospitalInformation(props) {
     const { register, handleSubmit, setValue, errors } = useForm();
     const [initialState, setInitialState] = useState(
         {
-            id: 0,
-            bedDetails: " ",
-            doctor: " ",
-            preAdmissionNumber: " ",
+            bedDetails: "_",
+            doctor: "_",
+            preAdmissionNumber: "_",
             surgeryBookedTime: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
             timeOfArrival: moment(Date.now()).format("YYYY-MM-DDTkk:mm"),
-            wardDetails: " "
+            wardDetails: "_"
         }
     );
 

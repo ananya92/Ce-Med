@@ -35,7 +35,6 @@ function ClinicalInformation(props) {
 
     const [initialState, setInitialState] = useState(
         {
-            id: 0,
             asthma: "No",
             cholestrol: "No",
             depression: "No",
