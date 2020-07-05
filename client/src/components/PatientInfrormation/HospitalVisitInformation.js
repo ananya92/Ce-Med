@@ -36,12 +36,12 @@ function HospitalVisitInformation(props) {
             admissionDate: moment(Date.now()).format("YYYY-MM-DD"),
             surgeryBookedDate: moment(Date.now()).format("YYYY-MM-DD"),
             surgeryBookedTime: moment(Date.now()).format("hh:mm"),
-            admittingDoctor: " ",
-            referringDoctor: " ",
-            alternateDoctor: " ",
-            generalGp: " ",
-            icdCodeDiagnosis: " ",
-            cptCodeProcedure: " ",
+            admittingDoctor: "_",
+            referringDoctor: "_",
+            alternateDoctor: "_",
+            generalGp: "_",
+            icdCodeDiagnosis: "_",
+            cptCodeProcedure: "_",
         }
     );
 
