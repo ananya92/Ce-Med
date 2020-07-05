@@ -269,7 +269,7 @@ function HospitalInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>

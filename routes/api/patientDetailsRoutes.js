@@ -325,7 +325,7 @@ router.get("/MedicalAidInformation/:CaseId", (req, res) => {
     db.PatientDetails_MedicalAidInformation.findAll({
         where: {
             CaseId: req.params.CaseId
-        }v
+        }
     }).then(function (data) {
         console.log(data);
         res.json(data);
@@ -369,6 +369,59 @@ router.post("/MedicalAidInformation/storeMedicalAidInformationData", function (r
 
 /*************************************************************************************** */
 
+/*************************************************************************************** */
+
+//PatientDetails_PatientPersonalInformation
+// route to get data about a Patient's personal Information
+router.get("/PatientPersonalInformation/:CaseId", (req, res) => {
+    console.log("req.params.CaseId**********");
+    console.log(req.params.CaseId);
+    db.PatientDetails_PatientPersonalInformation.findAll({
+        where: {
+            CaseId: req.params.CaseId
+        }
+    }).then(function (data) {
+        console.log(data);
+        res.json(data);
+    });
+});
+
+router.post("/PatientPersonalInformation/storePatientPersonalInformationData", function (req, res) {
+    console.log(req.body, parseInt(req.body.CaseId));
+    db.PatientDetails_PatientPersonalInformation.findAll(
+        {
+            where: {
+                CaseId: parseInt(req.body.CaseId)
+            }
+        }).then(function (data) {
+
+            console.log(data);
+
+            if (data.length > 0) {
+                db.PatientDetails_PatientPersonalInformation.update(
+                    req.body,
+                    {
+                        where: {
+                            CaseId: req.body.CaseId
+                        }
+                    }
+                ).then(function (data) {
+                    res.json(data);
+                });
+            } else {
+                console.log("Record not found, creating new record");
+                db.PatientDetails_PatientPersonalInformation.create(req.body).then(function (data) {
+                    res.json(data);
+                }).catch(error => {
+                    console.log(error);
+                });
+
+            }
+
+        })
+});
+
+/*************************************************************************************** */
 
 
 function dateToISOLikeButLocal(date) {

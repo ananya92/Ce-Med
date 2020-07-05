@@ -286,7 +286,7 @@ function GurantorInformation(props) {
                             label="Known As"
                             name="knownAs"
                             type="text"
-                            inputRef={register({ required: true })}
+                            inputRef={register}
                             defaultValue={initialState.knownAs}
                             fullWidth
                         />
@@ -302,7 +302,7 @@ function GurantorInformation(props) {
                                 native
                                 label="Title"
                                 fullWidth
-                                inputRef={register}
+                                inputRef={register({ required: true })}
                                 defaultValue={initialState.title}
                                 name="title"
                                 type="text"
@@ -350,7 +350,7 @@ function GurantorInformation(props) {
                             label="Date Of Birth"
                             variant="outlined"
                             type="date"
-                            defaultValue={Date.now()}
+                            defaultValue={moment(Date.now()).format("YYYY-MM-DD")}
                             // className={classes.textField}
                             InputLabelProps={{
                                 shrink: true,
@@ -512,7 +512,7 @@ function GurantorInformation(props) {
                                         label="Address Line 2"
                                         name="residentialAddressLine2"
                                         type="text"
-                                        inputRef={register}
+                                        inputRef={register({ required: true })}
                                         defaultValue={initialState.residentialAddressLine2}
                                         fullWidth
                                     />
@@ -677,7 +677,15 @@ function GurantorInformation(props) {
                         </h4>
                     )}
                 </Grid>
-                
+                <Grid item xs={12} sm={12}>
+                    {errors.title && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Title
+                        </h4>
+                    )}
+                </Grid>
+
+
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
@@ -688,7 +696,7 @@ function GurantorInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>
