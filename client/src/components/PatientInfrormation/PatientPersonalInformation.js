@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import API from "../../utils/API";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
+import moment from "moment";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -33,6 +33,43 @@ function PatientPersonalInformation(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
+    const [initialState, setInitialState] = useState(
+        {
+            identifierType: " ",
+            identifierNumber: " ",
+            surname: " ",
+            name: " ",
+            initials: " ",
+            otherNames: " ",
+            knownAs: " ",
+            title: " ",
+            gender: " ",
+            dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
+            mobileNumber: " ",
+            workNumber: " ",
+            homeNumber: " ",
+            methodOfContact: " ",
+            receiveMarketing: "No",
+            receivestatements: "No",
+            emailAddress: " ",
+            residentialAddressLine1: " ",
+            residentialAddressLine2: " ",
+            residentialSuburb: " ",
+            residentialCity: " ",
+            residentialCode: " ",
+            postalAddressLine1: " ",
+            postalAddressLine2: " ",
+            postalCity: " ",
+            postalSuburb: " ",
+            postalCode: " ",
+            maritalStatus: " ",
+            dietaryPreference: " ",
+            religion: " ",
+            congregation: " ",
+            minister: " "
+        }
+    );
+
     //setting case info
     caseInfo = {
         PatientId: props.patientId,
@@ -40,23 +77,97 @@ function PatientPersonalInformation(props) {
     };
 
     // Retrieving the existing value if case exists
-    // useEffect(() => {
-    //     if (caseInfo.CaseId) {
-    //         API.getPatientPersonalInformationData(caseInfo.CaseId).then(response => {
-    //             // console.log(response.data[0]);
-    //             setValue(
-    //                 [{ bedDetails: response.data[0].bedDetails },
-    //                 { doctor: response.data[0].doctor },
-    //                 { preAdmissionNumber: response.data[0].preAdmissionNumber },
-    //                 { surgeryBookedTime: response.data[0].surgeryBookedTime },
-    //                 { timeOfArrival: response.data[0].timeOfArrival },
-    //                 { wardDetails: response.data[0].wardDetails }
-    //                 ]);
-    //         }).catch(error => {
-    //             console.log("Error while getting hospital information data:", error);
-    //         });
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (caseInfo.CaseId) {
+            API.getPatientPersonalInformationData(caseInfo.CaseId).then(response => {
+                // console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                //this part is needed if need to update initial values 
+                // if (data != undefined || data != null) {
+                // let retrievedData = {
+                //     identifierType: data.identifierType,
+                //     identifierNumber: data.identifierNumber,
+                //     surname: data.surname,
+                //     name: data.name,
+                //     initials: data.initials,
+                //     otherNames: data.otherNames,
+                //     knownAs: data.knownAs,
+                //     title: data.title,
+                //     gender: data.gender,
+                //     dateOfBirth: data.dateOfBirth,
+                //     mobileNumber: data.mobileNumber,
+                //     workNumber: data.workNumber,
+                //     homeNumber: data.homeNumber,
+                //     methodOfContact: data.methodOfContact,
+                //     receiveMarketing: data.receiveMarketing,
+                //     receivestatements: data.receivestatements,
+                //     emailAddress: data.emailAddress,
+                //     residentialAddressLine1: data.residentialAddressLine1,
+                //     residentialAddressLine2: data.residentialAddressLine2,
+                //     residentialSuburb: data.residentialSuburb,
+                //     residentialCity: data.residentialCity,
+                //     residentialCode: data.residentialCode,
+                //     postalAddressLine1: data.postalAddressLine1,
+                //     postalAddressLine2: data.postalAddressLine2,
+                //     postalSuburb: data.postalSuburb,
+                //     postalCity: data.postalCity,
+                //     postalCode: data.postalCode,
+                //     maritalStatus: data.maritalStatus,
+                //     dietaryPreference: data.dietaryPreference,
+                //     religion: data.religion,
+                //     congregation: data.congregation,
+                //     minister: data.minister,
+                // }
+                //     console.log(retrievedData);
+                //     setTimeout(() => setInitialState(retrievedData));
+                // } else {
+                //     console.log("There is no saved data");
+                // }
+                if (data != undefined || data != null) {
+                    setValue([
+                        { identifierType: data.identifierType },
+                        { identifierNumber: data.identifierNumber },
+                        { surname: data.surname },
+                        { name: data.name },
+                        { initials: data.initials },
+                        { otherNames: data.otherNames },
+                        { knownAs: data.knownAs },
+                        { title: data.title },
+                        { gender: data.gender },
+                        { dateOfBirth: moment(data.dateOfBirth).format("YYYY-MM-DD") },
+                        { mobileNumber: data.mobileNumber },
+                        { workNumber: data.workNumber },
+                        { homeNumber: data.homeNumber },
+                        { methodOfContact: data.methodOfContact },
+                        { receiveMarketing: data.receiveMarketing },
+                        { receivestatements: data.receivestatements },
+                        { emailAddress: data.emailAddress },
+                        { residentialAddressLine1: data.residentialAddressLine1 },
+                        { residentialAddressLine2: data.residentialAddressLine2 },
+                        { residentialSuburb: data.residentialSuburb },
+                        { residentialCity: data.residentialCity },
+                        { residentialCode: data.residentialCode },
+                        { postalAddressLine1: data.postalAddressLine1 },
+                        { postalAddressLine2: data.postalAddressLine2 },
+                        { postalSuburb: data.postalSuburb },
+                        { postalCity: data.postalCity },
+                        { postalCode: data.postalCode },
+                        { maritalStatus: data.maritalStatus },
+                        { dietaryPreference: data.dietaryPreference },
+                        { religion: data.religion },
+                        { congregation: data.congregation },
+                        { minister: data.minister },
+
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Patient's Personal Information data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Patient's Personal Information data:", error);
+            });
+        }
+    }, [])
 
 
 
@@ -66,13 +177,13 @@ function PatientPersonalInformation(props) {
             ...res, CaseId: caseInfo.CaseId
         }
 
-        // console.log(data);
+        console.log(data);
 
-        // API.storePatientPersonalInformationData(data).then(response => {
-        //     // console.log(response);
-        // }).catch(error => {
-        //     console.log("Error while adding hospital information data:", error);
-        // });
+        API.storePatientPersonalInformationData(data).then(response => {
+            // console.log(response);
+        }).catch(error => {
+            console.log("Error while adding Patient's Personal Information data:", error);
+        });
     };
 
 
@@ -98,6 +209,7 @@ function PatientPersonalInformation(props) {
                                 label="Identifier Type"
                                 fullWidth
                                 inputRef={register({ required: true })}
+                                defaultValue={initialState.identifierType}
                                 name="identifierType"
                                 type="text"
                             // onChange={handleChange}
@@ -119,6 +231,7 @@ function PatientPersonalInformation(props) {
                             name="identifierNumber"
                             type="text"
                             inputRef={register({ required: true })}
+                            defaultValue={initialState.identifierNumber}
                             fullWidth
                         />
                     </Grid>
@@ -132,6 +245,7 @@ function PatientPersonalInformation(props) {
                             name="surname"
                             type="text"
                             inputRef={register({ required: true })}
+                            defaultValue={initialState.surname}
                             fullWidth
                         />
                     </Grid>
@@ -145,6 +259,7 @@ function PatientPersonalInformation(props) {
                             name="name"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.name}
                             fullWidth
                         />
                     </Grid>
@@ -158,6 +273,7 @@ function PatientPersonalInformation(props) {
                             name="initials"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.initials}
                             fullWidth
                         />
                     </Grid>
@@ -171,6 +287,7 @@ function PatientPersonalInformation(props) {
                             name="otherNames"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.otherNames}
                             fullWidth
                         />
                     </Grid>
@@ -183,7 +300,8 @@ function PatientPersonalInformation(props) {
                             label="Known As"
                             name="knownAs"
                             type="text"
-                            inputRef={register({ required: true })}
+                            inputRef={register}
+                            defaultValue={initialState.knownAs}
                             fullWidth
                         />
                     </Grid>
@@ -199,6 +317,7 @@ function PatientPersonalInformation(props) {
                                 label="Title"
                                 fullWidth
                                 inputRef={register({ required: true })}
+                                defaultValue={initialState.title}
                                 name="title"
                                 type="text"
                             // onChange={handleChange}
@@ -222,7 +341,8 @@ function PatientPersonalInformation(props) {
                                 native
                                 label="gender"
                                 fullWidth
-                                inputRef={register({ required: true })}
+                                inputRef={register}
+                                defaultValue={initialState.gender}
                                 name="gender"
                                 type="text"
                             // onChange={handleChange}
@@ -244,7 +364,7 @@ function PatientPersonalInformation(props) {
                             label="Date Of Birth"
                             variant="outlined"
                             type="date"
-                            // defaultValue={Date.now()}
+                            defaultValue={moment(Date.now()).format("YYYY-MM-DD")}
                             // className={classes.textField}
                             InputLabelProps={{
                                 shrink: true,
@@ -263,6 +383,7 @@ function PatientPersonalInformation(props) {
                             name="mobileNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.mobileNumber}
                             fullWidth
                         />
                     </Grid>
@@ -275,6 +396,7 @@ function PatientPersonalInformation(props) {
                             name="workNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.workNumber}
                             fullWidth
                         />
                     </Grid>
@@ -287,6 +409,7 @@ function PatientPersonalInformation(props) {
                             name="homeNumber"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.homeNumber}
                             fullWidth
                         />
                     </Grid>
@@ -301,7 +424,8 @@ function PatientPersonalInformation(props) {
                                 native
                                 label="Preferred Method Of Contact"
                                 fullWidth
-                                inputRef={register({ required: true })}
+                                inputRef={register}
+                                defaultValue={initialState.methodOfContact}
                                 name="methodOfContact"
                                 type="text"
                             // onChange={handleChange}
@@ -326,7 +450,8 @@ function PatientPersonalInformation(props) {
                                 native
                                 label="Receive Marketing?"
                                 fullWidth
-                                inputRef={register({ required: true })}
+                                inputRef={register}
+                                defaultValue={initialState.receiveMarketing}
                                 name="receiveMarketing"
                                 type="text"
                             // onChange={handleChange}
@@ -348,7 +473,8 @@ function PatientPersonalInformation(props) {
                                 native
                                 label="Receive Statements?"
                                 fullWidth
-                                inputRef={register({ required: true })}
+                                inputRef={register}
+                                defaultValue={initialState.receivestatements}
                                 name="receivestatements"
                                 type="text"
                             // onChange={handleChange}
@@ -369,6 +495,7 @@ function PatientPersonalInformation(props) {
                             name="emailAddress"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.emailAddress}
                             fullWidth
                         />
                     </Grid>
@@ -388,7 +515,8 @@ function PatientPersonalInformation(props) {
                                         label="Address Line 1"
                                         name="residentialAddressLine1"
                                         type="text"
-                                        inputRef={register}
+                                        inputRef={register({ required: true })}
+                                        defaultValue={initialState.residentialAddressLine1}
                                         fullWidth
                                     />
                                 </Grid>
@@ -402,6 +530,7 @@ function PatientPersonalInformation(props) {
                                         name="residentialAddressLine2"
                                         type="text"
                                         inputRef={register}
+                                        defaultValue={initialState.residentialAddressLine2}
                                         fullWidth
                                     />
                                 </Grid>
@@ -415,6 +544,7 @@ function PatientPersonalInformation(props) {
                                         name="residentialSuburb"
                                         type="text"
                                         inputRef={register}
+                                        defaultValue={initialState.residentialSuburb}
                                         fullWidth
                                     />
                                 </Grid>
@@ -429,6 +559,7 @@ function PatientPersonalInformation(props) {
                                             name="residentialCity"
                                             type="text"
                                             inputRef={register}
+                                            defaultValue={initialState.residentialCity}
                                             fullWidth
                                         />
                                     </Grid>
@@ -442,6 +573,7 @@ function PatientPersonalInformation(props) {
                                             name="residentialCode"
                                             type="text"
                                             inputRef={register}
+                                            defaultValue={initialState.residentialCode}
                                             fullWidth
                                         />
                                     </Grid>
@@ -460,7 +592,8 @@ function PatientPersonalInformation(props) {
                                         label="Address Line 1"
                                         name="postalAddressLine1"
                                         type="text"
-                                        inputRef={register}
+                                        inputRef={register({ required: true })}
+                                        defaultValue={initialState.postalAddressLine1}
                                         fullWidth
                                     />
                                 </Grid>
@@ -474,6 +607,7 @@ function PatientPersonalInformation(props) {
                                         name="postalAddressLine2"
                                         type="text"
                                         inputRef={register}
+                                        defaultValue={initialState.postalAddressLine2}
                                         fullWidth
                                     />
                                 </Grid>
@@ -487,6 +621,7 @@ function PatientPersonalInformation(props) {
                                         name="postalSuburb"
                                         type="text"
                                         inputRef={register}
+                                        defaultValue={initialState.postalSuburb}
                                         fullWidth
                                     />
                                 </Grid>
@@ -501,6 +636,7 @@ function PatientPersonalInformation(props) {
                                             name="postalCity"
                                             type="text"
                                             inputRef={register}
+                                            defaultValue={initialState.postalCity}
                                             fullWidth
                                         />
                                     </Grid>
@@ -514,6 +650,7 @@ function PatientPersonalInformation(props) {
                                             name="postalCode"
                                             type="text"
                                             inputRef={register}
+                                            defaultValue={initialState.postalCode}
                                             fullWidth
                                         />
                                     </Grid>
@@ -537,6 +674,7 @@ function PatientPersonalInformation(props) {
                             name="maritalStatus"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.maritalStatus}
                             fullWidth
                         />
                     </Grid>
@@ -549,6 +687,7 @@ function PatientPersonalInformation(props) {
                             name="dietaryPreference"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.dietaryPreference}
                             fullWidth
                         />
                     </Grid>
@@ -562,6 +701,7 @@ function PatientPersonalInformation(props) {
                             name="religion"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.religion}
                             fullWidth
                         />
                     </Grid>
@@ -576,6 +716,7 @@ function PatientPersonalInformation(props) {
                             name="congregation"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.congregation}
                             fullWidth
                         />
                     </Grid>
@@ -590,6 +731,7 @@ function PatientPersonalInformation(props) {
                             name="minister"
                             type="text"
                             inputRef={register}
+                            defaultValue={initialState.minister}
                             fullWidth
                         />
                     </Grid>
@@ -602,49 +744,56 @@ function PatientPersonalInformation(props) {
 
                 {/* Error reporting */}
 
-                {/* <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
-                        {errors.doctor && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Doctor Information
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.surgeryBookedTime && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter Surgery Booked Time
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.timeOfArrival && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Time Of Arrival
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.wardDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Ward Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.bedDetails && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Bed Details
-                            </h4>
-                        )}
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        {errors.preAdmissionNumber && (
-                            <h4 style={{ color: "red" }}>
-                                Please enter patient's Pre Admission Number
-                            </h4>
-                        )}
-                    </Grid> */}
+                    {errors.identifierType && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Identifier Type Information
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.identifierNumber && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Identifier Number
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.surname && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Surname
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.title && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Title
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.dateOfBirth && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter patient's date Of birth
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.residentialAddressLine1 && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter residential Address Line 1
+                        </h4>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                    {errors.postalAddressLine1 && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter postal Address Line 1
+                        </h4>
+                    )}
+                </Grid>
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
@@ -655,7 +804,7 @@ function PatientPersonalInformation(props) {
                             style={{ marginTop: 20 }}
                             fullWidth
                         >
-                            SUBMIT
+                            SAVE
                         </Button>
                     </Grid>
                     <Grid item xs={4} sm={4}></Grid>
