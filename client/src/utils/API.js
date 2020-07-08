@@ -112,6 +112,18 @@ export default {
         return axios.get(`/api/patientDetails/PatientPersonalInformation/${CaseId}`);
     },
 
+    //saving Patient Declaration Information
+    //1. save Patient Declaration Information
+    storePatientDeclarationData: function(data) {
+        // console.log(data);
+        return axios.post(`/api/patientDetails/PatientDeclaration/storePatientDeclarationData`, data);
+    },
+    //2. get Hospital Visit Information
+    getPatientPersonalInformationData: function(CaseId) {
+        // console.log(`/api/patientDetails/PatientDeclaration/${CaseId}`);
+        return axios.get(`/api/patientDetails/PatientDeclaration/${CaseId}`);
+    },
+
 };
 
 // Function to convert the ISO time to local timezone
