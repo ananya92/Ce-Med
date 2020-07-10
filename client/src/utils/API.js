@@ -119,7 +119,7 @@ export default {
         return axios.post(`/api/patientDetails/PatientDeclaration/storePatientDeclarationData`, data);
     },
     //2. get Hospital Visit Information
-    getPatientPersonalInformationData: function(CaseId) {
+    getPatientDeclarationData: function(CaseId) {
         // console.log(`/api/patientDetails/PatientDeclaration/${CaseId}`);
         return axios.get(`/api/patientDetails/PatientDeclaration/${CaseId}`);
     },

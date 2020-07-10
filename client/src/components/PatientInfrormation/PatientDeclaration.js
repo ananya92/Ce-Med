@@ -55,7 +55,7 @@ function PatientDeclaration(props) {
     // Retrieving the existing value if case exists
     useEffect(() => {
         if (caseInfo.CaseId) {
-            API.getPatientPersonalInformationData(caseInfo.CaseId).then(response => {
+            API.getPatientDeclarationData(caseInfo.CaseId).then(response => {
                 // console.log(JSON.stringify(response.data[0]));
                 // console.log(response.data[0]);
                 let data = response.data[0];
