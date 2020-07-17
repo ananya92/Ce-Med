@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { Container, Row, Col } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
+
 
 // component pages
-import PatientPersonalInformation from './PatientInfrormation/PatientPersonalInformation';
-import EmergencyContact from './PatientInfrormation/EmergencyContact';
-import AlternativeContact from './PatientInfrormation/AlternativeContact';
-import MedicalAidInformation from './PatientInfrormation/MedicalAidInformation';
-import HospitalVisitInformation from './PatientInfrormation/HospitalVisitInformation';
-import GurantorInformation from './PatientInfrormation/GurantorInformation';
-import ClinicalInformation from './PatientInfrormation/ClinicalInformation';
-import PatientDeclaration from './PatientInfrormation/PatientDeclaration';
+import Diagnosis from './BasicInfo/Diagnosis';
+import Vitals from './BasicInfo/Vitals';
+import PatientStatus from './BasicInfo/PatientStatus';
+import Comorbidities from './BasicInfo/Comorbidities';
 
 //This information must get from login
 const user = {
@@ -19,7 +15,7 @@ const user = {
 }
 
 function BasicInformation(props) {
-    const [key, setKey] = useState('patient-personal-information');
+    const [key, setKey] = useState('diagnosis');
     return (
 
         <div>
@@ -39,34 +35,22 @@ function BasicInformation(props) {
                 <Row>
                     <Col>
                         <Tabs
-                            id="basic-information"
+                            id="diagnosis"
                             activeKey={key}
                             onSelect={(k) => setKey(k)}
                         >                            
-                            <Tab eventKey="patient-details" title="Patient Details" unmountOnExit>
-                                <PatientPersonalInformation patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
+                            <Tab eventKey="diagnosis" title="Diagnosis" unmountOnExit>
+                                <Diagnosis patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
-                            <Tab eventKey="emergency-contact" title="Emergency Contact" unmountOnExit>
-                                <EmergencyContact patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
+                            <Tab eventKey="vitals" title="Vitals" unmountOnExit>
+                                <Vitals patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
-                            <Tab eventKey="alternative-contact" title="Alternative Contact" unmountOnExit>
-                                <AlternativeContact patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
+                            <Tab eventKey="patient-status" title="Patient Status" unmountOnExit>
+                                <PatientStatus patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
                             </Tab>
-                            <Tab eventKey="medical-aid-information" title="Medical Aid Information" unmountOnExit>
-                                <MedicalAidInformation patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
-                            </Tab>
-                            <Tab eventKey="hospital-visit-information" title="Hospital Visit Information" unmountOnExit>
-                                <HospitalVisitInformation patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
-                            </Tab>
-                            <Tab eventKey="gurantor-information" title="Gurantor Information" unmountOnExit>
-                                <GurantorInformation patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
-                            </Tab>
-                            <Tab eventKey="clinical-information" title="Clinical Information" unmountOnExit>
-                                <ClinicalInformation patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
-                            </Tab>
-                            <Tab eventKey="aatient-declaration" title="Patient Declaration" unmountOnExit>
-                                <PatientDeclaration patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
-                            </Tab>
+                            <Tab eventKey="comorbidities" title="Comorbidities" unmountOnExit>
+                                <Comorbidities patientId={props.currentPatient.patientID} caseId={props.currentCase.id} />
+                            </Tab>                            
                         </Tabs>
                     </Col>
                 </Row>
