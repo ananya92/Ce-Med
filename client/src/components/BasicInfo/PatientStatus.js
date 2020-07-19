@@ -28,8 +28,11 @@ const useStyles = makeStyles((theme) => ({
 let caseInfo = "";
 
 
-function Diagnosis(props) {
+function PatientStatus(props) {
     const classes = useStyles();
+
+    const [isOthers, setOthers] = useState("");
+
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
@@ -107,6 +110,10 @@ function Diagnosis(props) {
         }).catch(error => {
             console.log("Error while adding Patient's Personal Information data:", error);
         });
+    };
+
+    const handleChange = (event) => {
+        setOthers(event.target.value);
     };
 
 
@@ -202,185 +209,96 @@ function Diagnosis(props) {
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
-                        <h4>Vitals</h4>
+                        <h4>Patient Status Details</h4>
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <TextField
-                            margin="dense"
-                            name="dateVitalsAreRead"
-                            id="dateVitalsAreRead"
-                            label="date Vitals are Read"
-                            variant="outlined"
-                            type="date"
-                            defaultValue={initialState.dateVitalsAreRead}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            fullWidth
-                            inputRef={register({ required: true })}
-                        />
+                        <FormControl margin="dense" variant="outlined" fullWidth>
+                            <InputLabel htmlFor="specialised-critical-care">
+                                Patient Status
+                        </InputLabel>
+                            <Select
+                                id="specialisedCriticalCare"
+                                native
+                                label="Specialised Critical Care"
+                                fullWidth
+                                inputRef={register({ required: true })}
+                                onChange={handleChange}
+                                defaultValue={initialState.specialisedCriticalCare}
+                                name="specialisedCriticalCare"
+                                type="text"
+                            >
+                                <option aria-label="None" value="Specialised Critical Care Type" />
+                                <option value="Cardiac">Cardiac</option>
+                                <option value="Renal">Renal</option>
+                                <option value="Oncology">Oncology</option>
+                                <option value="Neuro">Neuro</option>
+                                <option value="Other">Other</option>
+                            </Select>
+                        </FormControl>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            margin="dense"
-                            name="timeVitalsAreRead"
-                            id="timeVitalsAreRead"
-                            label="Time Vitals are Read"
-                            variant="outlined"
-                            type="time"
-                            defaultValue={initialState.timeVitalsAreRead}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            fullWidth
-                            inputRef={register({ required: true })}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <Grid container spacing={2} >
+
+                    {isOthers === "Other" ?
+                        <React.Fragment>
                             <Grid item xs={12} sm={6}>
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="bPSystolic"
-                                        variant="outlined"
-                                        label="BP (Systolic)"
-                                        name="bPSystolic"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.bPSystolic}
-                                        fullWidth
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="bPDiastolic"
-                                        variant="outlined"
-                                        label="BP (Diastolic)"
-                                        name="bPDiastolic"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.bPDiastolic}
-                                        fullWidth
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="temp"
-                                        variant="outlined"
-                                        label="Temperature"
-                                        name="temp"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.temp}
-                                        fullWidth
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="pulse"
-                                        variant="outlined"
-                                        label="Pulse"
-                                        name="pulse"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.pulse}
-                                        fullWidth
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="respiration"
-                                        variant="outlined"
-                                        label="Respiration"
-                                        name="respiration"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.respiration}
-                                        fullWidth
-                                    />
-                                </Grid>
-
+                                <TextField
+                                    margin="dense"
+                                    id="other"
+                                    variant="outlined"
+                                    label="Other"
+                                    name="other"
+                                    type="text"
+                                    inputRef={register}
+                                    defaultValue={initialState.other}
+                                    fullWidth
+                                />
                             </Grid>
+                        </React.Fragment>
+                        : null}
+                    <Grid item xs={6} sm={6}>
+                        <FormControl margin="dense" variant="outlined" fullWidth>
+                            <InputLabel htmlFor="critical-care"  >
+                                Critical Care
+                                </InputLabel>
+                            <Select
+                                id="critical-care"
+                                native
+                                label="criticalCare"
+                                fullWidth
+                                inputRef={register}
+                                name="criticalCare"
+                                type="text"
+                                defaultValue="No"
+                            >
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
 
-                            <Grid item xs={12} sm={6}>
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="saturation"
-                                        variant="outlined"
-                                        label="Saturation"
-                                        name="saturation"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.saturation}
-                                        fullWidth
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="oxygenMethod"
-                                        variant="outlined"
-                                        label="Oxygen Method"
-                                        name="oxygenMethod"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.oxygenMethod}
-                                        fullWidth
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="oxygenPercentage"
-                                        variant="outlined"
-                                        label="Oxygen %"
-                                        name="oxygenPercentage"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.oxygenPercentage}
-                                        fullWidth
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="oxygenFlow"
-                                        variant="outlined"
-                                        label="Oxygen Flow (L)"
-                                        name="oxygenFlow"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.oxygenFlow}
-                                        fullWidth
-                                    />
-                                </Grid>
-
-                                <Grid item xs={12} sm={12}>
-                                    <TextField
-                                        margin="dense"
-                                        id="oxygenPercentageGiven"
-                                        variant="outlined"
-                                        label="Oxygen % Given"
-                                        name="oxygenPercentageGiven"
-                                        type="text"
-                                        inputRef={register}
-                                        defaultValue={initialState.oxygenPercentageGiven}
-                                        fullWidth
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                            </Select>
+                        </FormControl>
                     </Grid>
+
+                    <Grid item xs={6} sm={6}>
+                        <FormControl margin="dense" variant="outlined" fullWidth>
+                            <InputLabel htmlFor="high-care"  >
+                                High Care
+                            </InputLabel>
+                            <Select
+                                id="highCare"
+                                native
+                                label="highCare"
+                                fullWidth
+                                inputRef={register}
+                                name="highCare"
+                                type="text"
+                                defaultValue="No"
+                            >
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+
+                            </Select>
+                        </FormControl>
+                    </Grid>
+
 
                 </Grid>
 
@@ -392,9 +310,9 @@ function Diagnosis(props) {
 
                 <Grid item xs={12} sm={12}>
 
-                    {errors.dateVitalsAreRead && (
+                    {errors.specialisedCriticalCare && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Date Vitals Are Read
+                            Please enter Specialised Critical Care
                         </h4>
                     )}
                 </Grid>
@@ -444,4 +362,4 @@ function Diagnosis(props) {
     )
 }
 
-export default Diagnosis;
+export default PatientStatus;

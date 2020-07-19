@@ -398,7 +398,7 @@ function Diagnosis(props) {
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
-                        <h6>Other Details</h6>
+                        <h4>Diagnosis</h4>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <TextField
