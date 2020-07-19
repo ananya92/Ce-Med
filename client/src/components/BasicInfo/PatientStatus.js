@@ -43,7 +43,6 @@ function PatientStatus(props) {
             name: "_",
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
-
         }
     );
 
@@ -75,23 +74,23 @@ function PatientStatus(props) {
                 console.log("Error while getting Patient's Personal Information data:", error);
             });
 
-            // API.getVitalsData(caseInfo.CaseId).then(response => {
-            //     console.log(JSON.stringify(response.data[0]));
-            //     let data = response.data[0];
-            //     if (data != undefined || data != null) {
-            //         setValue([
-            //             { dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD") },
-            //             { timeVitalsAreRead: moment(Date.now()).format("hh:mm") },
-            //             { bPSystolic: data.bPSystolic },
-            //             { bPDiastolic: data.bPDiastolic },
-            //         ]);
-            //     }
-            //     else {
-            //         console.log("There is no saved Diagnosis data");
-            //     }
-            // }).catch(error => {
-            //     console.log("Error while getting Diagnosis data:", error);
-            // });
+            API.getPatientStatusData(caseInfo.CaseId).then(response => {
+                console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                if (data != undefined || data != null) {
+                    setValue([
+                        { specialisedCriticalCare: data.specialisedCriticalCare },
+                        { other: data.other },
+                        { criticalCare: data.criticalCare },
+                        { highCare: data.highCare },
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Patient Status data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Patient Status data:", error);
+            });
         }
     }, [])
 
@@ -105,10 +104,10 @@ function PatientStatus(props) {
 
         console.log(data);
 
-        API.storeVitalsData(data).then(response => {
+        API.storePatientStatusData(data).then(response => {
             // console.log(response);
         }).catch(error => {
-            console.log("Error while adding Patient's Personal Information data:", error);
+            console.log("Error while adding Patient's Status data:", error);
         });
     };
 

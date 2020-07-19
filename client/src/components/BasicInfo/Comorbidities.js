@@ -44,9 +44,10 @@ function Comorbidities(props) {
             name: "_",
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
-            dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD"),
-            timeVitalsAreRead: moment(Date.now()).format("hh:mm"),
-
+            noOfSticks: "_",
+            noOfStandardDrinks: "_",
+            height: "_",
+            weight: "_",
         }
     );
 
@@ -78,31 +79,41 @@ function Comorbidities(props) {
                 console.log("Error while getting Patient's Personal Information data:", error);
             });
 
-            // API.getVitalsData(caseInfo.CaseId).then(response => {
-            //     console.log(JSON.stringify(response.data[0]));
-            //     let data = response.data[0];
-            //     if (data != undefined || data != null) {
-            //         setValue([
-            //             { dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD") },
-            //             { timeVitalsAreRead: moment(Date.now()).format("hh:mm") },
-            //             { bPSystolic: data.bPSystolic },
-            //             { bPDiastolic: data.bPDiastolic },
-            //             { temp: data.temp },
-            //             { pulse: data.pulse },
-            // { respiration: data.respiration },
-            //             { saturation: data.saturation },
-            //             { oxygenMethod: data.oxygenMethod },
-            //             { oxygenPercentage: data.oxygenPercentage },
-            //             { oxygenFlow: data.oxygenFlow },
-            //             { oxygenPercentageGiven: data.oxygenPercentageGiven },
-            //         ]);
-            //     }
-            //     else {
-            //         console.log("There is no saved Diagnosis data");
-            //     }
-            // }).catch(error => {
-            //     console.log("Error while getting Diagnosis data:", error);
-            // });
+            API.getComorbiditiesData(caseInfo.CaseId).then(response => {
+                console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                if (data != undefined || data != null) {
+                    setValue([
+                        { chronicIscaemicHeartDisease: data.chronicIscaemicHeartDisease },
+                        { congestiveHeartFailure: data.congestiveHeartFailure },
+                        { unstableAngina: data.unstableAngina },
+                        { hypertension: data.hypertension },
+                        { hypothyroidism: data.hypothyroidism },
+                        { hyperlipidaemia: data.hyperlipidaemia },
+                        { diabetesInsulinDependant: data.diabetesInsulinDependant },
+                        { diabetesNonInsulinDependant: data.diabetesNonInsulinDependant },
+                        { chronicRenalFailure: data.chronicRenalFailure },
+                        { acuteRenalFailure: data.acuteRenalFailure },
+                        { renalDialysis: data.renalDialysis },
+                        { chronicObstructivePulmonaryDisease: data.chronicObstructivePulmonaryDisease },
+                        { asthma: data.asthma },
+                        { chronicArterialFibrilation: data.chronicArterialFibrilation },
+                        { epilepsy: data.epilepsy },
+                        { other: data.other },
+                        { smoking: data.smoking },
+                        { noOfSticks: data.noOfSticks },
+                        { useAlcohol: data.useAlcohol },
+                        { noOfStandardDrinks: data.noOfStandardDrinks },
+                        { height: data.height },
+                        { weight: data.weight },
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Comorbidities data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Comorbidities data:", error);
+            });
         }
     }, [])
 
@@ -116,10 +127,10 @@ function Comorbidities(props) {
 
         console.log(data);
 
-        API.storeVitalsData(data).then(response => {
+        API.storeComorbiditiesData(data).then(response => {
             // console.log(response);
         }).catch(error => {
-            console.log("Error while adding Patient's Personal Information data:", error);
+            console.log("Error while adding Patient's Comorbidities data:", error);
         });
     };
 
@@ -690,7 +701,7 @@ function Comorbidities(props) {
 
                 {/* Error reporting */}
 
-                <Grid item xs={12} sm={12}>
+                {/*<Grid item xs={12} sm={12}>
 
                     {errors.dateVitalsAreRead && (
                         <h4 style={{ color: "red" }}>
@@ -698,7 +709,7 @@ function Comorbidities(props) {
                         </h4>
                     )}
                 </Grid>
-                {/*<Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
                     {errors.secondaryDiagnosis && (
                         <h4 style={{ color: "red" }}>
                             Please enter Secondary Diagnosis
