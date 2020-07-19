@@ -5,6 +5,7 @@ import MedNavbar from './components/navbar';
 import Home from "./components/home";
 import Login from "./components/login";
 import PatientDetails from './components/patientDetails';
+import BasicInformation from './components/basicInformation';
 import IcuCriteriaApp1 from './components/icuCriteriaApp1';
 import IcuCriteria from './components/icuCriteria';
 import IcuCriteriaApp2 from './components/icuCriteriaApp2';
@@ -70,6 +71,11 @@ function App() {
             exact path="/patientDetails"
             render={() =>
               <PatientDetails currentPatient={currentPatient} currentCase={currentCase} />}
+          />
+          <Route
+            exact path="/basicInformation"
+            render={() =>
+              <BasicInformation currentPatient={currentPatient} currentCase={currentCase} />}
           />
           <Route
             exact path="/icuCriteriaApp1"

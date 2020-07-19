@@ -124,6 +124,21 @@ export default {
         return axios.get(`/api/patientDetails/PatientDeclaration/${CaseId}`);
     },
 
+    //******************BasicInfo***********************
+    // uses getPatientPersonalInformationData to get patient's personal information
+
+//saving Patient Declaration Information
+    //1. save Patient Declaration Information
+    storeDiagnosisData: function(data) {
+        // console.log(data);
+        return axios.post(`/api/basicInformation/Diagnosis/storeDiagnosisData`, data);
+    },
+    //2. get Hospital Visit Information
+    getDiagnosisData: function(CaseId) {
+        // console.log(`/api/patientDetails/PatientDeclaration/${CaseId}`);
+        return axios.get(`/api/basicInformation/Diagnosis/${CaseId}`);
+    },
+
 };
 
 // Function to convert the ISO time to local timezone

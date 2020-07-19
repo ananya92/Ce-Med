@@ -136,12 +136,13 @@ function Home(props) {
                             selected[0] !== undefined && selectedCase[0] !== undefined ?
                                 <div>
                                     <Button onClick={() => { history.push("/patientDetails"); }} variant="primary" block>Patient Details</Button>
+                                    <Button onClick={() => { history.push("/basicInformation"); }} variant="primary" block>Basic Information</Button>
+                                    <Button onClick={() => { history.push("/scoringCont1"); }} variant="primary" block>ICU Vitals 1</Button>
+                                    <Button onClick={() => { history.push("/scoringCont2"); }} variant="primary" block>ICU Vitals 2</Button>
                                     <Button onClick={() => { history.push("/icuCriteriaApp1"); }} variant="primary" block>ICU Criteria App 1</Button>
                                     <Button onClick={() => { history.push("/icuCriteria"); }} variant="primary" block>ICU Criteria</Button>
-                                    <Button onClick={() => { history.push("/icuCriteriaApp2"); }} variant="primary" block>ICU Criteria App 2</Button>
-                                    <Button onClick={() => { history.push("/scoringCont1"); }} variant="primary" block>Scoring Cont. 1</Button>
-                                    <Button onClick={() => { history.push("/scoringCont2"); }} variant="primary" block>Scoring Cont. 2</Button>
-                                    <Button onClick={() => { history.push("/critscoreOlivia"); }} variant="primary" block>Add Info to Critscore OLIVIA</Button>
+                                    <Button onClick={() => { history.push("/icuCriteriaApp2"); }} variant="primary" block>ICU Criteria App 2</Button>                                    
+                                     <Button onClick={() => { history.push("/critscoreOlivia"); }} variant="primary" block>Add Info to Critscore OLIVIA</Button>
                                     <Button onClick={() => { history.push("/critscoreApp1"); }} variant="primary" block>Add Info to Critscore App 1</Button>
                                     <Button onClick={() => { history.push("/critscoreApp2"); }} variant="primary" block>Add Info to Critscore App 2</Button>
                                     <Button onClick={() => { history.push("/critscoreApp3"); }} variant="primary" block>Add Info to Critscore App 3</Button>
@@ -149,11 +150,12 @@ function Home(props) {
                                 :
                                 <div>
                                     <Button onClick={() => { history.push("/patientDetails"); }} variant="primary" block>Patient Details</Button>
+                                    <Button variant="outline-secondary" block disabled>Basic Information</Button>
+                                    <Button variant="outline-secondary" block disabled>ICU Vitals 1</Button>
+                                    <Button variant="outline-secondary" block disabled>ICU Vitals 2</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria App 1</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria</Button>
-                                    <Button variant="outline-secondary" block disabled>ICU Criteria App 2</Button>
-                                    <Button variant="outline-secondary" block disabled>Scoring Cont. 1</Button>
-                                    <Button variant="outline-secondary" block disabled>Scoring Cont. 2</Button>
+                                    <Button variant="outline-secondary" block disabled>ICU Criteria App 2</Button>                                    
                                     <Button variant="outline-secondary" block disabled>Add Info to Critscore OLIVIA</Button>
                                     <Button variant="outline-secondary" block disabled>Add Info to Critscore App 1</Button>
                                     <Button variant="outline-secondary" block disabled>Add Info to Critscore App 2</Button>
