@@ -33,6 +33,10 @@ function Comorbidities(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
+    const [isSmoking, setIsSmoking] = useState("");
+
+    const [useAlcohol, setUseAlcohol] = useState("");
+
     const [initialState, setInitialState] = useState(
         {
             title: "_",
@@ -117,6 +121,14 @@ function Comorbidities(props) {
         }).catch(error => {
             console.log("Error while adding Patient's Personal Information data:", error);
         });
+    };
+
+    const handleChangeSmok = (event) => {
+        setIsSmoking(event.target.value);
+    };
+
+    const handleChangeDrink = (event) => {
+        setUseAlcohol(event.target.value);
     };
 
 
@@ -515,7 +527,7 @@ function Comorbidities(props) {
                         <FormControl margin="dense" variant="outlined" fullWidth>
                             <InputLabel htmlFor="epilepsy">
                                 Epilepsy
-                        </InputLabel>
+                            </InputLabel>
                             <Select
                                 id="epilepsy"
                                 native
@@ -550,6 +562,128 @@ function Comorbidities(props) {
                         <h4>Other Information</h4>
                     </Grid>
 
+                    <Grid item xs={6} sm={6}>
+                        <FormControl margin="dense" variant="outlined" fullWidth>
+                            <InputLabel htmlFor="smoking">
+                                Smoking
+                            </InputLabel>
+                            <Select
+                                id="smoking"
+                                native
+                                label="Smoking"
+                                fullWidth
+                                inputRef={register}
+                                name="smoking"
+                                type="text"
+                                defaultValue="No"
+                                onChange={handleChangeSmok}
+                            >
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    {isSmoking === "Yes" ?
+                        <Grid item xs={6} sm={6}>
+                            <FormControl margin="dense" variant="outlined" fullWidth>
+                                <InputLabel htmlFor="no-of-sticks">
+                                    No of Sticks
+                            </InputLabel>
+                                <Select
+                                    id="noOfSticks"
+                                    native
+                                    label="No of Sticks"
+                                    fullWidth
+                                    inputRef={register}
+                                    name="noOfSticks"
+                                    type="text"
+                                    defaultValue=""
+                                >
+                                    <option value="1-3 per week">1-3 per week</option>
+                                    <option value="4-8 per week">4-8per week</option>
+                                    <option value="9-16 per week">9-16 per week</option>
+                                    <option value="17-32 per week">17-32 per week</option>
+                                    <option value="33-64 per week">32-64 per week</option>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        : null}
+
+
+                    <Grid item xs={6} sm={6}>
+                        <FormControl margin="dense" variant="outlined" fullWidth>
+                            <InputLabel htmlFor="use-alcohol">
+                                Alcohol use
+                            </InputLabel>
+                            <Select
+                                id="useAlcohol"
+                                native
+                                label="Alcohol use"
+                                fullWidth
+                                inputRef={register}
+                                name="useAlcohol"
+                                type="text"
+                                defaultValue="No"
+                                onChange={handleChangeDrink}
+                            >
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    {useAlcohol === "Yes" ?
+                        <Grid item xs={6} sm={6}>
+                            <FormControl margin="dense" variant="outlined" fullWidth>
+                                <InputLabel htmlFor="no-of-sticks">
+                                    No of Standard Drinks
+                            </InputLabel>
+                                <Select
+                                    id="noOfStandardDrinks"
+                                    native
+                                    label="No Of Standard Drinks"
+                                    fullWidth
+                                    inputRef={register}
+                                    name="noOfStandardDrinks"
+                                    type="text"
+                                    defaultValue=""
+                                >
+                                    <option value="1-3 per week">1-3 per week</option>
+                                    <option value="4-8 per week">4-8per week</option>
+                                    <option value="9-16 per week">9-16 per week</option>
+                                    <option value="17-32 per week">17-32 per week</option>
+                                    <option value="33-64 per week">32-64 per week</option>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                        : null}
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="height"
+                            variant="outlined"
+                            label="Height"
+                            name="height"
+                            type="text"
+                            inputRef={register}
+                            defaultValue={initialState.height}
+                            fullWidth
+                        />
+                    </Grid>
+
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            id="weight"
+                            variant="outlined"
+                            label="Weight"
+                            name="weight"
+                            type="text"
+                            inputRef={register}
+                            defaultValue={initialState.weight}
+                            fullWidth
+                        />
+                    </Grid>
 
 
                 </Grid>
