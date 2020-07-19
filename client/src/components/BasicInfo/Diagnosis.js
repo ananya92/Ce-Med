@@ -34,8 +34,8 @@ function Diagnosis(props) {
     const [initialState, setInitialState] = useState(
         {
             title: "_",
-            surname: "_",
             name: "_",
+            surname: "_",
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
             residentialAddressLine1: "_",
@@ -93,24 +93,24 @@ function Diagnosis(props) {
                 console.log("Error while getting Patient's Personal Information data:", error);
             });
 
-            // API.getDiagnosisData(caseInfo.CaseId).then(response => {
-            //     console.log(JSON.stringify(response.data[0]));
-            //     let data = response.data[0];
-            //     if (data != undefined || data != null) {
-            //         setValue([
-            //             { primaryDiagnosis: data.primaryDiagnosis },
-            //             { secondaryDiagnosis: data.secondaryDiagnosis },
-            //             { surgicalProcedure: data.surgicalProcedure },
-            //             { additionalProcedures: data.additionalProcedures },
+            API.getDiagnosisData(caseInfo.CaseId).then(response => {
+                console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                if (data != undefined || data != null) {
+                    setValue([
+                        { primaryDiagnosis: data.primaryDiagnosis },
+                        { secondaryDiagnosis: data.secondaryDiagnosis },
+                        { surgicalProcedure: data.surgicalProcedure },
+                        { additionalProcedures: data.additionalProcedures },
 
-            //         ]);
-            //     }
-            //     else {
-            //         console.log("There is no saved Diagnosis data");
-            //     }
-            // }).catch(error => {
-            //     console.log("Error while getting Diagnosis data:", error);
-            // });
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Diagnosis data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Diagnosis data:", error);
+            });
         }
     }, [])
 
@@ -218,7 +218,7 @@ function Diagnosis(props) {
                                 shrink: true,
                             }}
                             fullWidth
-                            disabled 
+                            disabled
                             inputRef={register}
                         />
                     </Grid>
@@ -253,7 +253,7 @@ function Diagnosis(props) {
                                         variant="outlined"
                                         label="Address Line 2"
                                         name="residentialAddressLine2"
-                                        
+
                                         type="text"
                                         inputRef={register}
                                         defaultValue={initialState.residentialAddressLine2}
@@ -461,7 +461,7 @@ function Diagnosis(props) {
 
                 {/* Error reporting */}
 
-                 <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={12}>
 
                     {errors.primaryDiagnosis && (
                         <h4 style={{ color: "red" }}>

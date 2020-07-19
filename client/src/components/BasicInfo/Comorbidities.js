@@ -109,10 +109,10 @@ function Comorbidities(props) {
                     ]);
                 }
                 else {
-                    console.log("There is no saved Diagnosis data");
+                    console.log("There is no saved Comorbidities data");
                 }
             }).catch(error => {
-                console.log("Error while getting Diagnosis data:", error);
+                console.log("Error while getting Comorbidities data:", error);
             });
         }
     }, [])
@@ -130,7 +130,7 @@ function Comorbidities(props) {
         API.storeComorbiditiesData(data).then(response => {
             // console.log(response);
         }).catch(error => {
-            console.log("Error while adding Patient's Personal Information data:", error);
+            console.log("Error while adding Patient's Comorbidities data:", error);
         });
     };
 

@@ -34,8 +34,8 @@ function Vitals(props) {
     const [initialState, setInitialState] = useState(
         {
             title: "_",
-            surname: "_",
             name: "_",
+            surname: "_",            
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
             dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD"),
@@ -85,31 +85,31 @@ function Vitals(props) {
                 console.log("Error while getting Patient's Personal Information data:", error);
             });
 
-            // API.getVitalsData(caseInfo.CaseId).then(response => {
-            //     console.log(JSON.stringify(response.data[0]));
-            //     let data = response.data[0];
-            //     if (data != undefined || data != null) {
-            //         setValue([
-            //             { dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD") },
-            //             { timeVitalsAreRead: moment(Date.now()).format("hh:mm") },
-            //             { bPSystolic: data.bPSystolic },
-            //             { bPDiastolic: data.bPDiastolic },
-            //             { temp: data.temp },
-            //             { pulse: data.pulse },
-            // { respiration: data.respiration },
-//             { saturation: data.saturation },
-//             { oxygenMethod: data.oxygenMethod },
-//             { oxygenPercentage: data.oxygenPercentage },
-//             { oxygenFlow: data.oxygenFlow },
-//             { oxygenPercentageGiven: data.oxygenPercentageGiven },
-            //         ]);
-            //     }
-            //     else {
-            //         console.log("There is no saved Diagnosis data");
-            //     }
-            // }).catch(error => {
-            //     console.log("Error while getting Diagnosis data:", error);
-            // });
+            API.getVitalsData(caseInfo.CaseId).then(response => {
+                console.log(JSON.stringify(response.data[0]));
+                let data = response.data[0];
+                if (data != undefined || data != null) {
+                    setValue([
+                        { dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD") },
+                        { timeVitalsAreRead: moment(Date.now()).format("hh:mm") },
+                        { bPSystolic: data.bPSystolic },
+                        { bPDiastolic: data.bPDiastolic },
+                        { temp: data.temp },
+                        { pulse: data.pulse },
+                        { respiration: data.respiration },
+                        { saturation: data.saturation },
+                        { oxygenMethod: data.oxygenMethod },
+                        { oxygenPercentage: data.oxygenPercentage },
+                        { oxygenFlow: data.oxygenFlow },
+                        { oxygenPercentageGiven: data.oxygenPercentageGiven },
+                    ]);
+                }
+                else {
+                    console.log("There is no saved Vitals data");
+                }
+            }).catch(error => {
+                console.log("Error while getting Vitals data:", error);
+            });
         }
     }, [])
 
@@ -126,7 +126,7 @@ function Vitals(props) {
         API.storeVitalsData(data).then(response => {
             // console.log(response);
         }).catch(error => {
-            console.log("Error while adding Patient's Personal Information data:", error);
+            console.log("Error while adding Patient's Vitals data:", error);
         });
     };
 
