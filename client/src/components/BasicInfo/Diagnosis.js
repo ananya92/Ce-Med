@@ -253,6 +253,7 @@ function Diagnosis(props) {
                                         variant="outlined"
                                         label="Address Line 2"
                                         name="residentialAddressLine2"
+                                        
                                         type="text"
                                         inputRef={register}
                                         defaultValue={initialState.residentialAddressLine2}
@@ -460,56 +461,37 @@ function Diagnosis(props) {
 
                 {/* Error reporting */}
 
-                <Grid item xs={12} sm={12}>
+                 <Grid item xs={12} sm={12}>
 
-                    {errors.identifierType && (
+                    {errors.primaryDiagnosis && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Identifier Type Information
+                            Please enter Primary Diagnosis
+                        </h4>
+                    )}
+                </Grid>
+                {/*<Grid item xs={12} sm={12}>
+                    {errors.secondaryDiagnosis && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Secondary Diagnosis
                         </h4>
                     )}
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    {errors.identifierNumber && (
+                    {errors.surgicalProcedure && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Identifier Number
+                            Please enter Surgical Procedure
                         </h4>
                     )}
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    {errors.surname && (
+                    {errors.additionalProcedures && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Surname
+                            Please enter Additional Procedures
                         </h4>
                     )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.title && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter Title
-                        </h4>
-                    )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.dateOfBirth && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter patient's date Of birth
-                        </h4>
-                    )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.residentialAddressLine1 && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter residential Address Line 1
-                        </h4>
-                    )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.postalAddressLine1 && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter postal Address Line 1
-                        </h4>
-                    )}
-                </Grid>
+                </Grid> */}
+
+
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>

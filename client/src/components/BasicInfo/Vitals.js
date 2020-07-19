@@ -37,7 +37,23 @@ function Vitals(props) {
             surname: "_",
             name: "_",
             gender: "_",
-            dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),           
+            dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
+            dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD"),
+            timeVitalsAreRead: moment(Date.now()).format("hh:mm"),
+            bPSystolic: "_",
+            bPDiastolic: "_",
+            temp: "_",
+            pulse: "_",
+            respiration: "_",
+            saturation: "_",
+            oxygenMethod: "_",
+            oxygenPercentage: "_",
+            oxygenFlow: "_",
+            oxygenPercentageGiven: "_",
+            primaryDiagnosis: "_",
+            secondaryDiagnosis: "_",
+            surgicalProcedure: "_",
+            additionalProcedures: "_",
         }
     );
 
@@ -69,16 +85,23 @@ function Vitals(props) {
                 console.log("Error while getting Patient's Personal Information data:", error);
             });
 
-            // API.getDiagnosisData(caseInfo.CaseId).then(response => {
+            // API.getVitalsData(caseInfo.CaseId).then(response => {
             //     console.log(JSON.stringify(response.data[0]));
             //     let data = response.data[0];
             //     if (data != undefined || data != null) {
             //         setValue([
-            //             { primaryDiagnosis: data.primaryDiagnosis },
-            //             { secondaryDiagnosis: data.secondaryDiagnosis },
-            //             { surgicalProcedure: data.surgicalProcedure },
-            //             { additionalProcedures: data.additionalProcedures },
-
+            //             { dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD") },
+            //             { timeVitalsAreRead: moment(Date.now()).format("hh:mm") },
+            //             { bPSystolic: data.bPSystolic },
+            //             { bPDiastolic: data.bPDiastolic },
+            //             { temp: data.temp },
+            //             { pulse: data.pulse },
+            // { respiration: data.respiration },
+//             { saturation: data.saturation },
+//             { oxygenMethod: data.oxygenMethod },
+//             { oxygenPercentage: data.oxygenPercentage },
+//             { oxygenFlow: data.oxygenFlow },
+//             { oxygenPercentageGiven: data.oxygenPercentageGiven },
             //         ]);
             //     }
             //     else {
@@ -100,7 +123,7 @@ function Vitals(props) {
 
         console.log(data);
 
-        API.storeDiagnosisData(data).then(response => {
+        API.storeVitalsData(data).then(response => {
             // console.log(response);
         }).catch(error => {
             console.log("Error while adding Patient's Personal Information data:", error);
@@ -194,66 +217,190 @@ function Vitals(props) {
                                 shrink: true,
                             }}
                             fullWidth
-                            disabled 
+                            disabled
                             inputRef={register}
                         />
                     </Grid>
 
+                    <Grid item xs={12} sm={12}>
+                        <h4>Vitals</h4>
+                    </Grid>
 
-                    <Grid item xs={12} sm={12}>
-                        <h6>Other Details</h6>
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             margin="dense"
-                            id="primary-diagnosis"
+                            name="dateVitalsAreRead"
+                            id="dateVitalsAreRead"
+                            label="date Vitals are Read"
                             variant="outlined"
-                            label="Primary Diagnosis"
-                            name="primaryDiagnosis"
-                            type="text"
-                            inputRef={register}
-                            defaultValue={initialState.primaryDiagnosis}
+                            type="date"
+                            defaultValue={initialState.dateVitalsAreRead}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             fullWidth
+                            inputRef={register({ required: true })}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            margin="dense"
+                            name="timeVitalsAreRead"
+                            id="timeVitalsAreRead"
+                            label="Time Vitals are Read"
+                            variant="outlined"
+                            type="time"
+                            defaultValue={initialState.timeVitalsAreRead}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            fullWidth
+                            inputRef={register({ required: true })}
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <TextField
-                            margin="dense"
-                            id="secondary-diagnosis"
-                            variant="outlined"
-                            label="Secondary Diagnosis"
-                            name="secondaryDiagnosis"
-                            type="text"
-                            inputRef={register}
-                            defaultValue={initialState.secondaryDiagnosis}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <TextField
-                            margin="dense"
-                            id="surgical-procedure"
-                            variant="outlined"
-                            label="Surgical Procedure"
-                            name="surgicalProcedure"
-                            type="text"
-                            inputRef={register}
-                            defaultValue={initialState.surgicalProcedure}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <TextField
-                            margin="dense"
-                            id="additional-procedures"
-                            variant="outlined"
-                            label="Additional Procedures"
-                            name="additionalProcedures"
-                            type="text"
-                            inputRef={register}
-                            defaultValue={initialState.additionalProcedures}
-                            fullWidth
-                        />
+                        <Grid container spacing={2} >
+                            <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="bPSystolic"
+                                        variant="outlined"
+                                        label="BP (Systolic)"
+                                        name="bPSystolic"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.bPSystolic}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="bPDiastolic"
+                                        variant="outlined"
+                                        label="BP (Diastolic)"
+                                        name="bPDiastolic"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.bPDiastolic}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="temp"
+                                        variant="outlined"
+                                        label="Temperature"
+                                        name="temp"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.temp}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="pulse"
+                                        variant="outlined"
+                                        label="Pulse"
+                                        name="pulse"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.pulse}
+                                        fullWidth
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="respiration"
+                                        variant="outlined"
+                                        label="Respiration"
+                                        name="respiration"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.respiration}
+                                        fullWidth
+                                    />
+                                </Grid>
+
+                            </Grid>
+
+                            <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="saturation"
+                                        variant="outlined"
+                                        label="Saturation"
+                                        name="saturation"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.saturation}
+                                        fullWidth
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="oxygenMethod"
+                                        variant="outlined"
+                                        label="Oxygen Method"
+                                        name="oxygenMethod"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.oxygenMethod}
+                                        fullWidth
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="oxygenPercentage"
+                                        variant="outlined"
+                                        label="Oxygen %"
+                                        name="oxygenPercentage"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.oxygenPercentage}
+                                        fullWidth
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="oxygenFlow"
+                                        variant="outlined"
+                                        label="Oxygen Flow (L)"
+                                        name="oxygenFlow"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.oxygenFlow}
+                                        fullWidth
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        margin="dense"
+                                        id="oxygenPercentageGiven"
+                                        variant="outlined"
+                                        label="Oxygen % Given"
+                                        name="oxygenPercentageGiven"
+                                        type="text"
+                                        inputRef={register}
+                                        defaultValue={initialState.oxygenPercentageGiven}
+                                        fullWidth
+                                    />
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </Grid>
 
                 </Grid>
@@ -266,54 +413,35 @@ function Vitals(props) {
 
                 <Grid item xs={12} sm={12}>
 
-                    {errors.identifierType && (
+                    {errors.dateVitalsAreRead && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Identifier Type Information
+                            Please enter Date Vitals Are Read
+                        </h4>
+                    )}
+                </Grid>
+                {/*<Grid item xs={12} sm={12}>
+                    {errors.secondaryDiagnosis && (
+                        <h4 style={{ color: "red" }}>
+                            Please enter Secondary Diagnosis
                         </h4>
                     )}
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    {errors.identifierNumber && (
+                    {errors.surgicalProcedure && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Identifier Number
+                            Please enter Surgical Procedure
                         </h4>
                     )}
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                    {errors.surname && (
+                    {errors.additionalProcedures && (
                         <h4 style={{ color: "red" }}>
-                            Please enter Surname
+                            Please enter Additional Procedures
                         </h4>
                     )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.title && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter Title
-                        </h4>
-                    )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.dateOfBirth && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter patient's date Of birth
-                        </h4>
-                    )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.residentialAddressLine1 && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter residential Address Line 1
-                        </h4>
-                    )}
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                    {errors.postalAddressLine1 && (
-                        <h4 style={{ color: "red" }}>
-                            Please enter postal Address Line 1
-                        </h4>
-                    )}
-                </Grid>
+                </Grid> */}
+
+
                 <Grid>
                     <Grid item xs={4} sm={4}></Grid>
                     <Grid item xs={4} sm={4}>
