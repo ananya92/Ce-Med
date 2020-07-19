@@ -57,7 +57,7 @@ function Home(props) {
         z = z || '0';
         n = n + '';
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
-      }
+    }
     return (
         <div>
             <Container fluid>
@@ -139,13 +139,13 @@ function Home(props) {
                                     <Button onClick={() => { history.push("/basicInformation"); }} variant="primary" block>Basic Information</Button>
                                     <Button onClick={() => { history.push("/scoringCont1"); }} variant="primary" block>ICU Vitals 1</Button>
                                     <Button onClick={() => { history.push("/scoringCont2"); }} variant="primary" block>ICU Vitals 2</Button>
-                                    <Button onClick={() => { history.push("/icuCriteriaApp1"); }} variant="primary" block>ICU Criteria App 1</Button>
+                                    {/*<Button onClick={() => { history.push("/icuCriteriaApp1"); }} variant="primary" block>ICU Criteria App 1</Button>
                                     <Button onClick={() => { history.push("/icuCriteria"); }} variant="primary" block>ICU Criteria</Button>
                                     <Button onClick={() => { history.push("/icuCriteriaApp2"); }} variant="primary" block>ICU Criteria App 2</Button>                                    
                                      <Button onClick={() => { history.push("/critscoreOlivia"); }} variant="primary" block>Add Info to Critscore OLIVIA</Button>
                                     <Button onClick={() => { history.push("/critscoreApp1"); }} variant="primary" block>Add Info to Critscore App 1</Button>
                                     <Button onClick={() => { history.push("/critscoreApp2"); }} variant="primary" block>Add Info to Critscore App 2</Button>
-                                    <Button onClick={() => { history.push("/critscoreApp3"); }} variant="primary" block>Add Info to Critscore App 3</Button>
+                        <Button onClick={() => { history.push("/critscoreApp3"); }} variant="primary" block>Add Info to Critscore App 3</Button>*/}
                                 </div>
                                 :
                                 <div>
@@ -153,13 +153,13 @@ function Home(props) {
                                     <Button variant="outline-secondary" block disabled>Basic Information</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Vitals 1</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Vitals 2</Button>
-                                    <Button variant="outline-secondary" block disabled>ICU Criteria App 1</Button>
+                                    {/*<Button variant="outline-secondary" block disabled>ICU Criteria App 1</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria</Button>
                                     <Button variant="outline-secondary" block disabled>ICU Criteria App 2</Button>                                    
                                     <Button variant="outline-secondary" block disabled>Add Info to Critscore OLIVIA</Button>
                                     <Button variant="outline-secondary" block disabled>Add Info to Critscore App 1</Button>
                                     <Button variant="outline-secondary" block disabled>Add Info to Critscore App 2</Button>
-                                    <Button variant="outline-secondary" block disabled>Add Info to Critscore App 3</Button>
+                                    <Button variant="outline-secondary" block disabled>Add Info to Critscore App 3</Button>*/}
                                 </div>
                         }
                         <br />
