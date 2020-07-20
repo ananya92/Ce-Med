@@ -61,7 +61,7 @@ function Comorbidities(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getPatientPersonalInformationData(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
                 if (data != undefined || data != null) {
                     setValue([
