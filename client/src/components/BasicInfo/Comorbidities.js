@@ -209,7 +209,7 @@ function Comorbidities(props) {
                             name="gender"
                             type="text"
                             inputRef={register}
-                            defaultValue={initialState.surname}
+                            defaultValue={initialState.gender}
                             fullWidth
                             disabled
                         />
