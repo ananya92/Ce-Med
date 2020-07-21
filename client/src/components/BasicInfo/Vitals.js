@@ -10,6 +10,7 @@ import moment from "moment";
 
 
 
+
 // for styling form components
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,7 +36,7 @@ function Vitals(props) {
         {
             title: "_",
             name: "_",
-            surname: "_",            
+            surname: "_",
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
             dateVitalsAreRead: moment(Date.now()).format("YYYY-MM-DD"),
@@ -224,6 +225,17 @@ function Vitals(props) {
 
                     <Grid item xs={12} sm={12}>
                         <h4>Vitals</h4>
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+
+                        <Button
+                            target="_blank"
+                            href="http://www.google.com/"
+                            variant="contained"
+                            color="outline"
+                        >
+                            Graph
+                    </Button>
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
