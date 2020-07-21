@@ -33,7 +33,7 @@ function Comorbidities(props) {
     // react-hook-form
     const { register, handleSubmit, setValue, errors } = useForm();
 
-    const [isSmoking, setIsSmoking] = useState("");
+    const [ isSmoking , setIsSmoking] = useState("");
 
     const [useAlcohol, setUseAlcohol] = useState("");
 
@@ -44,8 +44,11 @@ function Comorbidities(props) {
             name: "_",
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
-            noOfSticks: "_",
-            noOfStandardDrinks: "_",
+            other: "_",
+            smoking: "Yes",
+            noOfSticks : "",
+            useAlcohol: "Yes",
+            noOfStandardDrinks : "",
             height: "_",
             weight: "_",
         }
@@ -107,6 +110,27 @@ function Comorbidities(props) {
                         { height: data.height },
                         { weight: data.weight },
                     ]);
+
+                    // In order to set second time after first dom update
+                    //  console.log(data);
+                    if (data.smoking === "Yes") {
+                        // console.log(data);
+                        setIsSmoking("Yes");
+                        setValue([
+                            { noOfSticks: data.noOfSticks },
+                        ])
+                    }
+
+                    // In order to set second time after first dom update
+                    //  console.log(data);
+                    if (data.useAlcohol === "Yes") {
+                        // console.log(data);
+                        setUseAlcohol("Yes");
+                        setValue([
+                            { noOfStandardDrinks: data.noOfStandardDrinks },
+                        ])
+                    }
+
                 }
                 else {
                     console.log("There is no saved Comorbidities data");
@@ -586,7 +610,7 @@ function Comorbidities(props) {
                                 inputRef={register}
                                 name="smoking"
                                 type="text"
-                                defaultValue="No"
+                                defaultValue={initialState.smoking}
                                 onChange={handleChangeSmok}
                             >
                                 <option value="No">No</option>
@@ -608,7 +632,7 @@ function Comorbidities(props) {
                                     inputRef={register}
                                     name="noOfSticks"
                                     type="text"
-                                    defaultValue=""
+                                    defaultValue={initialState.noOfSticks}
                                 >
                                     <option value="1-3 per week">1-3 per week</option>
                                     <option value="4-8 per week">4-8per week</option>
@@ -634,7 +658,7 @@ function Comorbidities(props) {
                                 inputRef={register}
                                 name="useAlcohol"
                                 type="text"
-                                defaultValue="No"
+                                defaultValue={initialState.useAlcohol}
                                 onChange={handleChangeDrink}
                             >
                                 <option value="No">No</option>
@@ -656,7 +680,7 @@ function Comorbidities(props) {
                                     inputRef={register}
                                     name="noOfStandardDrinks"
                                     type="text"
-                                    defaultValue=""
+                                    defaultValue={initialState.noOfStandardDrinks}
                                 >
                                     <option value="1-3 per week">1-3 per week</option>
                                     <option value="4-8 per week">4-8per week</option>

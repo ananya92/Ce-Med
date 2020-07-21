@@ -89,7 +89,7 @@ function PatientStatus(props) {
                         { highCare: data.highCare },
                     ]);
 
-                     // In order to set second time after first dom update
+                    // In order to set second time after first dom update
                     //  console.log(data);
                      if (data.specialisedCriticalCare === "Other") {
                         // console.log(data);
