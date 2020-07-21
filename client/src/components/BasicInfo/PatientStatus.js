@@ -43,6 +43,10 @@ function PatientStatus(props) {
             name: "_",
             gender: "_",
             dateOfBirth: moment(Date.now()).format("YYYY-MM-DD"),
+            specialisedCriticalCare: "Other",
+            other: "_",
+            criticalCare: "No",
+            highCare: "No",
         }
     );
 
@@ -56,7 +60,7 @@ function PatientStatus(props) {
     useEffect(() => {
         if (caseInfo.CaseId) {
             API.getPatientPersonalInformationData(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
                 if (data != undefined || data != null) {
                     setValue([
@@ -75,7 +79,7 @@ function PatientStatus(props) {
             });
 
             API.getPatientStatusData(caseInfo.CaseId).then(response => {
-                console.log(JSON.stringify(response.data[0]));
+                // console.log(JSON.stringify(response.data[0]));
                 let data = response.data[0];
                 if (data != undefined || data != null) {
                     setValue([
@@ -84,6 +88,17 @@ function PatientStatus(props) {
                         { criticalCare: data.criticalCare },
                         { highCare: data.highCare },
                     ]);
+
+                    // In order to set second time after first dom update
+                    //  console.log(data);
+                     if (data.specialisedCriticalCare === "Other") {
+                        // console.log(data);
+                        setOthers("Other");
+                        setValue([
+                            { other: data.other },
+                        ])
+                    }
+
                 }
                 else {
                     console.log("There is no saved Patient Status data");
@@ -267,7 +282,7 @@ function PatientStatus(props) {
                                 inputRef={register}
                                 name="criticalCare"
                                 type="text"
-                                defaultValue="No"
+                                defaultValue={initialState.criticalCare}
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
@@ -289,7 +304,7 @@ function PatientStatus(props) {
                                 inputRef={register}
                                 name="highCare"
                                 type="text"
-                                defaultValue="No"
+                                defaultValue={initialState.highCare}
                             >
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
