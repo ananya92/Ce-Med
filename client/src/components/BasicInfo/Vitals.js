@@ -231,8 +231,8 @@ function Vitals(props) {
                         <Button
                             target="_blank"
                             href="http://www.google.com/"
-                            variant="contained"
-                            color="outline"
+                            variant="contained"                    
+                            color="primary"
                         >
                             Graph
                     </Button>
