@@ -136,7 +136,7 @@ export default {
     },
     //2. get Comorbidities Information
     getComorbiditiesData: function (CaseId) {
-        console.log(`/api/basicInformation/Comorbidities/${CaseId}`);
+        // console.log(`/api/basicInformation/Comorbidities/${CaseId}`);
         return axios.get(`/api/basicInformation/Comorbidities/${CaseId}`);
     },
 
@@ -149,7 +149,7 @@ export default {
     },
     //2. get Diagnosis Information
     getDiagnosisData: function (CaseId) {
-        console.log(`/api/patientDetails/Diagnosis/${CaseId}`);
+        // console.log(`/api/patientDetails/Diagnosis/${CaseId}`);
         return axios.get(`/api/basicInformation/Diagnosis/${CaseId}`);
     },
 
@@ -161,7 +161,7 @@ export default {
     },
     //2. get Patient Status Information
     getPatientStatusData: function (CaseId) {
-        console.log(`/api/basicInformation/PatientStatus/${CaseId}`);
+        // console.log(`/api/basicInformation/PatientStatus/${CaseId}`);
         return axios.get(`/api/basicInformation/PatientStatus/${CaseId}`);
     },
 
@@ -173,7 +173,7 @@ export default {
     },
     //2. get Vitals Information
     getVitalsData: function (CaseId) {
-        console.log(`/api/basicInformation/Vitals/${CaseId}`);
+        // console.log(`/api/basicInformation/Vitals/${CaseId}`);
         return axios.get(`/api/basicInformation/Vitals/${CaseId}`);
     },
 
