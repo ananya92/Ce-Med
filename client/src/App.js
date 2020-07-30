@@ -57,10 +57,20 @@ function App() {
       <Router history={history}>
         <div className="App">
           <MedNavbar />
-          <Route
+          {/*<Route
             exact path="/"
             render={() =>
               <Home currentPatient={currentPatient} currentCase={currentCase} updatePatient={updatePatient} />}
+            />*/}
+          <Route
+            exact path="/home"
+            render={() =>
+              <Home currentPatient={currentPatient} currentCase={currentCase} updatePatient={updatePatient} />}
+          />
+          <Route
+            exact path="/"
+            render={() =>
+              <Login />}
           />
           <Route
             path="/login"
