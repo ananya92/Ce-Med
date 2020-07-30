@@ -5,7 +5,7 @@ import history from "../../utils/history";
 function MedNavbar() {
     return (
         <Navbar>
-            <Navbar.Brand onClick = {() => {history.push("/");}}>
+            <Navbar.Brand onClick = {() => {history.push("/home");}}>
                 <img
                     src={logo}
                     width="70"
